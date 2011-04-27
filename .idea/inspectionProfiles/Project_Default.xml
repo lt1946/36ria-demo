@@ -2,10 +2,10 @@
   <profile version="1.0" is_locked="false">
     <option name="myName" value="Project Default" />
     <option name="myLocal" value="false" />
-    <inspection_tool class="CheckTagEmptyBody" enabled="true" level="INFO" enabled_by_default="true" />
-    <inspection_tool class="CssOverwrittenProperties" enabled="true" level="INFO" enabled_by_default="true" />
-    <inspection_tool class="CssUnusedSymbolInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="INFO" enabled_by_default="true">
+    <inspection_tool class="CheckTagEmptyBody" level="INFO" enabled="true" />
+    <inspection_tool class="CssOverwrittenProperties" level="INFO" enabled="true" />
+    <inspection_tool class="CssUnusedSymbolInspection" level="WARNING" enabled="false" />
+    <inspection_tool class="HtmlUnknownAttribute" level="INFO" enabled="true">
       <option name="myValues">
         <value>
           <list size="5">
