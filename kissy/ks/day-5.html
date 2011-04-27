@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第五天DOM（进阶篇）—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第五天DOM（进阶篇）—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3244">http://www.36ria.com/3244</a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<p>起始代码</p>
+    <pre class="prettyprint">
+        (function(S){
+            S.use('core',function(){
+                var Event = S.Event,DOM = S.DOM;
+            });
+            
+        })(KISSY);
+    </pre> 
+    还是以拆合菜单为例，来演练dom剩下的方法（去掉了拆合实现代码）。   
+<h4>拆合菜单</h4>
+    <ul id="menu" class="mar-t-10">	
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=1" onclick="return false;">jquery</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=7" target="_blank">jquery插件</a></li>
+                <li><a href="http://www.36ria.com/?cat=6" target="_blank">jquery教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=105" target="_blank">jquery与ajax</a></li>                            
+            </ul>
+        </li>
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=11" onclick="return false;">flex</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=101" target="_blank">flex实例</a></li>
+                <li><a href="http://www.36ria.com/?cat=113" target="_blank">flex教程</a></li>                          
+            </ul>                            
+        </li> 
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=3" onclick="return false;">javascript</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=116" target="_blank">javascript资源</a></li>
+                <li><a href="http://www.36ria.com/?cat=4" target="_blank">javascript教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=9" target="_blank">浏览器</a></li>                            
+            </ul>                             
+        </li>                                                                                                                       
+    </ul>
+	拆合菜单的html代码如下（做了简化处理）：
+    <pre class="prettyprint">
+    &lt;ul id=&quot;menu&quot; class=&quot;mar-t-10&quot;&gt;	<br />        &lt;li class=&quot;menu-item&quot;&gt;<br />            &lt;div&gt;&lt;a href=&quot;http://www.36ria.com/?cat=1&quot; onclick=&quot;return false;&quot;&gt;jquery&lt;/a&gt;&lt;/div&gt;<br />            &lt;ul&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=7&quot; target=&quot;_blank&quot;&gt;jquery插件&lt;/a&gt;&lt;/li&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=6&quot; target=&quot;_blank&quot;&gt;jquery教程&lt;/a&gt;&lt;/li&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=105&quot; target=&quot;_blank&quot;&gt;jquery与ajax&lt;/a&gt;&lt;/li&gt;                            <br />            &lt;/ul&gt;<br />        &lt;/li&gt;<br />    &lt;/ul&gt;    </pre>  
+    由于将接下来的demo中将经常用到拆合菜单节点，所以先获取赋值给menu变量：
+  <pre class="prettyprint">
+//拆合菜单节点
+var menu = S.get("#menu");
+    </pre>        
+	<h4>demo1:dom-traversal模块中的parent、children、prev、next四个方法演练</h4>
+    <input type="button" value="获取拆合菜单的父节点的id" id="demo1-1" />
+    <p>弹出的是"content"，可以使用firebug查看下其父节点的id印证下。</p>
+  <pre class="prettyprint">
+//获取拆合菜单的父节点的id
+Event.on('#demo1-1','click',function(evt){
+    var menuParent = DOM.parent(menu);
+    alert(menuParent.id);
+})
+    </pre> 
+    <input type="button" value="获取拆合菜单的子节点li的个数" id="demo1-2" />
+    <p>children方法返回的结果集可以是多个节点（存在length属性），而parent、prev、next就只有一个（不存在length属性）</p>
+    <pre class="prettyprint">
+//获取拆合菜单的子节点li的个数
+Event.on('#demo1-2','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    alert(menuChildrens.length);
+})	
+    </pre>  
+  <input type="button" value="获取拆合菜单下第二个子节点的前一个和后一个节点标题的文本值" id="demo1-3" />   
+    <p>这个demo会稍微复杂下，因为不只要去到前后节点，还要取到前后节点的子节点div，然后才是文本值，来看代码:</p>
+    <pre class="prettyprint">
+//获取拆合菜单下第二个子节点的前一个和后一个节点的文本值
+Event.on('#demo1-3','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    //上一个节点
+    var preItem = DOM.prev(menuChildrens[1]);
+    //上一个节点的标题节点
+    var preItemTitle = DOM.children(preItem,'div');
+    //下一个节点
+    var nextItem = DOM.next(menuChildrens[1]);
+    //下一个节点的标题节点
+    var nextItemTitle = DOM.children(nextItem,'div');
+    
+    alert('上一个菜单项的标题为：'+DOM.text(preItemTitle)+',下一个菜单项的标题为：'+DOM.text(nextItemTitle));
+    
+})
+    </pre>  
+    有没有发现代码中children方法多了一个参数？
+    <pre class="prettyprint">
+var nextItemTitle = DOM.children(nextItem,'div');
+    </pre>  
+    其实不只是children，像next、prev、parent、siblings都有第二个参数，第二个参数是一个过滤器，比如示例中下一个节点的子节点有二个div、ul,但是我们只需用到div就可以了，这时候设置第二个参数为'div'，那么就只取div节点了。
+    <p>关于第二个参数，文档中的描述还是很详细（看parent方法说明），<a href="http://kissyteam.github.com/kissy/docs/dom/dom-traversal.html">请猛击这里</a></p>  
+    <h4>demo2:dom-traversal模块中的siblings方法演练</h4>   
+    <p>siblings是一个非常好用的方法</p>
+    先来看上一篇教程中的一段代码
+    <pre class="prettyprint">
+//隐藏所有子菜单
+DOM.hide(childrenMenus);
+//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方向
+if(display == 'none'){
+    DOM.show(nextMenu);
+    DOM.addClass(children,'arrow-down');
+}else{
+    DOM.hide(nextMenu);
+    DOM.removeClass(children,'arrow-down');
+}
+    </pre> 
+    <p>这段代码的用途是当你单击一个菜单项后，先隐藏所有子菜单，然后再显示当前菜单项下的子菜单，实际上这里的逻辑有个不对的地方，理论上来讲不该隐藏包括当前菜单项下的子菜单，应该是先隐藏除了当前菜单项下的子菜单下其他子菜单，然后再处理当前菜单项下的子菜单。</p>
+    <p>.....有点绕，明河在讲到动画的时候会继续说明（原来的处理方式在使用动画的情况下就会有一个bug）。</p>   
+  <input type="button" value="隐藏除了第二个子菜单外的子菜单" id="demo2-1" />  
+    <pre class="prettyprint">
+//隐藏除了第二个子菜单外的子菜单
+Event.on('#demo2-1','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    var sibItems = DOM.siblings(menuChildrens[1]);
+    //遍历同级节点并隐藏其子菜单
+    S.each(sibItems,function(v){
+        DOM.hide(DOM.children(v,'ul'));
+    });
+})	
+    </pre> 
+    代码中用到新的方法<a href="http://kissyteam.github.com/kissy/docs/kissy/lang.html">KISSY.each()</a>,这是很常用的方法，明河日后会详解。
+    <h4>demo3: dom-create模块中的create、remove方法演练</h4>  
+    <input type="button" value="向第二个子菜单添加新的菜单项" id="demo3-1" /> 
+    <pre class="prettyprint">
+//向第二个子菜单添加新的菜单项
+Event.on('#demo3-1','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    var secondUl = DOM.children(menuChildrens[1],'ul');
+    //创建一个新的li节点
+    var newLi = DOM.create('&lt;li class=&quot;new&quot;&gt;&lt;a href=&quot;http://www.36ria.com/?cat=113&quot; target=&quot;_blank&quot;&gt;明河共影&lt;/a&gt;&lt;/li&gt;');
+    //留意是secondUl[0]，而不是secondUl
+    secondUl[0].appendChild(newLi);
+})	
+    </pre>    
+    <p>文档中关于create的用法说明很详细，<a href="http://kissyteam.github.com/kissy/docs/dom/dom-create.html">猛击这里进入</a>。 </p>
+    <input type="button" value="删除新加入的菜单项" id="demo3-2" />  
+    <pre class="prettyprint">
+//删除新加入的菜单项
+Event.on('#demo3-2','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    var secondUl = DOM.children(menuChildrens[1],'ul');
+    var newLi = DOM.children(secondUl,'.new');
+    //删除样式名为new的菜单项
+    DOM.remove(newLi);
+})	
+    </pre> 
+    <h4>demo4: dom-create模块中的html方法演练</h4>  
+    <p>这个方法非常常用，相当于原生js中的innerHTML</p>  
+    <input type="button" value="替换第二个子菜单的菜单项" id="demo4-1" /> 
+    <pre class="prettyprint">
+//替换第二个子菜单的菜单项
+Event.on('#demo4-1','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    var secondUl = DOM.children(menuChildrens[1],'ul');
+    DOM.html(secondUl,'&lt;li class=&quot;new&quot;&gt;&lt;a href=&quot;http://www.36ria.com/?cat=113&quot; target=&quot;_blank&quot;&gt;明河共影&lt;/a&gt;&lt;/li&gt;');
+    alert(DOM.html(secondUl));
+})
+    </pre>  
+    当html()无第二个参数时，为获取节点下的html代码                    
+</div>
+<script src="kissy/build/seed-min.js"></script>
+<script>
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM;
+		//拆合菜单节点
+		var menu = S.get("#menu");
+		//获取拆合菜单的父节点的id
+		Event.on('#demo1-1','click',function(evt){
+			var menuParent = DOM.parent(menu);
+			alert(menuParent.id);
+		})
+		//获取拆合菜单的子节点li的个数
+		Event.on('#demo1-2','click',function(evt){
+			var menuChildrens = DOM.children(menu);
+			alert(menuChildrens.length);
+		})
+		//获取拆合菜单下第二个子节点的前一个和后一个节点的文本值
+		Event.on('#demo1-3','click',function(evt){
+			var menuChildrens = DOM.children(menu);
+			//上一个节点
+			var preItem = DOM.prev(menuChildrens[1]);
+			//上一个节点的标题节点
+			var preItemTitle = DOM.children(preItem,'div');
+			//下一个节点
+			var nextItem = DOM.next(menuChildrens[1]);
+			//下一个节点的标题节点
+			var nextItemTitle = DOM.children(nextItem,'div');
+			
+			alert('上一个菜单项的标题为：'+DOM.text(preItemTitle)+',下一个菜单项的标题为：'+DOM.text(nextItemTitle));
+			
+		})
+		//隐藏除了第二个子菜单外的子菜单
+		Event.on('#demo2-1','click',function(evt){
+			var menuChildrens = DOM.children(menu);
+			var sibItems = DOM.siblings(menuChildrens[1]);
+			//遍历同级节点并隐藏其子菜单
+			S.each(sibItems,function(v){
+				DOM.hide(DOM.children(v,'ul'));
+			});
+		})
+		//向第二个子菜单添加新的菜单项
+		Event.on('#demo3-1','click',function(evt){
+			var menuChildrens = DOM.children(menu);
+			var secondUl = DOM.children(menuChildrens[1],'ul');
+			//创建一个新的li节点,加了个样式new
+			var newLi = DOM.create('<li class="new"><a href="http://www.36ria.com/?cat=113" target="_blank">明河共影</a></li>');
+			//留意是secondUl[0]，而不是secondUl
+			secondUl[0].appendChild(newLi);
+		})	
+		//删除新加入的菜单项
+		Event.on('#demo3-2','click',function(evt){
+			var menuChildrens = DOM.children(menu);
+			var secondUl = DOM.children(menuChildrens[1],'ul');
+			var newLi = DOM.children(secondUl,'.new');
+			//删除样式名为new的菜单项
+			DOM.remove(newLi);
+		})
+		//替换第二个子菜单的菜单项
+		Event.on('#demo4-1','click',function(evt){
+			var menuChildrens = DOM.children(menu);
+			var secondUl = DOM.children(menuChildrens[1],'ul');
+			DOM.html(secondUl,'<li class="new"><a href="http://www.36ria.com/?cat=113" target="_blank">明河共影</a></li>');
+			alert(DOM.html(secondUl));
+		})														
+	});
+	
+	
+	
+})(KISSY);
+</script>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

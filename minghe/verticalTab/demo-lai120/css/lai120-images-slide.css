@@ -1,0 +1,72 @@
+/*迅雷首页幻灯片样式*/
+body{background-color:#FAFDEF;}
+#header{
+	background-color:#ECF4FC;
+	border-bottom:1px solid #A0AFC3;
+	margin:0px;
+	margin-bottom:10px;
+	padding:20px;
+	width:100%;
+	line-height:24px;
+}
+
+#lai120-images-slide{
+	width:418px;height:388px;
+	border:1px solid #9DD598;
+	margin:20px;
+	background-color:#FFF;
+	
+}
+#lai120-images-slide-contents{
+	height:270px;overflow:hidden;
+	margin:10px;
+	line-height:24px;color:#666666;
+}
+#lai120-images-slide-contents h4{
+	color:#026F02;
+	font-size:14px;
+	background-color:#FFF;
+}
+#lai120-images-slide-titles{
+	border-top:1px solid #74BD6C;
+	line-height:20px;
+	background:url(../images/list-bg.png) 0px 0px repeat-x;
+	height:97px;overflow:hidden;
+	
+}
+#lai120-images-slide-titles a{
+	color:#006D00;
+}
+#lai120-images-slide-titles img{
+	border:1px solid #9FD597;
+	padding:1px;
+}
+#lai120-images-slide-titles p{
+	margin-top:4px;
+}
+#lai120-images-slide-titles li{
+	width:80px;padding:8px 4px;
+
+}
+.lai120-images-slide-current-title{
+	background:none !important;
+	background-color:#79C074 !important;
+}
+.lai120-images-slide-current-title a{
+	color:#FFF !important;
+}
+
+.points{
+	position:absolute;right:10px;bottom:45px;
+	z-index:20000;
+}
+.points span{
+	height:16px;width:10px;
+	margin-right:5px;
+	background:url(../images/point.png) 0px 0px no-repeat;
+	display:block;
+	cursor:pointer;
+}
+.points span.current{
+	background-position:-14px 0px !important;
+}

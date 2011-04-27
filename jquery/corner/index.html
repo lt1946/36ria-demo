@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery.corner —— jquery圆角插件</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>jquery.corner —— jquery圆角插件</h2> 
+        作者：Dave Methvin，中文demo制作：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。  
+    </div>
+</div>
+<div class="page-960 center">
+	<div class="wrapper clearfix">
+    	jquery.corner是一款强大的圆角插件（所产生的不止只是圆角效果），兼容包括IE6、IE7、IE8、firefox、Opera 、Safari、Chrome等主流浏览器，唯一的缺点是为了产生边角效果，生成了相当数量的层，加重了浏览器的负担。
+    </div>
+	<div class="wrapper clearfix">
+    	<h1>jquery.corner支持的所有边角样式，默认为圆角。(带"*"号的边角效果，无法很好的应用于IE)</h1>
+        <div class="demo"><h1>Round</h1> <p>$(this).corner();</p></div>
+        <div class="demo"><h1>Bevel</h1> <p>$(this).corner("bevel");</p></div>
+        <div class="demo"><h1>Notch</h1> <p>$(this).corner("notch");</p></div>
+    
+        <div class="demo"><h1>Bite</h1>  <p>$(this).corner("bite");</p></div>
+        <div class="demo"><h1>Cool</h1>  <p>$(this).corner("cool");</p></div>
+        <div class="demo"><h1>Sharp</h1> <p>$(this).corner("sharp");</p></div>
+        <div class="demo"><h1>Slide</h1> <p>$(this).corner("slide");</p></div>
+    
+        <div class="demo"><h1>Jut</h1>   <p>$(this).corner("jut");</p></div>
+        <div class="demo"><h1>Curl</h1>  <p>$(this).corner("curl");</p></div>
+        <div class="demo"><h1>Tear</h1>  <p>$(this).corner("tear");</p></div>
+        <div class="demo"><h1>Fray</h1>  <p>$(this).corner("fray");</p></div>
+    
+        <div class="demo"><h1>Wicked</h1><p>$(this).corner("wicked");</p></div>
+        <div class="demo"><h1>Sculpt</h1><p>$(this).corner("sculpt");</p></div>
+        <div class="demo"><h1>Long</h1>  <p>$(this).corner("long");</p></div>
+        <div class="demo"><h1>Dog Ear</h1><p>$(this).corner("dog");</p></div>
+    
+        <div class="demo"><h1>Dog2</h1><p>$(this).corner("dog2");</p></div>
+        <div class="demo"><h1>Dog3</h1><p>$(this).corner("dog3");</p></div>
+        <div class="demo"><h1>Dogfold<sup>*</sup></h1><p>$(this).corner("dogfold");</p></div>
+        <div class="demo"><h1>Bevelfold<sup>*</sup></h1><p>$(this).corner("bevelfold");</p></div>
+    </div>
+	<div class="wrapper clearfix">
+    	<h1>jquery.corner只应用于单个边角</h1>
+        <div class="demo"><h1>Top Bevel</h1>        <p>$(this).corner("bevel top");</p></div>
+        <div class="demo"><h1>Top-Left Bite</h1>    <p>$(this).corner("bite tl");</p></div>
+        <div class="demo"><h1>Round Bottom</h1>     <p>$(this).corner("bottom");</p></div>
+    
+        <div class="demo"><h1>Left Notch</h1><p>$(this).corner("notch left");</p></div>
+        <div class="demo"><h1>Top-Right Dog Ear</h1><p>$(this).corner("dog tr");</p></div>
+        <div class="demo"><h1>Top-Left, Bottom-Right Cool</h1><p>$(this).corner("cool tl br");</p></div>
+        <div class="demo"><h1>Right Bevelfold</h1><p>$(this).corner("bevelfold right");</p></div>  
+    </div> 
+	<div class="wrapper clearfix">
+    	<h1>jquery.corner控制边角效果弧度</h1>
+        <div class="demo"><h1>Round 30px</h1> <p>$(this).corner("30px");</p></div>
+        <div class="demo"><h1>Round 5px</h1>  <p>$(this).corner("5px");</p></div>
+    
+        <div class="demo"><h1>Cool 20px</h1>  <p>$(this).corner("cool 20px");</p></div>
+        <div class="demo"><h1>Sharp 20px</h1> <p>$(this).corner("sharp 20px");</p></div>
+        <div class="demo"><h1>Bite 30px</h1>  <p>$(this).corner("bite 30px");</p></div>
+        <div class="demo"><h1>Wicked 20px</h1><p>$(this).corner("wicked 20px");</p></div>
+    
+        <div class="demo"><h1>Dog 20px</h1><p>$(this).corner("dog 20px");</p></div>
+        <div class="demo"><h1>Dog2 30px</h1><p>$(this).corner("dog2 30px");</p></div>
+        <div class="demo"><h1>Dog3 30px</h1><p>$(this).corner("dog3 30px");</p></div>
+
+    </div>        
+</div>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.corner.js"></script>
+<script type="text/javascript">
+$(function(){
+        $('div.demo').each(function() {
+            var t = $('p', this).text();
+            eval(t);
+        });
+})
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>多级联动获取国、省、市、县的例子</title>
+<script src="js/jquery-1.4.2.min.js"></script>
+<script src="js/jquery.seriesComboBoxs.js"></script>
+<script type="text/javascript">
+$(function(){
+	$.seriesComboBoxs({selects : ["#country","#province","#city","#county"],
+					  ajaxOptions : {"url" : "get_region.php"}	 });
+					  
+	$.seriesComboBoxs({selects : ["#province2","#city2","#county2"],
+					  ajaxOptions : {"url" : "get_region.php","dataType":"xml","data":{"data_type":"xml"}},
+					  defaultParentId : 1});	
+					  				  
+	var ComboBox = $.seriesComboBoxs({selects : ["#province3","#city3","#county3"],
+					  ajaxOptions : {"url" : "get_region.php"},
+					  defaultParentId : 1,
+					  listeners : {
+							render : function(){
+								$(".select-column:not(:first)").hide();
+							},
+							optionClick : function(index,$option,aSelect){
+								var _i = index + 1;
+								$(aSelect[_i]).parent(".select-column").show();
+								
+							} 
+					  }});	
+	$("#getText").click(function(){
+		alert(ComboBox.aSelectText.join(""));
+	})				  				  
+})
+</script>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="header">
+<h2>ajax多级联动获取国、省、市、县的例子</h2>
+<p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+</div>
+<h2>最基础的示例演示，读取json</h2>
+<table width="700" border="0" cellspacing="0" cellpadding="0" class="tab1">
+  <tr>
+  	<td>国家</td>
+  	<td><select  class="comboBox" id="country" name="country" width="100">
+    		<option value="">请选择你的国家</option>
+    	</select>
+    
+    </td>
+    <td>省份</td>
+    <td><select  class="comboBox" id="province" name="province" width="100">
+    		<option value="">请选择你的省份</option>
+    	</select>
+    </td>
+    <td>城市</td>
+    <td><select class="comboBox"  id="city" name="city" width="100" >
+    		<option value="">请选择你的城市</option>
+    	</select>
+    </td>
+    <td>区县</td>
+    <td><select class="comboBox" id="county" name="county" width="100"  >
+    		<option value="">请选择你的区县</option>
+    	</select>
+    </td>
+  </tr>
+</table>
+<h2>不显示国家数据，读取xml</h2>
+<table width="600" border="0" cellspacing="0" cellpadding="0" class="tab1">
+  <tr>
+    <td>省份</td>
+    <td><select  class="comboBox" id="province2" name="province2" width="100">
+    		<option value="">请选择你的省份</option>
+    	</select>
+    </td>
+    <td>城市</td>
+    <td><select class="comboBox"  id="city2" name="city2" width="100" >
+    		<option value="">请选择你的城市</option>
+    	</select>
+    </td>
+    <td>区县</td>
+    <td><select class="comboBox" id="county2" name="county2" width="100"  >
+    		<option value="">请选择你的区县</option>
+    	</select>
+    </td>
+  </tr>
+</table>
+<h2>高级示例，事件演示</h2>
+<ul class="clearfix selects_list">
+	<li class="l">
+    	<div class="select-column">
+          <select  class="comboBox" id="province3" name="province3" width="100">
+                <option value="">请选择你的省份</option>
+            </select>      
+        </div>    
+    </li>
+	<li class="l">
+    	<div class="select-column">
+           <select class="comboBox"  id="city3" name="city3" width="100" >
+                    <option value="">请选择你的城市</option>
+                </select>    
+        </div>     
+    </li>
+	<li class="l">
+    	<div class="select-column">
+               <select class="comboBox" id="county3" name="county3" width="100"  >
+                    <option value="">请选择你的区县</option>
+                </select> 
+        </div>   
+    </li>        
+</ul>
+<p><input type="button" value="获取选择框的合并字符串" id="getText" /></p>
+</body>
+</html>

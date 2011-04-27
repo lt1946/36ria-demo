@@ -1,0 +1,24 @@
+<projectDescription>
+  <id>1275297438493</id>
+  <name>gallery</name>
+  <asVersion>0</asVersion>
+  <boundTemplate>file:///C|/Users/Administrator/AppData/Local/Adobe/Flash CS5/zh_CN/Configuration/ActionScript 3.0/Templates/boundClass_as3.as</boundTemplate>
+  <classTemplate>file:///C|/Users/Administrator/AppData/Local/Adobe/Flash CS5/zh_CN/Configuration/ActionScript 3.0/Templates/standardClass_as3.as</classTemplate>
+  <classPath>.</classPath>
+  <defaultApp/>
+  <rootURI>file:///D|/web/www/gallery/</rootURI>
+  <flexSDK/>
+  <sources editable="false"/>
+  <libraries editable="false"/>
+  <externalLibraries editable="false"/>
+  <compileList editable="false"/>
+  <recentFiles editable="false">
+    <uri label="Img.as">file:///D|/web/www/gallery/lib/Img.as</uri>
+    <uri label="test.xml">file:///D|/web/www/gallery/test.xml</uri>
+    <uri label="gallery.fla">file:///D|/web/www/gallery/gallery.fla</uri>
+    <uri label="Gallery.as">file:///D|/web/www/gallery/lib/Gallery.as</uri>
+    <uri label="TweenLite.as">file:///D|/web/www/gallery/lib/gs/TweenLite.as</uri>
+    <uri label="crossdomain.xml">file:///D|/web/www/gallery/crossdomain.xml</uri>
+  </recentFiles>
+  <locations editable="false"/>
+</projectDescription>

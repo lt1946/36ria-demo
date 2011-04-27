@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:1="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>flex-box用法测试</title>
+<link href="http://www.36ria.com/style/css/doc.css" type="text/css" rel="stylesheet" />
+<script src="http://a.tbcdn.cn/s/kissy/1.1.6/kissy-min.js"  type="text/javascript"></script>
+<style>
+    .flex-box {
+        background-color:#ffffff;
+
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+        
+        margin-top:20px;
+
+        text-shadow: 1px 1px 1px rgba(240,240,240,0.7);
+        
+        box-shadow:0 0 10px #cccccc;
+        -webkit-box-shadow: 0 0 10px #cccccc;
+        -moz-box-shadow:0 0 10px #cccccc;
+
+    }
+
+    #demo-1 > div {
+        -webkit-box-flex: 1;
+        -moz-box-flex: 1;
+        box-flex: 1;
+    }
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>flex-box用法测试</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+    </div>
+</div>
+<div id="main" class="w950 mar-t10">
+    <h4>1.等比例布局</h4>
+	<div id="demo-1" class="flex-box">
+		<div class="box-div box-1">1</div>
+		<div class="box-div box-2">1</div>
+		<div class="box-div box-2">1</div>
+	</div>
+</div>
+</body>
+</html>

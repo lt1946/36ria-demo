@@ -1,0 +1,48 @@
+.yijs_carousel{
+	position:relative;
+	border:1px solid #cccccc;
+	overflow:hidden;
+	background-color:white;
+}
+
+.yijs_carousel ul{
+
+}
+.yijs_carousel ul li{
+	float:left;
+	overflow:hidden;
+}
+.yijs_carousel_ul_vessel{
+	overflow:hidden;
+	height:100%;
+	float:left;
+
+}
+.yijs_carousel_btn_vessel{
+	float:left;
+	position:relative;
+	width:40px;
+	height:100%;
+	
+}
+.yijs_carousel_btn{
+	width:23px;
+	height:24px;
+	position:absolute;
+	top:45%;
+    margin-left:6px;
+	cursor:pointer;
+	
+	
+}
+.yijs_carousel_left{
+    background:url(../images/left.png) 0px 0px no-repeat;	
+}.yijs_carousel_right{
+    background:url(../images/right.png) 0px 0px no-repeat;	
+}
+.yijs_carousel_btnEnabled{
+	background-position:-43px 0px !important;
+}
+.yijs_carousel_btnHover{
+	background-position:-84px 0px !important;	
+}

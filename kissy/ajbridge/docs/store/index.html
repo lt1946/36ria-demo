@@ -1,0 +1,578 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>store - AJBridge Docs</title>
+<link rel="stylesheet" href="../assets/base-min.css" />
+<link rel="stylesheet" href="../assets/docs.css" />
+</head>
+<body class="w866">
+<div id="header">
+    <a class="logo" href="../index.html"><img src="../assets/logo.png" alt="KISSY"  /></a>
+    <p class="rel-nav">
+         <a href="http://github.com/kissyteam/kissy-ajbridge/">src files</a>
+    </p>
+</div>
+<div id="content" class="layout grid-s232m0">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="section summary">
+				<dl>
+					<dt>本章节将假设您已了解以下内容：</dt>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/embed-swf-onto-webpage.html">嵌入SWF的几种方式</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/flashplayer-parameters.html">Flash播放器参数</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">静态发布方式</a></dd>
+					<dt>Requires:</dt>
+					<dd><a href="http://github.com/kissyteam/kissy/blob/master/build/packages/core.js">KISSY CORE</a></dd>
+					<dd><a href="http://github.com/kissyteam/kissy/blob/master/build/flash/flash-pkg.js" target="_blank">Flash package</a></dd>
+					<dt>Editors:</dt>
+					<dd><a href="mailto:longzang@taobao.com">龙藏</a>,Taobao,Inc</p></dd>
+				</dl>
+			</div>
+			
+            <div class="section" id="static">
+                <h3>Properties(Static)</h3>
+
+                <div class="member prop">
+                    <h4>
+                    	<a name="prop_version">version</a> - <code>String</code>
+					</h4>
+                    <div class="detail">
+                       <p>Store 的版本信息</p>
+                    </div>
+                </div>
+            </div>
+			<div class="section" id="constructor">
+				 <h3>Constructor</h3>
+				 <div class="member method">
+                    <h4>
+                        <a name="method_init">Store</a>
+                        <code> <em>Store</em>(id, config)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>构造函数</p>
+                        <p>创建一个 Store 对象，其中包含 白名单验证机制</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">id</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	指定的 SWF 的 id。
+                            </dd>
+                            <dd>
+                                <code class="param-name">config</code>
+                                <code class="param-type">&lt;String&gt;|&lt;Array&gt;</code>
+                               	指定Flash的一些配置信息。
+                            </dd>
+                        </dl>
+						<p> Store 的 config 新增以下可配置属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>默认值</th>
+									<th>说明</th>
+								</tr>
+				           		<tr>
+				           			<td><code>useCompression</code>:Boolean</td>
+									<td><code>true</code></td>
+									<td>使用数据压缩</td>
+								</tr>
+								<tr>
+				           			<td><code>baseOnBrowser</code>:String</td>
+									<td><code>无</code></td>
+									<td>
+										<p>基于浏览器的浏览方式</p>
+										<p>可选配以下方式</p>
+										<ul>
+											<li><code>"core"</code> - 按照浏览器的 内核进行区分浏览.</li>
+											<li><code>"shell"</code> - 按照浏览器的 外壳 进行区分浏览</li>
+											<li>不填写 - 则默认所有浏览器都可以访问数据</li>
+										</ul>
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+						<p>参考:</p>
+						<ul>
+							<li><a href="http://kissyteam.github.com/kissy/docs/ua/index.html#prop_core" target="_blank">KISSY.UA.core</a></li>
+							<li><a href="http://kissyteam.github.com/kissy/docs/ua/index.html#prop_shell" target="_blank">KISSY.UA.shell</a></li>
+						</ul>				
+                    </div>
+                </div>
+			</div>
+				
+			<div class="section" id="properties">
+                <h3>Properties</h3>
+
+                <div class="member prop">
+                   	<p class="tips"><a href="../ajbridge/index.html#part_properties" >查看继承的属性 </a></p>
+                </div>
+				
+				<h3>Methods</h3>
+                <div class="member method">
+                	<p class="tips"><a href="../ajbridge/index.html#part_methods" >查看继承的方法 </a></p>
+                    <h4>
+                        <a name="method_getItem">getItem</a>
+                        <code>any <em>getItem</em>(key)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获得指定 关键字 的值</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">key</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	指定的 关键字
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_setItem">setItem</a>
+                        <code>void <em>setItem</em>(key, value)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>存储指定关键字下的值</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">key</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	指定的 关键字
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_removeItem">removeItem</a>
+                        <code>void <em>removeItem</em>(key)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>删除指定关键字下的值</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">key</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	指定的 关键字
+                            </dd>
+							<dd>
+                                <code class="param-name">value</code>
+                                <code class="param-type">&lt;any&gt;</code>
+                               	对应 的值
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getLength">getLength</a>
+                        <code>Number <em>getLength</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获得当前存储粒度</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_key">key</a>
+                        <code>String <em>key</em>(index)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获取指定索引下的关键字</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">index</code>
+                                <code class="param-type">&lt;Number&gt;</code>
+                               	关键字索引
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_clear">clear</a>
+                        <code>void <em>clear</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>清空所有数据</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getModificationDate">getModificationDate</a>
+                        <code>Date <em>getModificationDate</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获得最后一次修改事件</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_hasAdequateDimensions">hasAdequateDimensions</a>
+                        <code>Boolean <em>hasAdequateDimensions</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>验证是否有足够的空间显示控制面板，用于向用户发起大于 用户默许的空间大小请求。  </p>
+                        <p>默认空间 具有 100K。  </p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_displaySettings">displaySettings</a>
+                        <code>void <em>displaySettings</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>激活并显示控制面板。  </p>
+						<p class="notice">注意，使用此方法将触发 控制面板显示请求。请确保 SWF 显示空间 具有 宽215象素、高138像素的空间，
+						为了确保此功能的显示建议采用<code>hasAdequateDimensions()</code>方法判断。 </p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getUseCompression">getUseCompression</a>
+                        <code>Boolean <em>getUseCompression</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>是否使用了压缩数据功能。  </p>
+                        <p class="notice">请通过初始化配置压缩功能。  </p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getSize">getSize</a>
+                        <code>Number <em>getSize</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获得已使用空间。  </p>
+						<p>单位：字节(B)。  </p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_setMinDiskSpace">setMinDiskSpace</a>
+                        <code>void <em>setMinDiskSpace</em>(bytes)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>配置存储数据的最小磁盘空间大小。  </p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">bytes</code>
+                                <code class="param-type">&lt;Number&gt;</code>
+                               	指定申请的磁盘空间值。单位：字节(B)。  
+                            </dd>
+                        </dl>
+						<p class="notice">注意，使用此方法申请的最小磁盘空间 若大于等于允许的最小磁盘空间时，将触发 控制面板显示请求。请确保 SWF 显示空间 具有 宽215象素、高138像素的空间，
+						为了确保此功能的显示建议采用<code>hasAdequateDimensions()</code>方法判断。 </p>
+						<p class="notice">配置的磁盘空间大小若小于客户端允许的最小磁盘空间，将不会触发控制显示面板。 </p>
+						<p>最小磁盘空间具有6个等级: </p>
+						<ul>
+							<li>从不存储</li>
+							<li>10KB</li>
+							<li>100KB - 默认</li>
+							<li>1MB</li>
+							<li>10MB</li>
+							<li>从不限制</li>
+						</ul>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="section" id="events">
+				 
+				 <h3>JS Events</h3>
+				 <p class="tips"><a href="../ajbridge/index.html#part_events" >查看继承的事件 </a></p>
+				
+				
+				 <h3>SWF Event</h3>
+				 <p>来自 SWF 定义的事件 </p>
+				 <p class="tips"><a href="../ajbridge/index.html#part_events" >查看继承的事件 </a></p>
+				 <div class="member event">
+                    <h4>
+                        <a name="event_initialize">initialize</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 本地存储 初始化。</p>
+						<p class="notice"> 仅在<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a>有该事件。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td><code>CLASS_NAME</code> - 对应的 AS 类 </td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_contentReady">contentReady</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 本地存储 就绪。</p>
+						<p class="notice"> 仅在<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a>有该事件。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td><code>CLASS_NAME</code> - 对应的 AS 类 </td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_new">new</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 从未使用本地存储。</p>
+                        <p class="notice"> 存储发现从未使用过本地存储时触发。AJBridge.Store 专有，仅适合 AJBridge.Store 或 YUI.SWFStore 存储过的本地文件</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td><code>CLASS_NAME</code> - 对应的 AS 类 </td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_storage">storage</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 数据存储成功。</p>
+                        <p class="notice"> 注意，如果存入值和之前相同，则不会激发。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td>
+										<p>可能具备以下值:</p>
+										<ul>
+											<li><code>add</code> - 从未存储该键及其对应值</li>
+											<li><code>update</code> - 更新该键值，对应值不同时触发</li>
+											<li><code>delete</code> - 删除该键及值</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+				           			<td><code>key</code></td>
+									<td>对应的键</td>
+								</tr>
+								<tr>
+				           			<td><code>oldValue</code></td>
+									<td>对应的之前的值</td>
+								</tr>
+								<tr>
+				           			<td><code>newValue</code></td>
+									<td>对应的当前的值</td>
+								</tr>
+								<tr>
+				           			<td><code>bubbles</code></td>
+									<td>false</td>
+								</tr>
+								<tr>
+				           			<td><code>cancelable</code></td>
+									<td>true</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_status">status</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 数据存储状态。</p>
+                        <p class="notice"> 实例报告其状态或错误条件时调度。一般不会激发。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td>
+										<p>可能具备以下值:</p>
+										<ul>
+											<li><code>failed</code> - 从未存储该键及其对应值</li>
+											<li><code>success</code> - 更新该键值，对应值不同时触发</li>
+										</ul>
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_pending">pending</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 当存储的数据或者申请的最小磁盘空间大于客户端允许值时触发。</p>
+                        <p class="notice">请确保 SWF 显示空间 具有 宽215象素、高138像素的空间。 </p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td><code>CLASS_NAME</code> - 对应的 AS 类 </td>
+								</tr>
+								<tr>
+				           			<td><code>key</code></td>
+									<td>最后一次存储的键</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_clear">clear</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 清除成功。</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td><code>CLASS_NAME</code> - 对应的 AS 类 </td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_showSettings">showSettings</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 显示控制面板成功。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>info</code></td>
+									<td><code>CLASS_NAME</code> - 对应的 AS 类 </td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_ioError">ioError</a>
+                    </h4>
+                    <div class="detail">
+                        <p> io 错误，白名单获取失败。确保 Store.swf 和 storage-whitelist.xml 在同一目录。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_securityError">securityError</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 安全错误。可能未指定白名单策略，或者 未配置跨域策略文件</p>
+                    </div>
+				</div>
+			</div>
+           <div class="section notes">
+                <p>
+                    	示例详细：<a href="../../src/store/test.html">store/test.html</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sub">
+        <div class="sub-wrap">
+            <div class="loc"><a href="../index.html">home</a> &rsaquo; store :</div>
+            <div class="toc">
+                <h3>Properties(Static)</h3>
+                <ul>
+                    <li><a href="index.html#prop_version">version</a></li>
+                </ul>
+				<h3>Constructor</h3>
+				<ul>
+                    <li><a href="index.html#constructor">Store</a></li>
+                </ul>
+				<h3>Methods</h3>
+				<ul>
+                    <li><a href="index.html#method_getItem">getItem</a></li>
+                    <li><a href="index.html#method_setItem">setItem</a></li>
+                    <li><a href="index.html#method_removeItem">removeItem</a></li>
+                    <li><a href="index.html#method_getLength">getLength</a></li>
+                    <li><a href="index.html#method_key">key</a></li>
+                    <li><a href="index.html#method_clear">clear</a></li>
+                    <li><a href="index.html#method_getModificationDate">getModificationDate</a></li>
+                    <li><a href="index.html#method_hasAdequateDimensions">hasAdequateDimensions</a></li>
+                    <li><a href="index.html#method_displaySettings">displaySettings</a></li>
+                    <li><a href="index.html#method_getUseCompression">getUseCompression</a></li>
+                    <li><a href="index.html#method_getSize">getSize</a></li>
+                    <li><a href="index.html#method_setMinDiskSpace">setMinDiskSpace</a></li>
+                </ul>
+				<h3>Events</h3>
+				<ul>
+                    <li><a href="index.html#event_initialize">initialize</a></li>
+                    <li><a href="index.html#event_contentReady">contentReady</a></li>
+                    <li><a href="index.html#event_new">new</a></li>
+                    <li><a href="index.html#event_storage">storage</a></li>
+                    <li><a href="index.html#event_status">status</a></li>
+                    <li><a href="index.html#event_pending">pending</a></li>
+                    <li><a href="index.html#event_clear">clear</a></li>
+                    <li><a href="index.html#event_showSettings">showSettings</a></li>
+                    <li><a href="index.html#event_ioError">ioError</a></li>
+                    <li><a href="index.html#event_securityError">securityError</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p class="copyright">&copy; 2009 - 2029 KISSY UI LIBRARY</p>
+</div>
+</body>
+</html>

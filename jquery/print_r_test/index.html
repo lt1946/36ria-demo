@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>print_r测试页面</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+/**
+*打印出json数据
+*/
+function print_r(theObj) {
+	var retStr = '';
+	if (typeof theObj == 'object') {
+		retStr += '<div style="font-size:12px;">';
+		for (var p in theObj) {
+			if (typeof theObj[p] == 'object') {
+				retStr += '<div><b>['+p+'] => ' + typeof(theObj) + '</b></div>';
+				retStr += '<div style="padding-left:25px;">' + print_r(theObj[p]) + '</div>';
+			} else {
+				retStr += '<div>['+p+'] => <b>' + theObj[p] + '</b></div>';
+			}
+		}
+		retStr += '</div>';
+	}
+	return retStr;
+}
+
+$(function(){
+	$.getJSON("http://api.zuosa.com/statuses/public_timeline.json?callback=?", function(data) {
+		$("#debug").html(print_r(data));
+		
+	});
+	
+})
+</script>
+
+</head>
+
+<body>
+<div id="debug">
+</div>
+</body>
+</html>

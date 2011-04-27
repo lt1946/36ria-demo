@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>便利的设置函数</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<link href="basic.css" rel="stylesheet" type="text/css" />
+<link href="demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	$("#btn1").click(function(){
+		$('#a1').html(function(i,html){
+			return html.replace(/。/g,'！已经被替换');
+		});		
+	})
+	$("#btn2").click(function(){
+		$('#a1').attr("title",function(i,title){
+			return title + " (已经被替换)";
+		});		
+	})	
+})
+</script>
+</head>
+
+<body>
+<h1 class="left_h1">改进一：jquery1.4的大部分设置值对方法都可以设置第二个参数为回调函数。比如：.css(), .attr(), .val(), .html(), .text()。</h1>
+<p></p>
+<h4>看下面的demo</h4>
+<p><a href="" id="a1" title="测试">这是一个链接。</a></p>
+<p>现在使用回调函数中直接对衔接中的文字进行替换。以前的方法是先取a的htnl，然后再使用正则匹配，最后进行替换。</p>
+<p>1.4一步搞定，来看代码：</p>
+<p><code>
+		$('#a1').html(function(i,html){
+			return html.replace(/。/g,'！已经被替换');
+		});	
+  </code>
+  <input name="btn1" id="btn1" type="button" value="点此替换" />
+  你会发现，衔接的“。”被替换为“！已经被替换”。
+  
+</p>
+<p>是不是比以前方便多了？</p>
+<p>同样适用于其他设置值对方法，比如attr()，可以试着第二个参数改变成函数看看。</p>
+
+<p>这次替换链接的title属性：</p>
+<p><code>
+		$('#a1').attr("title",function(i,title){
+			return title + " (已经被替换)";
+		});		
+</code></p>
+<p>
+  <input name="btn2" id="btn2" type="button" value="点此替换" />
+</p>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+	<head>
+		<title>AJBridge Uploader Test Runner</title>
+		<!-- include jasmine  -->
+		<link rel="stylesheet" href="../../../tools/jasmine/jasmine.css">
+		<script src="../../../tools/jasmine/jasmine.js"></script>
+		<script src="../../../tools/jasmine/jasmine-html.js"></script>
+		
+		<!-- basic -->
+		<script src="../../../../kissy/build/kissy.js"></script>
+		<script src="../../../../kissy/build/flash/flash-pkg.js"></script> 
+		
+		<!-- ajbridge -->
+		<script src="../../ajbridge/ajbridge.js"></script>
+		
+		<!-- comp... -->
+		<script src="../uploader.js"></script>
+		<script src="uploader-spec.js"></script>
+		
+	</head>
+	<style type="text/css">
+		.box{
+			position:relative;
+		}
+		.flashBackground{
+			background:#C4C4C4;
+			width:400px;
+			height:300px;
+			
+		}
+		
+		.flashBackground p{
+			font-size:14px;
+			font-weight:bold;
+			color:#FF0000;
+			text-align:center;
+		}
+		
+		#FC_SelectFilesBtn{
+			position:absolute;
+		}
+	</style>
+	<body>
+		
+		<script>
+				jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+		    	jasmine.getEnv().execute();
+		</script>
+		
+		
+		
+		<h2>Select Files Button(Flash):</h2>
+		<div class="box">
+			<div id="FC_SelectFilesBtn">
+			    <a href="http://www.adobe.com/go/getflashplayer">
+			        <img src="../../assets/get_flash_player.gif" alt="Get Adobe Flash player"/>
+			    </a>
+			</div>
+			<div class="flashBackground">
+				<p>Move mouse here!</p>
+				<p>Click me and select any files.</p>
+			</div>
+		</div>
+		
+	</body>
+</html>

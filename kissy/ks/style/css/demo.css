@@ -1,0 +1,83 @@
+/*-----清理浮动---*/
+.clearfix:after{content:"."; display:block; height:0; clear:both;visibility:hidden;}
+*html .clearfix{height:1%;}
+*+html .clearfix{height:1%;}
+.l{float:left;}
+.r{float:right;}
+
+.w950{width:950px;}
+
+.mar-t10{margin-top:10px;}
+.mar-t5{margin-top:5px;}
+
+
+body{background-color:#FAFDEF;line-height:24px;font-size:14px;}
+p{line-height:24px;color:#333;font-size:14px;}
+h4{font-size:16px;border-top:2px dashed #CCCCCC;margin-top:10px;padding:10px 0px;color:#333;}
+#header{height:100px;line-height:32px;padding:10px;background:url(../images/header-bg.png) 0px 0px repeat-x;font-size:14px;color:#FFC;}
+#logo{margin-right:10px;}
+#header p{color:#FFF;}
+#header  h2{font-size:16px;color:#FFF;margin:0px !important;}
+#header a{color:#3CF;text-decoration:underline;}
+#header a:hover{color:#CCC !important;}	
+
+#demo3{width:130px;height:50px;background-color:#F00;padding:10px;color:#FFF;cursor:pointer;}
+.demo3-over{background-color:#09F !important;color:#000 !important;}
+
+code{
+	font-size:14px;
+	display:block;
+	background:#F6FCE2;
+	border:1px dashed #CCC;
+	padding:10px;margin:10px;
+	color:#666;
+}
+pre.prettyprint{border:1px dashed #CCC !important;background-color:#E9F4FB;margin:10px 0px;padding:10px !important;line-height:18px !important;}
+
+ul li{margin-left:12px;color:#666;}
+/*-----拆合菜单---*/
+#menu{
+	width:250px;
+	background-color:#FFF;
+	border:1px solid #CDC8CF;border-bottom:none;
+}
+#menu .menu-item{
+	display:inline;
+}
+#menu .menu-item div{
+	height:27px;
+	background:url(../images/menu-header-bg.jpg) 0px 0px repeat-x #99F;
+	border-bottom:1px solid #CDC8CF;
+	padding-top:3px;
+	cursor:pointer;
+}
+#menu .menu-item div a{
+	font-size:14px;font-weight:bold;color:#765D97;
+	margin-left:10px;
+	background:url(../images/menu-arrow.gif) 0px -24px no-repeat;padding-left:20px;
+}
+#menu .menu-item div a:hover{
+	text-decoration:none;
+}
+#menu .menu-item  ul{
+	border-bottom:1px solid #CDC8CF;
+	padding:5px 10px;
+	height:90px;
+}
+#menu .menu-item  ul li{
+	padding:2px 20px;
+	border:1px solid #FFF;
+}
+#menu .menu-item  ul li a{
+	color:#666;
+}
+#menu .menu-item  ul li a:hover{
+	color:#06C;
+}
+.arrow-down{
+	background-position:0px 2px !important;
+}
+.ria_r_content_nav_di_dd_hover{border:1px solid #CFE1FC !important;background-color:#EFF5FD;}
+
+
+

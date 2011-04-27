@@ -1,0 +1,111 @@
+body{background-color:#FAFDEF;}
+#header{
+	height:100px;line-height:32px;
+	padding:10px;
+	background:url(../images/header-bg.png) 0px 0px repeat-x;
+	font-size:14px;color:#FFC;
+}
+#logo{
+	margin-right:10px;
+}
+#header  h2{
+	font-size:16px;
+	color:#FFF;
+
+}
+#header a{
+	color:#3CF;
+	text-decoration:underline;
+}
+#header a:hover{
+	color:#CCC !important;
+}	
+#page{
+	margin-top:20px;
+}
+code{
+	display:block;
+	padding:10px;
+	background-color:#FFC;
+	border:1px dashed #CCC;
+	line-height:24px;
+	margin-top:10px;
+}
+
+/*------------正式样式----------------*/
+.wrapper{
+	margin-top:10px;
+	padding:10px;
+}
+
+#ladder{
+	width:20px; height:20px;
+	border:10px solid; border-color:#ff3300 #0000ff #339966 #00ff00;
+}
+
+#ladder-top{
+	width:20px; height:20px;
+	border:10px solid; border-color:#ff3300 transparent transparent transparent;
+	/*解决IE6下border的transparent无效问题*/
+	border-style:solid dashed dashed dashed;
+}
+#ladder-bottom{
+	width:20px; height:20px;
+	border:10px solid; border-color:transparent transparent #339966 transparent;
+	/*解决IE6下border的transparent无效问题*/
+	border-style:dashed dashed solid dashed;	
+}
+
+#triangle-top{
+	width:0px; height:0px;
+	border:10px solid; border-color:#ff3300 transparent transparent transparent;
+	border-style:solid dashed dashed dashed;
+}
+#triangle-bottom{
+	width:0px; height:0px;
+	border:10px solid; border-color:transparent transparent #339966 transparent;
+	border-style:dashed dashed solid dashed;	
+}
+/*文字提示框*/
+.yitip-wrapper{
+	padding-top:20px;
+}
+.yitip{
+	position:absolute;	
+	left:-40px;
+	top:-14px;
+	padding:6px 12px;	
+	background-color:white;
+	font-size:12px;
+	line-height:1;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:0 0 1px white;
+	white-space:nowrap;
+	
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	
+	background-color:#f9f2ba;
+	border:1px solid #e9d315;
+	color:#5b5316;	
+}
+.yitip .pointyTipShadow,.yitip .pointyTip{
+	position:absolute;
+	border:6px solid; border-color:#e9d315 transparent transparent transparent;
+	border-style:solid dashed dashed dashed;
+	bottom:-12px;
+	width:0;height:0;
+	left:50%;
+	margin-left:-6px;
+	overflow:hidden;
+}
+.yitip .pointyTip{
+	border-top-color:#f9f2ba;
+}
+.yitip .pointyTipShadow{
+	border-width:7px !important;
+	bottom:-14px;
+	margin-left:-7px;
+}

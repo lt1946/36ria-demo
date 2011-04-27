@@ -1,0 +1,55 @@
+/*迅雷首页幻灯片样式*/
+body{background-color:#FAFDEF;}
+#header{
+	background-color:#ECF4FC;
+	border-bottom:1px solid #A0AFC3;
+	margin:0px;
+	margin-bottom:10px;
+	padding:20px;
+	width:100%;
+	line-height:24px;
+}
+
+#xunlei-images-slide{
+	width:700px;height:230px;
+	padding:10px;
+	border:1px solid #CCDFF2;
+	margin:20px;
+	background-color:#FFF;
+	
+}
+#xunlei-images-slide-contents{
+	width:380px;height:225px;overflow:hidden;
+}
+#xunlei-images-slide-titles{
+	width:310px;height:228px;
+	border-bottom:1px solid #EDEDED;
+	
+}
+#xunlei-images-slide-titles li{
+	padding:6px 0px;padding-left:3px;
+	border-top:1px solid #EDEDED;
+	cursor:pointer;
+	height:28px;
+}
+#xunlei-images-slide-titles a{
+	color:#7C7B7B;
+}
+#xunlei-images-slide-titles img{
+	display:block;float:left;
+	border:1px solid #9F9F9F;
+	margin-right:5px;
+}
+#xunlei-images-slide-titles div{
+	width:248px;overflow:hidden;
+}
+#xunlei-images-slide-titles strong{
+	display:block;margin-bottom:3px;
+	color:#4A4A4A;
+	
+}
+.xunlei-images-slide-current-title{
+	background-color:#F5F3F3;
+}	
+
+

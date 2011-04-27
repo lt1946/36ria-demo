@@ -1,0 +1,254 @@
+<html>
+
+<head>
+<title>kissy实例—ajax调用Google Calendar</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.36ria.com/style/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="http://www.36ria.com/style/css/demo.css" rel="stylesheet" type="text/css" />
+    <script src="http://assets.taobaocdn.com/s/kissy/1.1.6/kissy-min.js"></script>
+    <!--引入kissy模板-->
+    <script src="template.js"></script>
+    <style type="text/css">
+        #calendar{
+            border:1px solid #ccc;
+            padding:10px;
+            background-color:#fff;
+            width:600px;
+            padding-top:0px;
+            margin-top:20px;
+        }
+        .list li{
+            margin-left:0px !important;
+            margin-bottom:10px;
+            border-bottom:1px dashed #ccc;
+            padding-bottom:10px;
+        }
+        .list li br{
+            display:none;
+        }
+        .date{
+            width:86px;
+            word-wrap:break-word;
+            word-break:break-all;
+            margin-right:10px;
+        }
+        .tpl2 .date{
+            width:100%;
+        }
+        h5.t{
+            font-size:12px;
+            padding:0px;
+        }
+    </style>
+    <script type="text/javascript">
+        var S = KISSY, Event = S.Event,DOM = S.DOM,IO = S.IO,T = S.Template,
+            cal,
+            tpls =['<div id="calendar">' +
+                        '<h2 class="title"><%=name%>(<%=email%>)的日历</h2>' +
+                        '<ul class="list">'+
+                        '<% for ( var i = 0, l = entry.length; i < l;  i++ ) { %>' +
+                            '<li class="grid"><div class="date g-u"><%=entry[i].date%></div><div class="g-u"><h5 class="t"><%=entry[i].title%></h5><p class="content"><%=entry[i].content%></p></div></li>' +
+                        "<% } %>"+
+                        '</ul>'+
+                        '<% if(testIf) { %>'+
+                        '<p class="footer">这是第一个模板</p>' +
+                        '<% } %>' +
+                   '</div>',
+                   //模板2
+                   '<div id="calendar" class="tpl2">' +
+                        '<h2 class="title"><%=name%>的日历</h2>' +
+                        '<p>明河的email是:<strong><%=email%></strong></p>'+
+                        '<ul class="list">'+
+                        '<% for ( var i = 0, l = entry.length; i < l;  i++ ) { %>' +
+                            '<li><div class="date"><%=entry[i].date%></div><h5 class="t"><%=entry[i].title%></h5><p class="content"><%=entry[i].content%></p></li>' +
+                        "<% } %>"+
+                        '</ul>'+
+                        '<% if(testIf) { %>'+
+                        '<p class="footer">这是第二个模板</p>' +
+                        '<% } %>' +
+                   '</div>'],
+                //模板引擎bug测试
+                testTpl = '<p><p><p><%=test%></p></p></p>';
+        S.ready(function(){
+            cal = S.get('#cal-container');
+            Event.on('#demo1','click',function(){
+                send('cal-rss.php');
+            });
+            //模板引擎bug测试
+            DOM.html(S.get('#tpl-bug-test'),T(testTpl).render({'test':'请用firebug查看这里的结构'}));
+        });
+        /**
+         * 请求数据
+         * @param url 本地代理路径
+         */
+        //TODO:不只演示了kissy的ajax方法，同时演示了kissy的模板方法
+        function send(url){
+            var doc,html,result,author,name,email,entry,items = [],item = {},testIf,radio = S.query('.radio'),tpl,tplIndex;
+            S.each(radio,function(elem){
+                if(DOM.attr(elem,'checked')){
+                    tplIndex = Number(DOM.val(elem));
+                    tpl = tpls[tplIndex];
+                    return true;
+                }
+            });
+            IO.get(url,function(data){
+                //title = data.getElementsByTagName('title').item(0).firstChild.data;
+                doc = DOM.children(data)[0];
+                author = getChildrenNode(doc,'author');
+                //日历作者名
+                name = DOM.text(DOM.children(author)[0]);
+                //作者邮箱
+                email = DOM.text(DOM.children(author)[1]);
+                //内容
+                entry = getChildrenNode(doc,'entry');
+                S.each(entry,function(elem){
+                     item = {
+                         date : new Date(DOM.text(getChildrenNode(elem,'published'))).format('yyyy-MM-dd hh:mm:ss'),
+                         title : DOM.text(getChildrenNode(elem,'title')),
+                         content : DOM.text(getChildrenNode(elem,'content'))
+                     };
+                    items.push(item);
+                });
+                testIf = true;
+                //输出模板
+                result = {'name':name,'email':email,'entry' : items,'testIf':testIf};
+                html = T(tpl).render(result);
+                DOM.html(cal,html);
+            },'xml')
+        }
+        /**
+         * 获取子节点
+         * @param parentNode 父节点
+         * @param nodeName   节点名
+         */
+        //TODO:之所以引入这个方法，是由于kissy无法通过节点名称获取XMLducument的子节点
+        function getChildrenNode(parentNode,nodeName){
+            var childrenNodes = DOM.children(parentNode),node = [];
+            if(childrenNodes.length > 0){
+                S.each(childrenNodes,function(n){
+                    if(n.nodeName == nodeName){
+                        node.push(n);
+                    }
+                })
+            }
+            return node;
+        }
+        /**
+         * 格式化时间
+         * @param format
+         */
+        Date.prototype.format = function(format)
+        {
+            var o = {
+                "M+" : this.getMonth()+1, //month
+                "d+" : this.getDate(),    //day
+                "h+" : this.getHours(),   //hour
+                "m+" : this.getMinutes(), //minute
+                "s+" : this.getSeconds(), //second
+                "q+" : Math.floor((this.getMonth()+3)/3), //quarter
+                "S" : this.getMilliseconds() //millisecond
+            };
+            if(/(y+)/.test(format)) {
+                format=format.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+            }
+
+            for(var k in o) {
+                if(new RegExp("("+ k +")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+                }
+            }
+            return format;
+        }
+    </script>
+</head>
+<body>
+<div id="header" class="clearfix">
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div>
+  <div class="l mar-t5">
+        <h2>kissy实例—ajax调用Google Calendar</h2>
+        <p>作者：明河共影，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p>
+        <p>文章链接：<a href=" http://www.36ria.com/3746" target="_blank">http://www.36ria.com/3787</a></p>
+    </div>
+</div>
+<div id="main" class="mar-t10">
+    <p>不只演示了kissy的ajax方法，同时演示了kissy的模板方法（kissy的模板类没有包含在1.1.6的压缩包中，需要另外引入）</p>
+    <p><button id="demo1">猛击这里，请求日历数据</button></p>
+    <p><input type="radio" name="tpl[]" class="radio" value="0" checked="checked" /><label>模板1</label><input type="radio" name="tpl[]" class="radio" value="1" /><label>模板2</label></p>
+    <div id="title"></div>
+    <div id="cal-container">
+
+    </div>
+    <p>示例中的二个模板代码</p>
+    <pre class="prettyprint">
+tpls =['&lt;div id=&quot;calendar&quot;&gt;' +<br>
+'&lt;h2 class=&quot;title&quot;&gt;&lt;%=name%&gt;(&lt;%=email%&gt;)的日历&lt;/h2&gt;' +<br>
+'&lt;ul class=&quot;list&quot;&gt;'+<br>
+'&lt;% for ( var i = 0, l = entry.length; i &lt; l;  i++ ) { %&gt;' +<br>
+'&lt;li class=&quot;grid&quot;&gt;&lt;div class=&quot;date g-u&quot;&gt;&lt;%=entry[i].date%&gt;&lt;/div&gt;&lt;div class=&quot;g-u&quot;&gt;&lt;h5 class=&quot;t&quot;&gt;&lt;%=entry[i].title%&gt;&lt;/h5&gt;&lt;p class=&quot;content&quot;&gt;&lt;%=entry[i].content%&gt;&lt;/p&gt;&lt;/div&gt;&lt;/li&gt;' +<br>
+&quot;&lt;% } %&gt;&quot;+<br>
+'&lt;/ul&gt;'+<br>
+'&lt;% if(testIf) { %&gt;'+<br>
+'&lt;p class=&quot;footer&quot;&gt;这是第一个模板&lt;/p&gt;' +<br>
+'&lt;% } %&gt;' +<br>
+'&lt;/div&gt;',<br>
+//模板2<br>
+'&lt;div id=&quot;calendar&quot; class=&quot;tpl2&quot;&gt;' +<br>
+'&lt;h2 class=&quot;title&quot;&gt;&lt;%=name%&gt;的日历&lt;/h2&gt;' +<br>
+'&lt;p&gt;明河的email是:&lt;strong&gt;&lt;%=email%&gt;&lt;/strong&gt;&lt;/p&gt;'+<br>
+'&lt;ul class=&quot;list&quot;&gt;'+<br>
+'&lt;% for ( var i = 0, l = entry.length; i &lt; l;  i++ ) { %&gt;' +<br>
+'&lt;li&gt;&lt;div class=&quot;date&quot;&gt;&lt;%=entry[i].date%&gt;&lt;/div&gt;&lt;h5 class=&quot;t&quot;&gt;&lt;%=entry[i].title%&gt;&lt;/h5&gt;&lt;p class=&quot;content&quot;&gt;&lt;%=entry[i].content%&gt;&lt;/p&gt;&lt;/li&gt;' +<br>
+&quot;&lt;% } %&gt;&quot;+<br>
+'&lt;/ul&gt;'+<br>
+'&lt;% if(testIf) { %&gt;'+<br>
+'&lt;p class=&quot;footer&quot;&gt;这是第二个模板&lt;/p&gt;' +<br>
+'&lt;% } %&gt;' +<br>
+'&lt;/div&gt;'];
+    </pre>
+    <p>xml处理过程</p>
+    <pre class="prettyprint">
+IO.get(url,function(data){
+    //title = data.getElementsByTagName('title').item(0).firstChild.data;
+    doc = DOM.children(data)[0];
+    author = getChildrenNode(doc,'author');
+    //日历作者名
+    name = DOM.text(DOM.children(author)[0]);
+    //作者邮箱
+    email = DOM.text(DOM.children(author)[1]);
+    //内容
+    entry = getChildrenNode(doc,'entry');
+    S.each(entry,function(elem){
+         item = {
+             date : new Date(DOM.text(getChildrenNode(elem,'published'))).format('yyyy-MM-dd hh:mm:ss'),
+             title : DOM.text(getChildrenNode(elem,'title')),
+             content : DOM.text(getChildrenNode(elem,'content'))
+         };
+        items.push(item);
+    });
+    testIf = true;
+    //输出模板
+    result = {'name':name,'email':email,'entry' : items,'testIf':testIf};
+    html = T(tpl).render(result);
+    DOM.html(cal,html);
+},'xml')
+    </pre>
+    <p>模板引擎bug测试，请使用firebug查看下面的模板输出后的结构，再比对模板真实的结构。</p>
+    <div id="tpl-bug-test"></div>
+    <pre class="prettyprint">
+&lt;p&gt;&lt;p&gt;&lt;p&gt;明河&lt;/p&gt;&lt;/p&gt;&lt;/p&gt;
+    </pre>
+    这是要输出的结构，而实际上模板却输出了下面错误的结构。
+    <pre class="prettyprint">
+        &lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;明河&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;
+    </pre>
+    也就是失去了嵌套的结构，这个bug只有在连续出现相同标签嵌套的情况下。
+</div>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+
+</html>

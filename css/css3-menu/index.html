@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>分享按钮列表的demo - $.shareList</title>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	var menu = $('#menu'),
+		pos = menu.offset();
+		
+		$(window).scroll(function(){
+			if($(this).scrollTop() > pos.top+menu.height() && menu.hasClass('default')){
+				menu.fadeOut('fast', function(){
+					$(this).removeClass('default').addClass('fixed').fadeIn('fast');
+				});
+			} else if($(this).scrollTop() <= pos.top && menu.hasClass('fixed')){
+				menu.fadeOut('fast', function(){
+					$(this).removeClass('fixed').addClass('default').fadeIn('fast');
+				});
+			}
+		});
+})
+</script>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>css3+jquery实现固定头部的菜单</h2> 
+        作者：<span sizcache="4" sizset="20"><a title="Michal Kozak" href="http://www.1stwebdesigner.com/author/michalkozak/">Michal Kozak</a></span> ，翻译：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。    
+    </div>
+</div>
+<div id="page">
+<div id="navi">
+        <div id="menu" class="default">
+            <ul>
+                <li><a href="index.html#">首页</a></li>
+                <li><a href="index.html#">jquery</a></li>
+                <li><a href="index.html#">设计</a></li>
+                <li><a href="index.html#">flex</a></li>
+                <li><a href="index.html#">air</a></li>
+                <li><a href="index.html#">ajax</a></li>
+                <li><a href="index.html#">html5</a></li>
+                <li><a href="index.html#">css3</a></li>
+                <li><a href="index.html#">WordPress</a></li>
+            </ul>
+        </div><!-- close menu -->
+    </div><!-- close navi -->
+    <div id="content">
+      <h2><a href="http://www.36ria.com/2653">从25秒到5秒—wordpress站点性能优化实战</a></h2>
+      <p>追溯到前三个月，如果你访问RIA之家，将是痛苦的经历，打开一个首页需要高达25秒的时间！那时候很多朋友向明河抱怨RIA之家实在是慢到令人发指，而如今RIA之家的访问时间已经是5秒，明显快了非常多（5秒其实还是不够快）。</p>
+      <p>今天这篇文章，明河以优化RIA之家性能为例讲述如何优化wordpress站点。</p>
+      <h4>一、准备</h4>
+      <p>1、YShow ：web性能优化必备工具。</p>
+      <p>2、测速站点：<a href="http://tools.pingdom.com/">http://tools.pingdom.com/</a></p>
+      <p>3、合并背景图片 ：<a href="http://www.csssprites.com/" target="_blank">http://www.csssprites.com/</a></p>
+      <p>4、Closure Compiler ：<a href="http://closure-compiler.appspot.com/home">http://closure-compiler.appspot.com/home</a>  google在线压缩js工具</p>
+      <h4>二、选择一个好的虚拟主机</h4>
+      <p>最为主要的因素，虚拟主机速度的快慢直接决定了你站点的速度，之前RIA之家站点访问速度之所以延迟到25秒，就是主机（国外）在作祟，前几月明河换了个新的主机，速度要快上15秒！新的主机也一样是国外主机，所以国外主机速度也是有区别的。</p>
+      <h4>三、安装wp-super-cache</h4>
+      <p>我想大部分玩wordpress的朋友都有安装这个插件，关于此插件的教程网上很多，明河就不再累述。</p>
+      <h4>四、ajax化站点</h4>
+      <p>RIA之家原来的导航、幻灯片、最新评论、右侧头部菜单并没有采用ajax技术，加入后速度提高的同时，也加强了用户体验。</p>
+      <h4>五、尽量少用会向页面添加新的css、js的wordpress插件</h4>
+      <p>很多朋友的wordpress博客运行慢的主要原因就是使用过多的wordpress插件。</p>
+      <h2>遵循YShow建议优化</h2>
+      <p>接下来的优化过程，需要用到优化利器：YShow</p>
+      <p><img title="optimize" src="http://www.36ria.com/wp-content/uploads/2010/06/optimize.png" alt="" width="600" height="179" /></p>
+      <p>上图是YShow对RIA之家，为什么只有C？有几个评级选项，明河是无能为力，比如要求站点使用CDN，头部加上过期时间，添加ETags，这几项都是F，不是明河不想优化，而是这几项需要服务器的支持，虚拟主机一般都没办法处理这几项。</p>
+      <h4>六、 尽可能的减少 HTTP 的请求数</h4>
+      <p><strong>1、使用css sprites技术合并背景图片</strong></p>
+      <p>这里推荐个好的站点：<a href="http://www.csssprites.com/" target="_blank">http://www.csssprites.com/</a></p>
+      <p>它可以自动将你上传的图片合并并给出对应的background-position坐标，并将结果以png和gif的格式输出。</p>
+      <p>明河将图片合并成2张图片，一个是icon.png用于存放不需要repeat的图片碎片，另外一个是h-sprites.png需要repeat-x的图片。</p>
+      <p><strong>2、合并js文件，并使用</strong><a href="http://closure-compiler.appspot.com/home" target="_blank"><strong>Closure Compiler</strong></a><strong>压缩js</strong></p>
+      <p><strong>3、合并css文件</strong></p>
+      <h4>七、开启Gzip</h4>
+      <p>gzip需要服务器的支持，开启Gzip后首页文件大小缩小了40%，速度提高了2-3秒。</p>
+      <p><strong>八、 将 CSS 样式放在页面的上方而将脚本移动到底部</strong><br />
+        这里值得一提的是大部分的wordpress插件都是往头部加js和css，这时候需要你手动打开wordpress插件，修改add_action(&ldquo;wp_head&rdquo;,xxxx),改成add_action(&ldquo;wp_footer&rdquo;,xxxx)，再去掉css，将css合并到你主题的style.css中<br />
+        优化结束。</p>
+      <p>使用Pingdom常看下站点速度：<br />
+        <img src="http://www.36ria.com/wp-content/uploads/2010/06/optimize2.png" alt="" title="optimize2" width="277" height="313" /><br />
+        还有提升空间，有进一步的优化心得再与各位分享，谢谢。</p>
+    </div><!-- close content -->
+</div>
+</body>
+</html>

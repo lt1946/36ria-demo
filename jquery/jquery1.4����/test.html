@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<link href="basic.css" rel="stylesheet" type="text/css" />
+<link href="demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	$("#btn1").click(function(){
+		$('#a1').html(function(i,html){
+			return html.replace(/。/g,'！已经被替换');
+		});		
+	})
+	$("#btn2").click(function(){
+		$('#a1').attr("title",function(i,title){
+			return title + " (已经被替换)";
+		});		
+	})	
+})
+</script>
+</head>
+
+<body>
+<h1 class="left_h1">改进一：jquery1.4的大部分设置值对方法都可以设置第二个参数为回调函数。比如：.css(), .attr(), .val(), .html(), .text()。</h1>
+<p></p>
+<h4>看下面的demo</h4>
+<p><a href="" id="a1" title="测试">这是一个链接。</a></p>
+<p>现在使用回调函数中直接对衔接中的文字进行替换。以前的方法是先取a的htnl，然后再使用正则匹配，最后进行替换。</p>
+<p>1.4一步搞定，来看代码：</p>
+<p><code>
+		$('#a1').html(function(i,html){
+			return html.replace(/。/g,'！已经被替换');
+		});	
+  </code>
+  <input name="btn1" id="btn1" type="button" value="点此替换" />
+  你会发现，衔接的“。”被替换为“！已经被替换”。
+  
+</p>
+<p>是不是比以前方便多了？</p>
+<p>同样适用于其他设置值对方法，比如attr()，可以试着第二个参数改变成函数看看。</p>
+
+<p>这次替换链接的title属性：</p>
+<p><code>
+		$('#a1').attr("title",function(i,title){
+			return title + " (已经被替换)";
+		});		
+</code></p>
+<p>
+  <input name="btn2" id="btn2" type="button" value="点此替换" />
+</p>
+<h1 class="left_h1">改进二：jquery1.4在ajax方面改变巨大，务必留意。</h1>
+<h4>2.1允许序列化嵌套的参数。</h4>
+<p>比如：{foo: [&quot;bar&quot;, &quot;baz&quot;]} 将被序列化成foo[]=bar&amp;foo[]=baz，而不是序列化成以前的foo=bar&amp;foo=baz。</p>
+<p>如果你想要使用旧的序列化方式，有三种设置方法：</p>
+<p><code>
+  
+  jQuery.ajaxSettings.traditional = true;
+</code></p>
+<p><code> jQuery.param( stuff, true );</code></p>
+<p><code> $.ajax({ data: stuff, traditional: true }); </code>
+个人推荐第一种方式，当然最好还是改用新的序列化方式。
+</p>
+<h4>2.2自动检测json和javascript的数据类型。</h4>
+<p>1.4后返回json或javascript可以不用设置dataType 了，将会根据application/json或application/x-javascript自动判断类型。但后台返回的数据类型务必指定。</p>
+<h4>2.3支持添加html头信息。</h4>
+<p>$.ajax()新增一个属性ifModified: true ，设置为true，可以有效利用浏览器缓存（目前我还有试过其效果。）</p>
+<h4>2.4使用原生的JSON.parse，来解析json。</h4>
+<p>1.4会对ajax返回回来的json进行合法性验证，错误的json格式将不予解析，比如{foo: &quot;bar&quot;}。</p>
+<h4>2.5 $.serialize()序列化表单时，现在可以序列化html5的表单元素。</h4>
+<p>......相当的与时俱进，html5我还没认真看过.....</p>
+<h4>2.6 留意新增一个全新属性Context，非常有用处</h4>
+<p>Context的出现真是太及时了，Context会简化你的ajax请求。Context的作用是你可以自定义上下文，也就是指定ajax中回调函数的this。来看代码：</p>
+<code>
+jQuery.ajax({<br />
+url: &quot;test.html&quot;,<br />
+context: document.body,<br />
+success: function(){<br />
+jQuery(this).addClass(&quot;done&quot;);<br />
+}<br />
+}); </code>
+代码success回调函数中的this将指向document.body！
+<h4>2.7 显式设置content-type</h4>
+<p>在1.4以前，如果你没有设置参数data，$.ajax()会忽略contentType 这个参数的值，1.4contentType在ajax请求时都要发送。</p>
+<h4>2.8 你可以指定JSONP的回调函数名</h4>
+<h4>2.9 默认不允许跨域请求</h4>
+<h1 class="left_h1">改进三：改进方法。</h1>
+<p>1.4改进了不少方法的速度，同时又加入了新的便利方法。</p>
+<h4>3.1快速创建元素</h4>
+<p><code>
+  jQuery(&quot;&lt;div/&gt;&quot;, {<br />
+  id: &quot;foo&quot;,<br />
+  css: {<br />
+  height: &quot;50px&quot;,<br />
+  width: &quot;50px&quot;,<br />
+  color: &quot;blue&quot;,<br />
+  backgroundColor: &quot;#ccc&quot;<br />
+  },<br />
+  click: function() {<br />
+  $(this).css(&quot;backgroundColor&quot;, &quot;red&quot;); <br />
+  }<br />
+  }).appendTo(&quot;body&quot;);</code>
+相当强悍，不用像以前一样。添加完层，再attr("id","xxx")，css()，click之类的了，一句语句搞定。</p>
+<h4>3.2eq()和get()二个方法支持负数参数</h4>
+<p>取负数时，从最后向前读取。比如下面代码</p>
+<code>$(&quot;div&quot;).eq(-2);<br />
+$(&quot;div&quot;).get(-2);
+
+</code>
+<h4>3.3新增二个方法first()和last()。</h4>
+<p>取第一个对象和最后一个对象不用使用： <a href="http://api.jquery.com/eq/">.eq(0)</a> 和 <a href="http://api.jquery.com/eq/">.eq(-1)</a>了。</p>
+<h4>3.4新增toArray() 方法</h4>
+<h4>3.5建议弃用jQuery().ready() </h4>
+<h4>3.4toggleClass()支持多个样式</h4>
+<code>
+$("div").toggleClass("current active");
+</code>
+<h4>data() 支持批量设值比如： $('body').data({one: 1, two: 2});</h4> 
+<h4>index() 如果无参数，则返回在它兄弟级元素集合中的索引值；并支持使用选择器(selector)过滤</h4> 
+<h4>offset() 新增功能可以直接设置元素相对于document的坐标，并支持function参数</h4> 
+<h4>jQuery.param() 第二个参数(布尔值)，可以设定是否进行URI编码 </h4> 
+<h4>proxy() 全新方法</h4> 
+<h4>focusin、focusout全新事件，解决focus和blur事件没法冒泡的问题</h4> 
+<h4>bind() 可以批量绑定事件</h4>
+<h4>detach() 返回从元素数组中移除的匹配元素。 </h4>
+<h4>has() 筛选出包含有指定元素的集合</h4>
+<h4>isEmptyObject() 检测对象是否为空值</h4>
+<h4>nextUntil([ selector ]) 查找当前元素之后到selector(参数)之间的同辈元素</h4> 
+<h4>prevUntil([ selector ]) 查找当前元素之前到selector(参数)之间的同辈元素 </h4>
+<h4>parentsUntil( [ selector ] ) 取得一个包含着所有匹配元素的祖先元素（直到找到selector截止）的元素集合 </h4>
+<h4>jQuery.noop 空函数，当想定义一个空函数时可以用这个。 </h4>
+<h4>isEmptyObject() 检测对象是否为空值</h4>
+<h4>isEmptyObject() 检测对象是否为空值</h4>
+<h4>isEmptyObject() 检测对象是否为空值</h4>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

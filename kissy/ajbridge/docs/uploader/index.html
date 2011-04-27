@@ -1,0 +1,990 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>uploader - AJBridge Docs</title>
+<link rel="stylesheet" href="../assets/base-min.css" />
+<link rel="stylesheet" href="../assets/docs.css" />
+</head>
+<body class="w866">
+<div id="header">
+    <a class="logo" href="../index.html"><img src="../assets/logo.png" alt="KISSY"  /></a>
+    <p class="rel-nav">
+         <a href="http://github.com/kissyteam/kissy-ajbridge/">src files</a>
+    </p>
+</div>
+<div id="content" class="layout grid-s232m0">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="section summary">
+				<dl>
+					<dt>本章节将假设您已了解以下内容：</dt>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/embed-swf-onto-webpage.html">嵌入SWF的几种方式</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/flashplayer-parameters.html">Flash播放器参数</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">静态发布方式</a></dd>
+					<dt>Requires:</dt>
+					<dd><a href="http://github.com/kissyteam/kissy/blob/master/build/packages/core.js">KISSY CORE</a></dd>
+					<dd><a href="http://github.com/kissyteam/kissy/blob/master/build/flash/flash-pkg.js" target="_blank">Flash package</a></dd>
+					<dt>Editors:</dt>
+					<dd><a href="mailto:longzang@taobao.com">龙藏</a>,Taobao,Inc</dd>
+				</dl>
+			</div>
+			 <p class="notice">由于 flash player 自身安全因素限制，浏览本地文件需要通过 用户行为激发 swf 实例，请通过覆盖按钮方式实现本地浏览文件功能。 </p>
+            <div class="section" id="static">
+                <h3>Properties(Static)</h3>
+
+                <div class="member prop">
+                    <h4>
+                    	<a name="prop_version">version</a> - <code>String</code>
+					</h4>
+                    <div class="detail">
+                       <p>版本信息</p>
+                    </div>
+                </div>
+            </div>
+			<div class="section" id="constructor">
+				 <h3>Constructor</h3>
+				 <div class="member method">
+                    <h4>
+                        <a name="method_init">Uploader</a>
+                        <code> <em>Uploader</em>(id, config)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>构造函数</p>
+                        <p>创建一个 Uploader 对象</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">id</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	指定的 SWF 的 id。
+                            </dd>
+                            <dd>
+                                <code class="param-name">config</code>
+                                <code class="param-type">&lt;String&gt;|&lt;Array&gt;</code>
+                               	指定Flash的一些配置信息。
+                            </dd>
+                        </dl>
+						<p> Uploader 的 config 新增以下可配置属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>默认值</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+				           			<td><code>ds</code>:String</td>
+									<td><code>null</code></td>
+									<td>指定默认上传服务器接收地址。可以由upload() 方法动态指定服务器地址。请保证至少通过一种形式配置。default server 的缩写 </td>
+								</tr>
+								<tr>
+				           			<td><code>dsp</code>:Object</td>
+									<td><code>null</code></td>
+									<td>服务器传参。default server parameters 的缩写。</td>
+								</tr>
+				           		<tr>
+				           			<td><code>dsr</code>:Boolean</td>
+									<td><code>false</code></td>
+									<td>服务器端是否会在上传完毕后传回数据。 default server response 的缩写 </td>
+								</tr>
+								<tr>
+				           			<td><code>btn</code>:Boolean</td>
+									<td><code>false</code></td>
+									<td>启用按钮模式。该模式下会激发鼠标事件。</td>
+								</tr>
+								<tr>
+				           			<td><code>hand</code>:Boolean</td>
+									<td><code>false</code></td>
+									<td>启用手型指针。鼠标显示为手型。</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+                </div>
+			</div>
+				
+			<div class="section" id="properties">
+                <h3>Properties</h3>
+
+                <div class="member prop">
+                   	<p class="tips"><a href="../ajbridge/index.html#part_properties" >查看继承的属性 </a></p>
+                </div>
+				
+				<h3>Methods</h3>
+				<p class="tips"><a href="../ajbridge/index.html#part_methods" >查看继承的方法 </a></p>
+                <div class="member method">
+                    <h4>
+                        <a name="method_setFileFilters">setFileFilters</a>
+                        <code>void <em>setFileFilters</em>(fileFilters)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>过滤在对话框中显示的文件。如果省略此参数，则显示所有文件</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">fileFilters</code>
+                                <code class="param-type">&lt;Array&gt;</code>
+                               	这是个复合数组，每项至少包含以下 desc 或 description 和  ext 或 extension 2个属性。可选。指文件上传的指定后缀名组。组中每项是个Object。默认为空，即可以上传任意文件。若约定了过滤后缀名则必需保证每个Object传递具备如下属性的Obejct：{ des:"对过滤规则的描述", ext:"扩展文件名，以类似*.jpg的方式约定"}。
+                            </dd>
+                        </dl>
+						<p>示例</p>
+<pre class="example-code"><code>
+// 仅显示 JPG或JPEG图片 或 文本文件
+uploader.setFileFilters([{desc:"JPG,JPEG",ext:"*.jpg;*.jpeg"},
+                  {desc:"TEXT",ext:"*.txt"}]);
+</code></pre>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_filter">filter</a>
+                        <code>void <em>filter</em>(fileFilters)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>setFileFilters 的别名</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_setAllowMultipleFiles">setAllowMultipleFiles</a>
+                        <code>void <em>setAllowMultipleFiles</em>(allowMultipleFiles)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>启用多文件选择及上传功能</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">allowMultipleFiles</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+								指定是否支持多文件选择
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_multifile">multifile</a>
+                        <code>void <em>multifile</em>(allowMultipleFiles)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>setAllowMultipleFiles 的别名</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_browse">browse</a>
+                        <code>Boolean <em>browse</em>(mulit, fileFilters)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>配置浏览文件方式。相当同时使用 setAllowMultipleFiles() 和 setFileFilters() </p>
+						 <p class="notice">注意，此函数为配置函数，真正意义上的浏览本地文件需要通过 点击 swf 实现 。 </p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">mulit</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+                               	同 setAllowMultipleFiles()
+                            </dd>
+							<dd>
+                                <code class="param-name">fileFilters</code>
+                                <code class="param-type">&lt;Array&gt;</code>
+                               	同 setFileFilters()
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_upload">upload</a>
+                        <code>Boolean <em>upload</em>(fileID, serverURL,method,serverURLParameter,hasResponse,uploadDataFieldName)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>上传指定的单个文件 </p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">fileID</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								文件id
+                            </dd>
+							<dd>
+                                <code class="param-name">serverURL</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								上传服务URL
+                            </dd>
+							<dd>
+                                <code class="param-name">method</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								指上传提交方式  GET or POST
+                            </dd>
+							<dd>
+                                <code class="param-name">serverURLParameter</code>
+                                <code class="param-type">&lt;Object&gt;</code>
+								服务器参数。必需是 key-value 对象。
+                            </dd>
+							<dd>
+                                <code class="param-name">hasResponse</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+								服务端是否有应答数据
+                            </dd>
+							<dd>
+                                <code class="param-name">uploadDataFieldName</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								POST操作数据属性。默认是Filedata不需要更改，请务必保持此指不为空或空字符串
+                            </dd>
+							<dt>Returns:</dt>
+							<dd>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+								当上传功能被锁、用户没有选择文件、用户不允许使用上传功能等障碍，则会不返回 false。
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+<pre class="example-code"><code>
+// 仅显示 JPG或JPEG图片 或 文本文件
+uploader.upload(fileID,
+                "http://127.0.0.1:8080/upload.php",
+                "POST",
+                {
+                  username:"user",
+                  password:"1297ew9jd23888s834u3j2u38"
+                },
+                false);
+</code></pre>
+				<div class="member method">
+                    <h4>
+                        <a name="method_uploadAll">uploadAll</a>
+                        <code>Boolean <em>uploadAll</em>(serverURL,method,serverURLParameter,hasResponse,uploadDataFieldName)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>上传所有文件 </p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">serverURL</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								上传服务URL
+                            </dd>
+							<dd>
+                                <code class="param-name">method</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								指上传提交方式  GET or POST
+                            </dd>
+							<dd>
+                                <code class="param-name">serverURLParameter</code>
+                                <code class="param-type">&lt;Object&gt;</code>
+								服务器参数。必需是 key-value 对象。
+                            </dd>
+							<dd>
+                                <code class="param-name">hasResponse</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+								服务端是否有应答数据
+                            </dd>
+							<dd>
+                                <code class="param-name">uploadDataFieldName</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								POST操作数据属性。默认是Filedata不需要更改，请务必保持此指不为空或空字符串
+                            </dd>
+							<dt>Returns:</dt>
+							<dd>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+								当上传功能被锁、用户没有选择文件、用户不允许使用上传功能等障碍，则会不返回 false。
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+<pre class="example-code"><code>
+// 仅显示 JPG或JPEG图片 或 文本文件
+uploader.uploadAll("http://127.0.0.1:8080/upload.php",
+                "POST",
+                {
+                  username:"user",
+                  password:"1297ew9jd23888s834u3j2u38"
+                },
+                false);
+</code></pre>				
+				<div class="member method">
+                    <h4>
+                        <a name="method_cancel">cancel</a>
+                        <code>void <em>cancel</em>(fileID)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>取消正在上传中的文件。如果没有指定  fileID 则取消所有正在上传的文件</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">fileID</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	文件 id 可选。
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getFile">getFile</a>
+                        <code>Object <em>getFile</em>(fileID)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获取指定文件 id 下的文件信息</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">fileID</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	文件 id 。
+                            </dd>
+							<dt>Returns:</dt>
+							<dd>
+                                <code class="param-type">&lt;Object&gt;</code>
+								返回文件信息对象。见 下表 ：
+                            </dd>
+                        </dl>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+				           			<td><code>cDate</code>:Date</td>
+									<td>文件创建日期 </td>
+								</tr>
+								<tr>
+				           			<td><code>mDate</code>:Date</td>
+									<td>文件修改日期。</td>
+								</tr>
+				           		<tr>
+				           			<td><code>name</code>:String</td>
+									<td>文件名 </td>
+								</tr>
+								<tr>
+				           			<td><code>size</code>:Number</td>
+									<td>文件大小。单位：字节</td>
+								</tr>
+								<tr>
+				           			<td><code>type</code>:String</td>
+									<td>文件类型。</td>
+								</tr>
+								<tr>
+				           			<td><code>id</code>:String</td>
+									<td>文件 id。</td>
+								</tr>
+				          	</tbody>
+						</table> 
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_removeFile">removeFile</a>
+                        <code>Object <em>removeFile</em>(fileID)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>按文件 id 删除指定文件</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">fileID</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	文件 id 。
+                            </dd>
+							<dt>Returns:</dt>
+							<dd>
+                                <code class="param-type">&lt;Object&gt;</code>
+								返回文件信息对象。见 下表 ：
+                            </dd>
+                        </dl>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+				           			<td><code>cDate</code>:Date</td>
+									<td>文件创建日期 </td>
+								</tr>
+								<tr>
+				           			<td><code>mDate</code>:Date</td>
+									<td>文件修改日期。</td>
+								</tr>
+				           		<tr>
+				           			<td><code>name</code>:String</td>
+									<td>文件名 </td>
+								</tr>
+								<tr>
+				           			<td><code>size</code>:Number</td>
+									<td>文件大小。单位：字节</td>
+								</tr>
+								<tr>
+				           			<td><code>type</code>:String</td>
+									<td>文件类型。</td>
+								</tr>
+								<tr>
+				           			<td><code>id</code>:String</td>
+									<td>文件 id。</td>
+								</tr>
+				          	</tbody>
+						</table> 
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_lock">lock</a>
+                        <code>void <em>lock</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>锁定上传组件，不再允许浏览器本地文件。</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_unlock">unlock</a>
+                        <code>void <em>unlock</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>解锁上传组件，允许浏览器本地文件</p>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_setBtnMode">setBtnMode</a>
+                        <code>void <em>setBtnMode</em>(allow)</code>
+                    </h4>
+                    <div class="detail">
+                        <p> 设置按钮模式。</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">allow</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+                               	布尔值为 true 时，则 swf 实例将会 产生鼠标事件。
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_useHand">useHand</a>
+                        <code>void <em>useHand</em>(allow)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>设置鼠标手势。  </p>
+                       <dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">allow</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+                               	布尔值为 true 时，则 鼠标移动到 swf 实例上鼠标则会成为手型。
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_clear">clear</a>
+                        <code>void <em>clear</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>清空所有已选择和正在上传文件。  </p>
+                    </div>
+                </div>
+				
+            </div>
+			
+			<div class="section" id="events">
+				 
+				 <h3>JS Events</h3>
+				 <p class="tips"><a href="../ajbridge/index.html#part_events" >查看继承的事件 </a></p>
+				
+				
+				 <h3>SWF Event</h3>
+				 <p>来自 SWF 定义的事件 </p>
+				 <p class="tips"><a href="../ajbridge/index.html#part_events" >查看继承的事件 </a></p>
+				<div class="member event">
+                    <h4>
+                        <a name="event_contentReady">contentReady</a>
+                    </h4>
+                    <div class="detail">
+                        <p> SWF 内容准备就绪。</p>
+						<p class="notice"> 仅在<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a>有该事件。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_fileSelect">fileSelect</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 当单个文件或多个文件时触发。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>类型</th>
+									<th>备注</th>
+								</tr>
+				           		<tr>
+				           			<td><code>fileList</code></td>
+									<td><code>Array</code> </td>
+									<td>文件数组。每个数组项包含属性见下表
+										<table width="100%" class="innertable">
+								            <tbody>
+								            	<tr>
+								            		<th>属性</th>
+													<th>说明</th>
+												</tr>
+												<tr>
+								           			<td><code>cDate</code>:Date</td>
+													<td>文件创建日期 </td>
+												</tr>
+												<tr>
+								           			<td><code>mDate</code>:Date</td>
+													<td>文件修改日期。</td>
+												</tr>
+								           		<tr>
+								           			<td><code>name</code>:String</td>
+													<td>文件名 </td>
+												</tr>
+												<tr>
+								           			<td><code>size</code>:Number</td>
+													<td>文件大小。单位：字节</td>
+												</tr>
+												<tr>
+								           			<td><code>type</code>:String</td>
+													<td>文件类型。</td>
+												</tr>
+												<tr>
+								           			<td><code>id</code>:String</td>
+													<td>文件 id。</td>
+												</tr>
+								          	</tbody>
+		  								</table> 
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_browseCancel">browseCancel</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 浏览文件浏览取消。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadLock">uploadLock</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 成功锁定。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadUnlock">uploadUnlock</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 成功解除锁定。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadClear">uploadClear</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 成功清空。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadStart">uploadStart</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 开始上传。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>类型</th>
+									<th>备注</th>
+								</tr>
+				           		<tr>
+				           			<td><code>file</code></td>
+									<td><code>Object</code> </td>
+									<td>当前上传文件对象
+										<table width="100%" class="innertable">
+								            <tbody>
+								            	<tr>
+								            		<th>属性</th>
+													<th>说明</th>
+												</tr>
+												<tr>
+								           			<td><code>cDate</code>:Date</td>
+													<td>文件创建日期 </td>
+												</tr>
+												<tr>
+								           			<td><code>mDate</code>:Date</td>
+													<td>文件修改日期。</td>
+												</tr>
+								           		<tr>
+								           			<td><code>name</code>:String</td>
+													<td>文件名 </td>
+												</tr>
+												<tr>
+								           			<td><code>size</code>:Number</td>
+													<td>文件大小。单位：字节</td>
+												</tr>
+												<tr>
+								           			<td><code>type</code>:String</td>
+													<td>文件类型。</td>
+												</tr>
+												<tr>
+								           			<td><code>id</code>:String</td>
+													<td>文件 id。</td>
+												</tr>
+								          	</tbody>
+		  								</table>  
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadProgress">uploadProgress</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 数据存储状态。</p>
+                        <p class="notice"> 实例报告其状态或错误条件时调度。一般不会激发。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>类型</th>
+									<th>备注</th>
+								</tr>
+								<tr>
+				            		<td><code>bytesLoaded</code></td>
+									<td><code>Number</code> </td>
+									<td>当前文件已上传字节 </td>
+								</tr>
+								<tr>
+				            		<td><code>bytesTotal</code></td>
+									<td><code>Number</code> </td>
+									<td>当前文件总字节 </td>
+								</tr>
+				           		<tr>
+				           			<td><code>file</code></td>
+									<td><code>Object</code> </td>
+									<td>当前上传文件对象表
+										<table width="100%" class="innertable">
+								            <tbody>
+								            	<tr>
+								            		<th>属性</th>
+													<th>说明</th>
+												</tr>
+												<tr>
+								           			<td><code>cDate</code>:Date</td>
+													<td>文件创建日期 </td>
+												</tr>
+												<tr>
+								           			<td><code>mDate</code>:Date</td>
+													<td>文件修改日期。</td>
+												</tr>
+								           		<tr>
+								           			<td><code>name</code>:String</td>
+													<td>文件名 </td>
+												</tr>
+												<tr>
+								           			<td><code>size</code>:Number</td>
+													<td>文件大小。单位：字节</td>
+												</tr>
+												<tr>
+								           			<td><code>type</code>:String</td>
+													<td>文件类型。</td>
+												</tr>
+												<tr>
+								           			<td><code>id</code>:String</td>
+													<td>文件 id。</td>
+												</tr>
+								          	</tbody>
+		  								</table> 
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadComplete">uploadComplete</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 上传完毕且无返回数据时触发。</p>
+                        <p class="notice"> 当配置服务器有数据返回，则此事件不予激发，和 uploadCompleteData 事件互斥。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>类型</th>
+									<th>备注</th>
+								</tr>
+				           		<tr>
+				           			<td><code>file</code></td>
+									<td><code>Object</code> </td>
+									<td>当前上传文件对象
+										<table width="100%" class="innertable">
+								            <tbody>
+								            	<tr>
+								            		<th>属性</th>
+													<th>说明</th>
+												</tr>
+												<tr>
+								           			<td><code>cDate</code>:Date</td>
+													<td>文件创建日期 </td>
+												</tr>
+												<tr>
+								           			<td><code>mDate</code>:Date</td>
+													<td>文件修改日期。</td>
+												</tr>
+								           		<tr>
+								           			<td><code>name</code>:String</td>
+													<td>文件名 </td>
+												</tr>
+												<tr>
+								           			<td><code>size</code>:Number</td>
+													<td>文件大小。单位：字节</td>
+												</tr>
+												<tr>
+								           			<td><code>type</code>:String</td>
+													<td>文件类型。</td>
+												</tr>
+												<tr>
+								           			<td><code>id</code>:String</td>
+													<td>文件 id。</td>
+												</tr>
+								          	</tbody>
+		  								</table> 
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadCompleteData">uploadCompleteData</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 上传完毕且返回数据时触发。</p>
+                        <p class="notice"> 当配置服务器无数据返回，则此事件不予激发，和 uploadComplete 事件互斥。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>类型</th>
+									<th>备注</th>
+								</tr>
+								<tr>
+				            		<td><code>data</code></td>
+									<td><code>String</code> </td>
+									<td>服务器传回数据 </td>
+								</tr>
+				           		<tr>
+				           			<td><code>file</code></td>
+									<td><code>Object</code> </td>
+									<td>当前上传文件对象
+										<table width="100%" class="innertable">
+								            <tbody>
+								            	<tr>
+								            		<th>属性</th>
+													<th>说明</th>
+												</tr>
+												<tr>
+								           			<td><code>cDate</code>:Date</td>
+													<td>文件创建日期 </td>
+												</tr>
+												<tr>
+								           			<td><code>mDate</code>:Date</td>
+													<td>文件修改日期。</td>
+												</tr>
+								           		<tr>
+								           			<td><code>name</code>:String</td>
+													<td>文件名 </td>
+												</tr>
+												<tr>
+								           			<td><code>size</code>:Number</td>
+													<td>文件大小。单位：字节</td>
+												</tr>
+												<tr>
+								           			<td><code>type</code>:String</td>
+													<td>文件类型。</td>
+												</tr>
+												<tr>
+								           			<td><code>id</code>:String</td>
+													<td>文件 id。</td>
+												</tr>
+								          	</tbody>
+		  								</table> 
+									</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_uploadError">uploadError</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 上传组件错误。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>类型</th>
+									<th>备注</th>
+								</tr>
+								<tr>
+				            		<td><code>message</code></td>
+									<td><code>String</code> </td>
+									<td>描述 </td>
+								</tr>
+								<tr>
+				            		<td><code>dump</code></td>
+									<td><code>Array</code> </td>
+									<td>临时数据栈 </td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_listComplete">listComplete</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 上传文件列表全部上传完成。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_mouseOver">mouseOver</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标悬停。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_mouseDown">mouseDown</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标按下。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_listComplete">mouseUp</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标弹起。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_mouseOut">mouseOut</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标移开。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_click">click</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标单击。</p>
+                    </div>
+				</div>
+			</div>
+            <div class="section notes">
+                <p>
+                    	测试：<a href="../../src/uploader/test.html">uploader/test.html</a>
+                </p>
+				<p>
+                    	Demo：<a href="../../src/uploader/demo.html">uploader/demo.html</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sub">
+        <div class="sub-wrap">
+            <div class="loc"><a href="../index.html">home</a> &rsaquo; Uploader :</div>
+            <div class="toc">
+                <h3>Properties(Static)</h3>
+                <ul>
+                    <li><a href="index.html#prop_version">version</a></li>
+                </ul>
+				<h3>Constructor</h3>
+				<ul>
+                    <li><a href="index.html#constructor">Uploader</a></li>
+                </ul>
+				<h3>Methods</h3>
+				<ul>
+                    <li><a href="index.html#method_setFileFilters">setFileFilters</a></li>
+                    <li><a href="index.html#method_filter">filter</a></li>
+                    <li><a href="index.html#method_setAllowMultipleFiles">setAllowMultipleFiles</a></li>
+                    <li><a href="index.html#method_multifile">multifile</a></li>
+                    <li><a href="index.html#method_browse">browse</a></li>
+                    <li><a href="index.html#method_upload">upload</a></li>
+                    <li><a href="index.html#method_uploadAll">uploadAll</a></li>
+                    <li><a href="index.html#method_cancel">cancel</a></li>
+                    <li><a href="index.html#method_getFile">getFile</a></li>
+                    <li><a href="index.html#method_removeFile">removeFile</a></li>
+                    <li><a href="index.html#method_lock">lock</a></li>
+                    <li><a href="index.html#method_unlock">unlock</a></li>
+                    <li><a href="index.html#method_setBtnMode">setBtnMode</a></li>
+                    <li><a href="index.html#method_useHand">useHand</a></li>
+                    <li><a href="index.html#method_clear">clear</a></li>
+                </ul>
+				<h3>Events</h3>
+				<ul>
+                    <li><a href="index.html#event_contentReady">contentReady</a></li>
+                    <li><a href="index.html#event_fileSelect">fileSelect</a></li>
+                    <li><a href="index.html#event_browseCancel">browseCancel</a></li>
+                    <li><a href="index.html#event_uploadLock">uploadLock</a></li>
+                    <li><a href="index.html#event_uploadUnlock">uploadUnlock</a></li>
+                    <li><a href="index.html#event_uploadClear">uploadClear</a></li>
+                    <li><a href="index.html#event_uploadStart">uploadStart</a></li>
+                    <li><a href="index.html#event_uploadProgress">uploadProgress</a></li>
+                    <li><a href="index.html#event_uploadComplete">uploadComplete</a></li>
+                    <li><a href="index.html#event_uploadCompleteData">uploadCompleteData</a></li>
+                    <li><a href="index.html#event_uploadError">uploadError</a></li>
+                    <li><a href="index.html#event_listComplete">listComplete</a></li>
+                    <li><a href="index.html#event_mouseOver">mouseOver</a></li>
+                    <li><a href="index.html#event_mouseDown">mouseDown</a></li>
+                    <li><a href="index.html#event_mouseUp">mouseUp</a></li>
+                    <li><a href="index.html#event_mouseOut">mouseOut</a></li>
+                    <li><a href="index.html#event_click">click</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p class="copyright">&copy; 2009 - 2029 KISSY UI LIBRARY</p>
+</div>
+</body>
+</html>

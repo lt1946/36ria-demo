@@ -1,0 +1,50 @@
+/*******************重置html样式*******************/
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,input,p,blockquote,th,td,form{margin:0;padding:0;}
+ol,ul,li,dd,dt,dl{ list-style:none;}
+address,caption,cite,code,dfn,th,var{font-style:normal;font-weight:normal;}
+img{border:0;}
+caption,th{text-align:left;}
+table{border-collapse:collapse;empty-cells:show;}
+input,select,textarea{font-size:12px;}
+textarea {}
+body{font-size:12px;}
+/*******************可重用样式*******************/
+
+
+/*-----显示模式---*/
+.none{display:none;}
+.block{display:block;}
+.inline{display:inline;}
+.hidden{overflow:hidden;}
+/*-----对齐方式----*/
+.l{float:left;}
+.r{float:right;}
+.clear{clear:both;height:0px;font-size:0px;line-height:0px;over-flow:hidden;}
+* html .clear {display:inline;}
+.a-c{text-align:center;margin:0 auto;}
+.a-l{text-align:left;}
+.a-r{text-align:right;}
+/*-----margin----*/
+.mar-t6{margin-top:6px;}
+
+/*-----padding----*/
+.pad10{padding:0 10px;}
+
+/*-----font size----*/
+.font-12{font-size:12px;}
+.font-14{font-size:14px;}
+.bold{font-weight:bold;}
+/*-------color------*/
+.red{color:#b70a03;}
+.gray{color:#999999;}
+.blue,a.blue{color:#002bb8;}
+.orange{color:#FF9900 !important;}
+.gray{color:#666;}
+.white{color:#FFFFFF;}
+/*------border-----*/
+.bor-gray{border:1px #CCCCCC solid;}
+/*-------a------*/
+a{color:#333; text-decoration:none;}
+
+/*------button-----*/
+.btn{border:1px solid #BDBDBB;background-color:#E6E6E4;padding:2px 0px;}

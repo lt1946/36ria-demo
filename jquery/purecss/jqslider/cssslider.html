@@ -1,0 +1,197 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>NealGrosskopf.com l Create a JQuery Content Slider Using Pure CSS - Demo</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style type="text/css">
+html, body, ul, p
+{
+margin: 0px;
+padding: 0px;
+}
+
+html
+{
+background: #ddd url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%01%00%00%01%F4%08%06%00%00%00%FC%3DG%97%00%00%00%04sBIT%08%08%08%08%7C%08d%88%00%00%00%09pHYs%00%00%0B%12%00%00%0B%12%01%D2%DD~%FC%00%00%00%16tEXtCreation%20Time%0004%2F21%2F09Q2O%D2%00%00%00%25tEXtSoftware%00Macromedia%20Fireworks%20MX%202004%87v%AC%CF%00%00%00%3AIDATx%9C%ED%CE%B1%09%00%40%0C%C3%40%93%FDw%D6%CF%F0%10%82%0A7*%C5%05%60%92d)%80f%B5c%910j%F1%5B%24%8CZ%FC%16%09%A3%16%BFE%C2%A8%E5f%F5%9D%07%C7%09m%7D%3E%5DSI%00%00%00%00IEND%AEB%60%82") repeat-x left top;
+}
+
+body
+{
+color: #666;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 12px;
+line-height: 27px;
+margin-top: 100px;
+text-align: justify;
+}
+
+p:first-line
+{
+color: #5b6f7b;
+font-family: 'Trebuchet MS',Arial,Helvetica,sans-serif;
+font-size: 18px;
+font-weight: bold;
+line-height: 45px;
+text-transform: capitalize;
+}
+
+p:after
+{
+color: #5b6f7b;
+font-weight: bold;
+padding-left: 3px;
+text-decoration: underline;
+content: "Read More >>";
+}
+
+/* Start Core Styling */
+#slider, ul, li { height: 300px; }
+#slider, li { position: relative; width: 500px; }
+
+#slider
+{
+margin: auto;
+overflow: hidden;
+/* Non Core */
+background: #f6f7f8;
+box-shadow: 4px 4px 15px #aaa;
+	-o-box-shadow: 4px 4px 15px #aaa;
+	-icab-box-shadow: 4px 4px 15px #aaa;
+	-khtml-box-shadow: 4px 4px 15px #aaa;
+	-moz-box-shadow: 4px 4px 15px #aaa;
+	-webkit-box-shadow: 4px 4px 15px #aaa;
+border: 1px solid #bcc5cb;
+border-width: 1px 2px 2px 1px;
+border-radius: 10px;
+	-o-border-radius: 10px;
+	-icab-border-radius: 10px;
+	-khtml-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+padding: 10px;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { #slider { border-width: 1px; } }
+
+ul
+{
+list-style-type: none;
+position: absolute;
+left: 0px;
+top: 0px;
+width: 2000px;
+-webkit-transition: left .3s linear;
+}
+
+#a1:target ul { left: 0px; }
+#a2:target ul { left: -500px; }
+#a3:target ul { left: -1000px; }
+#a4:target ul { left: -1500px; }
+
+li { float: left; }
+
+p
+{
+position: absolute;
+left: 60px;
+top: 10px;
+width: 400px;
+z-index: 1;
+}
+
+a
+{
+background-image: url("data:image/png,%89PNG%0D%0A%1A%0A%00%00%00%0DIHDR%00%00%00%3C%00%00%00%80%08%06%00%00%00W%F4%0A%7C%00%00%00%04sBIT%08%08%08%08%7C%08d%88%00%00%00%09pHYs%00%00%0A%F0%00%00%0A%F0%01B%AC4%98%00%00%00%25tEXtSoftware%00Macromedia%20Fireworks%20MX%202004%87v%AC%CF%00%00%00%16tEXtCreation%20Time%0006%2F23%2F08%1B%A3%A6%E6%00%00%03%DFIDATx%9C%E5%DCKn%1AA%14%85%E1_(%0B%60%C4%80%09%5B%60%09%DEG%90%DCYA%98%87!s%B3%03%88%C4%3E%D8%02%DEA%18%04)%8C%C8%0A%9C%01%85Exuw%3Dn%DD%5B%7D%25O9%FA%DC%06%FATU%9B%8F%8F%0F%A4%7F~%FD%FES%E5%C8%FD%FA%FDG%D5Cxv%FBC%05%2C%A5s'%D3Y%05%2CE%C1%B9%B1%00b%60%0DX%10%02%EF%F6%871%F0%26%91u9%93%E9%EC%2679%D8a7%40%3Fu%D6%E58%ECMnR%B06%2C%24%04k%C4B%22%F0n%7F%E8s%FA%A0%90%C6%D6%E6F%07%3B%EC%06%18%C7~%EDg%E3%B0%B5%B9Q%C1%DA%B1%10%11l%01%0Bq%AF%F0%5B%D3%D0%C8%D3*7%0Ax%B7%3F%2C%81*%C6k%B5%99%C9t%D6%3A7%18l%09%0B%81%60kX%08%00%BB2%E0%15%1A2%AE%0Cx%E7z%81%B54%1F%9Fi%0D%B6%8C%85%96%60%EBXh%01%D6%D4iC%A6%11Xk%F3%F1%99ZpIX%A8%01%97%86%85'%60%CD%9D6d%EE%82%AD4%1F%9F%B9%01%97%8C%85%2Bp%E9X%B8%BD%C2%26%3Am%C8%7C%82-6%1F%9F%E9Aw%B0%00%BD.aAp3M%CB%F4F%C3%C17%60%25%1D%BC%5E%CC%B3%E4%F6%00%BA%84%FE%FC%93%EE%0A%FA%FA%3D%3C%05%B6R%E19r%FF%03%8F%86%83%BF%C0%8BT%F8y%D6%8B%B9X%EE%CD%A7t%E9%E8%BB_K%25%A3%1F~%0F%3Bt%05%1CS%85%DF%1B%87N%96%FB%F4%C6c4%1C%BCs%FA%8DK%A3%93%E5%D6%DEi%95%86ntkY%12%BA%F1%BD%B4COc%057%1D%87%8E%96%DB%AA%3C%8C%86%83%9Fdh8%EB%C5%3CZn%EB%B6d%1D%EDU%0F-%A3%BD%FB%B0C%AFB%C2%7D%C6%A1%BDs%83%16%00%2C6%AC%E0%15%0Fk%E8(K%3C%96%D01%D7%B4Lt%E9h%60%2B%0D%2B%EA%AA%A5%05t%F4eZ%ED%E8%24%EB%D2%9A%BBt%B2%85x%AD%0D%2B%E9%CE%83Ft%F2%AD%16mh%91%BD%25M%5DZl3MK%C3%12%DD%3DT%81%CE%F48%EDk%A6%C7i_%B3%86%E7%C8%ED%01%2BwJVzV%EE%94%AC%E8%9C%DF%C3%CBL%E8%A54%FA%F2C%AB%13%E8%9BsZ%EE%40%A9%F4%BC%B9%03%A5%C9%E7%1A%DC%076%19%D0%7D%60%23%81%BE%F7%3D%5C4%FA%D1%8DG%B1%E8gwZ%7DN%1Fd%A2%E7%A5%CF%B9%EE%C0i%F4%A9%BB%B5%1Cs%BA%D2%D2%E81%A7%2B-w%22%FE%3A%BC%14t%D3%F2P%0C%BAM%5B%CA%F2%DCR%EC%DC%B6%F5%B0r%A7o%A5%A7r%A7o%83%C7%A7%0F%9BF%FB.%00%98E%87%ACxT%99%CAF%15R6B%97x%CC5%AC%18kZ%A6%D0%B1%16%F1%CC%A0%A3%FE%1F%0F%0B%5D%3A%26%D8D%C3%8A%BD.%AD%1E%9Db!%5E5%3A%D5%CE%83%DA.%9Dr%ABEe%C3J%BD%B7%A4%0E-%B1%99%A6%0A-%B5%7B%A8%A6KKn%97%AAhX%D2O%97fG%7F%C9%11%BE%DB%1F2%C4RM%A6%B3%0E%3E%3F%9C!s%E5N%DF%8A%E7%AE%17%F3o%D2%E0%ACX%90%BD%C2%D9%B1%20%07%DE%92%E1%9C%D6%BD%5C%09%F0%16xq%07N%25g%0B%BC%B8%03%A7%9F%93%1A%AC%0A%0Bi%C1%EA%B0%90%0E%7C%04%AA%0C%D8%23P%3D%C2B%1A%F0%91%D3%95%7DO%F0%DA%B5%B9%EE%40%E9%C3%89%0DV%8D%85%B8%60%F5X%88%FC%DCR%06%2C%C0%B4)%16%E2%81%2Bw4Xz*w4%B8%F1%C4%00%9B%C1B8%D8%14%16%C2%C0%ABL%D8%95%2F%16%FC%C1*%9A%8F%CF%F8%80%CDb%A1%3D%D84%16%DA%81%D5t%DA%90i%0AV%D9%7C%7C%A6%09%B8%18%2C%D4%83%8B%C2%C2s%B0%DAN%1B2%8F%C0%26%9A%8F%CF%DC%03%17%8B%85%5Bp%D1X%B8%F3%7F--t%DA%90%B9%04%9Bk%3E%3Es%06w%02%0B%D0%B9%C7i%FF%01%CB7L%02%09a%B5%C9%00%00%00%00IEND%AEB%60%82");	
+background-repeat: no-repeat;
+cursor: pointer;
+display: none;
+height: 64px;
+width: 30px;
+outline-width: 0px;
+position: absolute;
+top: 90px;
+text-indent: -9999px;
+z-index: 2;
+}
+
+a[class^="down"] { left: 10px; }
+a[class^="up"] { right: 10px; }
+
+a[class^="down"]:hover { background-position: right top; }
+a[class^="down"], a[class^="down"]:active { background-position: left top; }
+
+a[class^="up"]:hover { background-position: right bottom; }
+a[class^="up"], a[class^="up"]:active{ background-position: left bottom; }
+
+/* Default */
+:target .up2.default { display: none; }
+
+.up2.default,
+#a1:target .up2,
+#a2:target .down1,
+#a2:target .up3,
+#a3:target .down2,
+#a3:target .up4,
+#a4:target .down3
+{ display: block; }
+</style>
+</head>
+
+<body>
+
+<div id="slider">
+
+<!-- :target hooks -->
+<div id="a1">
+
+<div id="a2">
+<div id="a3">
+<div id="a4">
+
+	<!-- 1 -->
+	<a href="cssslider.html#a2" class="up2 default">2</a>
+	<a href="cssslider.html#a2" class="up2">2</a>
+	
+	<!-- 2 -->
+	<a href="cssslider.html#a1" class="down1">1</a>
+
+	<a href="cssslider.html#a3" class="up3">3</a>
+	
+	<!-- 3 -->
+	<a href="cssslider.html#a2" class="down2">2</a>
+	<a href="cssslider.html#a4" class="up4">4</a>
+	
+	<!-- 4 -->
+	<a href="cssslider.html#a3" class="down3">3</a>
+	
+	<ul>
+
+		<li>
+			<p>www.ria.com--ria之家，专注于ria技术的blog，欢迎您的加入。博客不断完善中，感谢您的支持！<br/>
+			博客不断完善中，感谢您的支持！
+			<br>博客不断完善中，感谢您的支持！<br>博客不断完善中，感谢您的支持！<br>博客不断完善中，感谢您的支持！<br>
+			博客不断完善中，感谢您的支持！<br>博客不断完善中，感谢您的支持！<br>博客不断完善中，感谢您的支持！<br>
+			博客不断完善中，感谢您的支持！</p>
+			
+		</li>	
+		<li>
+			<p>博主：明河共影：RIA之家技术群：24440797。你可以通过以下方式联络到明河： 1、进入我的微博首页"http://t.sina.com.cn/36ria"跟随我 2、我的email：riahome@126.com<br/></p>
+		</li>	
+		<li>
+			<p>博客不断完善中，感谢您的支持！<br/></p>			
+		</li>	
+		<li>
+
+			<p>再次感谢您的支持！<br/></p>
+		</li>
+	</ul>
+
+</div> <!-- End #a4 -->
+</div> <!-- End #a3 -->
+</div> <!-- End #a2 -->
+</div> <!-- End #a1 -->
+
+</div> <!-- End #slider -->
+
+</body>
+</html>

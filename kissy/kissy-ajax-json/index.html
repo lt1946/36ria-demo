@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>说说kissy的ajax获取json时不执行回调函数的问题</title>
+<link href="http://www.36ria.com/style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="http://www.36ria.com/style/css/demo.css" rel="stylesheet" type="text/css" />
+<script src="http://assets.taobaocdn.com/s/kissy/1.1.6/kissy-min.js"></script>
+<script>
+var S = KISSY;
+var Event = S.Event,DOM = S.DOM,IO = S.IO;
+S.ready(function(){
+	Event.on('#demo1','click',function(){
+		send('fail-json.js');
+	})
+	Event.on('#demo2','click',function(){
+		send('success-json.js');
+	})	
+})
+
+function send(url){
+		IO.get(url,function(data){
+	    	alert(data.author);
+		},'json')
+}
+</script>
+</head>
+
+<body>
+<div id="header" class="clearfix"> 
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div> 
+  <div class="l mar-t5"> 
+        <h2>说说kissy的ajax获取json时不执行回调函数的问题</h2> 
+        <p>作者：明河共影，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p> 
+        <p>文章链接：<a href=" http://www.36ria.com/3746" target="_blank">http://www.36ria.com/3746</a></p>    
+    </div> 
+</div> 
+<div id="main" class="mar-t10"> 
+	<p>kissy1.1.6的ajax方法终于出来了，如果你打算使用kissy的ajax获取json，也许会遇到明河接下来描述的这个问题。</p>
+    <p><strong>问题描述：</strong>ajax请求json数据成功了，没有报任何错误，但不执行ajax的success回调函数！</p>
+    <p>接下来看明河重现下这个问题。</p>
+    <p>json的数据格式如下：（请看fail-json.js）</p>
+  <pre class="prettyprint">
+{site : "RIA之家",author : "明河共影"}    </pre> 
+    <p>非常简单的结构，你看出上面结构的问题吗？是的，从理论上来讲这种结构是没问题的，点击下面按钮发送请求看看。</p>
+    <p><button id="demo1">猛击此处</button></p>
+    <pre class="prettyprint">
+Event.on('#demo1','click',function(){
+    send('fail-json.js');
+})
+
+function send(url){
+		IO.get(url,function(data){
+	    	alert(data.author);
+		},'json')
+}    </pre>     
+    <p>你可以看到，毫无反应！用firebug查看下，请求的确已经发送成功了，但是没有执行回调！这是为什么呢。继续点击下面的按钮。</p> 
+  <p><button id="demo2">猛击此处</button></p> 
+    <p>成功的弹出“明河共影”！来看代码 
+Event.on('#demo2','click',function(){
+    send('success-json.js');
+})	
+
+function send(url){
+		IO.get(url,function(data){
+	    	alert(data.author);
+		},'json')
+}    </p>
+<p>可以比对下上一个demo的代码，你会发现代码没有任何变化（除了换了url），也就是说数据源有问题。好的，接下来我们来看下success-json.js。 
+  {"site" : "RIA之家","author" : "明河共影"}    </p>
+<p>fail-json.js的代码</p>
+    <pre class="prettyprint">
+{site : "RIA之家",author : "明河共影"}   </pre>
+    我想，你已经知道问题的所在了，是的，键名少了双引号！kissy的ajax接口对json数据源格式是有严格要求的！键名必须带引号，而且不能使用单引号，单引号也会引起这样的问题！                
+</div>
+<!--为了让代码更易读，这里明河引入prettify代码高亮--> 
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" /> 
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script> 
+<script> 
+prettyPrint();
+</script> 
+</body>
+</html>

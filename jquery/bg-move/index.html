@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文字上背景移动特效</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="jquery.backgroundPosition.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(document).ready(function() {
+
+	moveBgAround('.scrollBg');
+});
+/**
+*移动背景
+*/
+function moveBgAround(applyTo,x,y) {
+	var _applyTo = applyTo;
+	var _maxX = x || 1000;
+	var _maxY = y || 700;
+	//随机移动距离
+	var x = Math.floor(Math.random()*_maxX);
+	var y = Math.floor(Math.random()*_maxY);
+
+	//随机速度
+	var time = Math.floor(Math.random()*1001) + 2000;
+
+	//让背景开始移动
+	$(_applyTo).animate({
+		backgroundPosition: '(' + (x * -1) + 'px ' + (y * -1) + 'px)'
+	}, time, "swing", function() {
+		//回调函数
+		moveBgAround(_applyTo,_maxX,_maxY);
+	});
+}
+</script>
+</head>
+
+<body>
+ <div class="scrollBg">
+        <img src='mask.png' alt='RIA之家' width="500" height="109" />
+ </div>
+ 
+ <div id="scrollBg2" class="scrollBg">
+        <img src='mask.png' alt='RIA之家' width="500" height="109" />
+ </div>
+</body>
+</html>

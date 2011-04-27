@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.verticalTab - 垂直选项卡</title>
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../js/jquery.verticalTab.js"></script>
+<script type="text/javascript" src="../js/yijs.GridAnimate.js"></script>
+<link href="../style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/xunlei-images-slide.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+#tab-controllers{
+	margin:20px;line-height:32px;width:800px;
+	color:#666;
+}
+#tab-controllers label{
+	padding:6px;
+}
+.text{
+	width:80px;border:1px solid #999;padding:2px;
+}
+</style>
+<script type="text/javascript">
+$(function(){
+	var GA = new yijs.GridAnimate({});
+	var VT = $("#xunlei-images-slide").verticalTab({titlesApplyTo:"#xunlei-images-slide-titles",
+	                         contentsApplyTo : "#xunlei-images-slide-contents",
+							 currentTitleCls : "xunlei-images-slide-current-title",
+							 animateType : "grid",
+							 animatePlugin : {
+							 	"grid" : GA
+							 }})
+			  .verticalTab("api");
+	
+	//自动切换
+	$("#auto").change(function(){
+		VT.setAuto($(this).attr("checked"));
+	})
+	getDelay();
+	//获取切换延迟时间		  
+	function getDelay(){
+		$("#delay").text(VT.delay+"毫秒");
+	}
+	//改变切换延迟时间
+	$("#change-delay").blur(function(){
+		VT.delay = $(this).val();
+		getDelay();
+	})
+
+	
+	//选中当前效果
+	$(".gird-animate-type").each(function(){
+		$(this).val() == GA.type && $(this).attr("checked",true);
+	})	
+    //效果设置
+	$(".gird-animate-type").change(function(){
+		GA.type = $(this).val();
+	})
+})
+</script>
+</head>
+
+<body>
+<h2 id="header">
+$.verticalTab - 垂直选项卡<br /> 
+<p>gird动画效果演示</p>
+作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。
+</h2>
+                        <div class="mar-t-10 clearfix" id="xunlei-images-slide">
+                            <div class="l" id="xunlei-images-slide-contents">
+                                <ul>
+                                    <li>
+                                      <a  href="http://kankan.xunlei.com/vod/movie/58/58753.shtml" blockid="2132">
+                                      	<img src="http://images.movie.xunlei.com/gallery/580/12bbeea8b15271b0c89a2a91adc7f464.jpg" alt="《维京英灵殿》维京独眼海盗传奇冒险故事" />
+                                      </a>    
+                                    </li> 
+									<li>
+        								<a  href="http://kankan.xunlei.com/vod/movie/58/58920.shtml" blockid="2132"><img src="http://images.movie.xunlei.com/gallery/580/12a0f43c613275402415f38fe7a5bd07.jpg" alt="《劳拉现身》美女云集激情无限性感喜剧片" /></a>
+                                    </li>                                        
+                                    <li>
+<a  href="http://click.cm.sandai.net/UClick?gs=cmactuclick&entryid=kangjia01&location=http%3A%2F%2Factive.game.xunlei.com%2FkonkaBall%2F" blockid="2132"><img src="http://images.movie.xunlei.com/gallery/580/c648c61c4cd038a13c8c1cdb4574c4ce.jpg" alt="康佳网锐LED邀您看：2010南非世界杯" /></a>
+                                    </li>
+                                    <li>
+<a  href="http://a814.oadz.com/link/C/814/118/wZzczOmltKBKoNG46qVoYI6dRi0_/p063/3/http://www.m18.com/market/front.aspx?pno=xl-kk-fjdt&url=http://static.m18.com/LP/pink_100603t.shtml" blockid="2132"><img src="http://images.movie.xunlei.com/gallery/579/0215c78d5eb4891689d2bf6f9020a9b4.jpg" alt="2010新款连衣裙上架全场79元起" /></a>
+                                    </li>
+                                    <li>
+<a  href="http://www.1680net.com/special_78.htm?code=&position=002_3" blockid="2132"><img src="http://images.movie.xunlei.com/gallery/580/63037137e1551e997659b55843f2fcd2.jpg" alt="6月7日ipone 4G上市  苹果第三代降价清货" /></a>                                    
+                                    </li>                                                                                                     
+                                </ul>                                                           
+                            </div>                        
+                        	<div class="r" id="xunlei-images-slide-titles">
+                                <ul>
+                                            <li  class="clearfix">
+                                            	<a href="gird-animate.html#">
+                                                	<img src="http://images.movie.xunlei.com/gallery/580/e83aaf0b9d7ac6e408857630529ed8cc.jpg" alt="" />
+                                                    <div class="l">
+                                                        <strong>《维京英灵殿》维京独眼海盗传奇冒险故事</strong>
+                                                        <p>经典奇幻动画片改编 冷兵器时代英勇肉搏杀戮</p>
+                                                    </div>
+                                           		</a>
+                                           </li>
+                            
+                                            <li  class="clearfix">
+                                            	<a href="gird-animate.html#">
+                                                	<img src="http://images.movie.xunlei.com/gallery/580/f88420197cbc9facaba80e6584c6ca37.jpg" alt="" />
+                                                    <div class="l">
+                                                        <strong>《劳拉现身》美女云集激情无限性感喜剧片</strong>
+                                                        <p>惹火美女不爱猛男爱辣妹 勇敢追爱上演禁忌恋</p>
+                                                    </div>
+                                                 </a>
+                                            </li>
+                                            <li class="clearfix">
+                                            	<a href="gird-animate.html#" blockid="2132">
+                                                	<img src="http://images.movie.xunlei.com/gallery/580/acae14e317238768359f11b359e41f9f.jpg" alt="" />
+                                                    <div class="l">
+                                                        <strong>康佳网锐LED邀您看：2010南非世界杯</strong>
+                                                        <p>无与伦比的足球盛宴 激情无限的南非风情</p>
+                                                    </div>
+                                                  </a>
+                                            </li>
+                                            <li class="clearfix">
+                                            	<a href="gird-animate.html#">
+                                          			<img src="http://images.movie.xunlei.com/gallery/579/703b0a694dec2bf7f31b78b4bf330842.jpg" alt="" />
+                                                    <div class="l">
+                                                        <strong>2010新款连衣裙上架全场79元起</strong>
+                                                        <p>选对你的one piece 魅力一夏天</p>                                                    
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <li  class="clearfix">
+                                            	<a  href="gird-animate.html#">
+                                            		<img src="http://images.movie.xunlei.com/gallery/580/954dddc30669ce1e77893951e77a3edb.jpg" alt="" />
+                                                    <div class="l">
+                                                        <strong>6月7日ipone 4G上市  苹果第三代降价清货</strong>
+                                                        <p>苹果第三代仅售79美元  先抢先得</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>                      
+                            </div>
+                        </div> 
+<div id="tab-controllers">
+	<div><input name="auto" type="checkbox" value="1" id="auto" /><label>自动切换</label></div>
+    <div><label style="padding-left:0px;">切换的延迟时间</label><input name="" type="text" class="text" id="change-delay"/>&nbsp;当前延迟时间为：<span id="delay"></span></div>
+    <h4>gird效果选择 ：</h4>
+    <div>
+    	<input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="random" /><label>随机效果</label>
+        <input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="up2down" /><label>从上至下</label>
+        <input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="down2up" /><label>从下至上</label>
+        <input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="left2right" /><label>从左至右</label>
+        <input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="right2left" /><label>从右至左</label>
+        <input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="leftTop2rightBottom" /><label>从左上角到右下角</label>
+        <input name="gird-animate-type[]" class="gird-animate-type" type="radio" value="randomUnit" /><label>随机格子</label>
+    </div>
+</div>                        
+</body>
+</html>

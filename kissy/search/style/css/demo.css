@@ -1,0 +1,135 @@
+body{background-color:#FAFDEF;}
+#header{
+	height:100px;line-height:32px;
+	padding:10px;
+	background:url(../images/header-bg.png) 0px 0px repeat-x;
+	font-size:14px;color:#FFC;
+}
+#logo{
+	margin-right:10px;
+}
+#header  h2{
+	font-size:16px;
+	color:#FFF;
+
+}
+#header a{
+	color:#3CF;
+	text-decoration:underline;
+}
+#header a:hover{
+	color:#CCC !important;
+}
+.wrapper{
+	margin-top:20px;
+	padding:20px;
+	background-color:#FFF;
+	border:1px solid #999;
+	line-height:24px;
+}
+#content h2{font-size:20px;color:#C58080;font-family:黑体;border-bottom:1px solid #E1E1E1;padding-bottom:10px;margin:10px 0px; }	
+#content ul li{line-height:24px;margin-left:12px;color:#666;}
+#content h4{font-size:16px;color:#609574;padding:5px 0px;border-bottom:2px dashed #609574;margin-bottom:10px;}
+pre.prettyprint{border:1px dashed #CCC;background-color:#E9F4FB;margin:10px 0px;padding:10px;overflow-x:scroll;border-bottom:none !important;}
+
+.api-table{border-top:1px solid #CCC;border-bottom:1px solid #CCC;}
+.api-table td{line-height:24px;padding:3px 12px;}
+.api-table thead td{color:#333333;font-size:14px;font-weight:bold;background-color:#EDECF4;border-top:1px solid #CCC;border-bottom:1px solid #CCC;}
+.strong{font-weight:bold;color:#333;}
+.api-table td.td-title{background-color:#E9F4FB;width:80px;text-align:right;border-right:1px solid #CCC;font-weight:bold;}
+
+/*------------正式样式----------------*/
+
+#search-form{
+	display: inline-block;
+	zoom: 1; /* ie7 hack for display:inline-block */
+	*display: inline;
+	border: solid 1px #d2d2d2;
+	padding: 5px 8px;
+
+	-webkit-box-shadow: 0 1px 0px rgba(0,0,0,.1);
+	-moz-box-shadow: 0 1px 0px rgba(0,0,0,.1);
+	box-shadow: 0 1px 0px rgba(0,0,0,.1);
+
+	background: #f1f1f1;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top,  #fff,  #ededed);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed'); /* ie7 */
+	-ms-filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed'); /* ie8 */	
+}
+.round-2em{
+	-webkit-border-radius: 2em;
+	-moz-border-radius: 2em;
+	border-radius: 2em;	
+}
+#search-form input{
+	font: normal 12px/100% Arial, Helvetica, sans-serif;
+}
+#search-form #s{
+	background: #fff;
+	padding: 6px 6px 6px 8px;
+	width: 465px;
+	border: solid 1px #bcbbbb;
+	outline: none;
+
+
+	
+}
+#search-form #search-btn{
+	/*border: solid 1px #bcbbbb;*/
+	border: solid 1px #da7c0c;
+	padding:4px 12px;
+	cursor:pointer;
+    font-weight:bolder;
+	width:100px;
+	
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+	
+	font: 16px/100% '黑体';
+	text-shadow: 0px 1px 3px rgba(0,0,0,.5);	
+	color: #fef4e9;	
+/*
+	background: #ededed;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+	background: -moz-linear-gradient(top,  #fff,  #dcdcdc);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#dcdcdc');
+*/
+	background: #f78d1d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+	background: -moz-linear-gradient(top,  #faa51a,  #f47a20);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');			
+}
+#search-form #search-btn:hover {
+/*	
+	background: #fff;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
+	background: -moz-linear-gradient(top,  #fff,  #ededed);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed');
+*/
+	background: #f47c20;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f88e11), to(#f06015));
+	background: -moz-linear-gradient(top,  #f88e11,  #f06015);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f88e11', endColorstr='#f06015');
+}
+#search-form #search-btn:active{
+	color: #999;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
+	background: -moz-linear-gradient(top,  #ededed,  #fff);
+	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');	
+}
+
+#ajax-search{
+	position:relative;
+}
+
+#site-container{
+	margin-top:5px;margin-left:10px;
+}
+#site-container label{
+	display:inline-block;
+	margin:0px 5px;
+}
+
+

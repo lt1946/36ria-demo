@@ -1,0 +1,43 @@
+.yijs_imagesView{
+	background-color:#000;
+	position:relative;
+}
+.yijs_imagesView_list{
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	width:100%;
+	height:60px;
+	overflow:hidden;
+	z-index:10003;
+}
+.yijs_imagesView_mask{
+	filter:alpha(opacity=50);
+	-moz-opacity: 0.5;
+	opacity: 0.5;
+	border-top:1px solid #5D625C;	
+	position:absolute;
+	bottom:0px;
+	left:0px;	
+	z-index:10001;
+	background-color:#000;
+}
+.yijs_imagesView_list li{float:left;color:#FFF;font-size:12px;cursor:pointer;}
+.yijs_imagesView_list li div{float:left;}
+.yijs_imagesView_list li img{width:50px;height:50px;margin-right:10px;margin-left:20px;border:1px solid #FFF;}
+.yijs_imagesView_list li div p{margin:0px;padding:0px;font-size:14px;margin:6px 0px;font-weight:bold;}
+
+.yijs_imagesView_largeImageVessel{overflow:hidden;position:absolute;z-index:9000;}
+.yijs_imagesView_largeImageVessel div{
+	filter:alpha(opacity=10);
+	-moz-opacity: 0.1;
+	opacity: 0.1;	
+}
+
+.yijs_imagesView_li_bg{position:absolute;bottom:0px;left:0px;z-index:10002;filter:alpha(opacity=30);
+-moz-opacity: 0.3;
+	opacity: 0.3;
+	background-color:#999;}
+
+.yijs_imagesView_loading{position:absolute;width:100px;height:7px;background:url(../images/loadsmall.gif) 0px 0px no-repeat;left:45%;top:40%;z-index:8000;}
+	

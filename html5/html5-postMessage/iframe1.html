@@ -1,0 +1,48 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>iframe1</title>
+  <meta charset="utf-8"/>
+</head>
+<style>
+body {
+  background-color:green;	
+  font-size: 12px;
+  color: #fff;
+}
+</style>
+<script type="text/javascript">
+  window.onload = function() {
+    
+    document.getElementById('title').innerHTML = '页面所处的域: ' + document.location.host + '每过1秒向第二个iframe输出hello，RIA之家！';
+
+	//定时向另外一个不同域的iframe发送消息
+	setInterval(function(){
+	    var message = 'hello，RIA之家！&nbsp;&nbsp; ' + (new Date().getTime());
+		window.parent.frames[1].postMessage(message, '*');
+	},1000);
+	
+    var onmessage = function(e) {
+       var data = e.data,p = document.createElement('p');
+	   p.innerHTML = data;
+       document.getElementById('display').appendChild(p);
+    };
+	//监听postMessage消息事件
+    if (typeof window.addEventListener != 'undefined') {
+      window.addEventListener('message', onmessage, false);
+    } else if (typeof window.attachEvent != 'undefined') {
+      window.attachEvent('onmessage', onmessage);
+    }
+
+  };
+
+</script>
+
+<body>
+<div id="title"></div>
+<br>
+<div id="display"></div>
+</body>
+
+</html>

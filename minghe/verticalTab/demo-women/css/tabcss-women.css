@@ -1,0 +1,74 @@
+﻿.film-women-outside{
+	width:318px;
+	height:448px;
+	border:1px #f1f1f1 solid;
+	position:absolute;
+}
+#film-women-content{
+	width:318px;
+	height:448px;
+	overflow:hidden;
+}
+#film-women-content p{
+	display:none;
+}
+#film-women-content ul li,#film-women-content img{
+	width:318px;
+	height:448px;
+}
+#film-women-title{
+	position:relative;
+	top:-64px;
+	width:318px;
+	overflow:hidden;
+	left:1px;
+	float:left;
+	z-index:8888;
+	color:white;
+	height:32px;
+}
+#film-women-title p{ width:140px; float:left;}
+#film-women-title a{
+	color:white;
+	font-size:14px;
+	font-weight:bold;
+}
+.film-women-p{
+	position:relative;
+	height:32px;
+	top:-32px;
+	line-height:32px;
+	text-align:center;
+	z-index:9999;
+	background-image:url('../images/dd.png');
+}
+.film-women-p a{
+	color:white;
+	font-weight:bold;
+	font-size:14px;
+	position:relative;
+	height:32px;
+	top:-32px;
+}
+#film-women-title ul li{
+	float:left;
+	width:18px;
+	margin-top:10px;
+	height:16px;
+	margin-left:5px;
+	text-align:center;
+	line-height:16px;
+	z-index:9999;
+	cursor:pointer;
+	background-color:#a72667;
+}
+.film-women-title-current{
+	background-color:white !important;
+	border:1px #a72667 solid !important;
+	width:16px !important;
+	height:14px !important;
+	color:black;
+}
+.film-women-title-current a{
+	color:black;
+}

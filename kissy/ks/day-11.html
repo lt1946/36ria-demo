@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第十天kissy1.1.6新增的ajax方法—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<style>
+.demo-container{
+	background-color:#fff;
+	border:1px solid #ccc;
+	padding:10px;
+	margin:10px 0px;
+}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第十天kissy1.1.6新增的ajax方法—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3696">http://www.36ria.com/3696</a></p>
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<a id="test-a" href="1#test">123123</a>
+    <h4>demo1:merge示例</h4>
+    <p><input type="button" value="打印合并后参数" id="btn-demo1"/></p>
+    <div id="demo1-container" class="demo-container"></div>
+    <pre class="prettyprint">
+var param = {width : 300,color : 'blue'},
+            defaultConfig = {width: 200,color : 'red',act : 0},
+            config = S.merge(defaultConfig,param),
+            html = "&lt;p&gt;合并后的参数：width为"+config.width+",color为"+config.color+",act为"+config.act+"&lt;/p&gt;&lt;p&gt;默认配置的width为"+defaultConfig.width+"&lt;/p&gt; ";
+        DOM.html('#demo1-container',html)
+    </pre>
+    <h4>demo2:extend示例</h4>
+    <p><input type="button" value="执行继承于父类的init方法" id="btn-demo2"/></p>
+    <pre class="prettyprint">
+        //父类
+        var TestSteps = function(config){
+            var self = this;
+            self.width = config.width;
+        };
+        TestSteps.prototype = {
+            init : function(){
+                alert(this.width);
+            }
+        };
+        //子类
+        S.Steps = function(config){
+
+        };
+
+        //继承于TestSteps
+        S.extend(S.Steps,TestSteps);
+        Event.on('#btn-demo2','click',function(ev){
+            var steps = new S.Steps({width:200});
+            steps.init();
+        })
+    </pre>
+    <h4>demo3:继承KISSY.Base</h4>
+    <p><input type="button" value="模拟处理步骤条宽度" id="btn-demo3"/></p>
+    <div id="demo3-container" class="demo-container"></div>
+    <pre class="prettyprint">
+    Event.on('#btn-demo3','click',function(ev){
+        var steps = new S.Steps(),width;
+        steps.set('width',300);
+        width = steps.get('width');
+        steps.reset();
+        DOM.html('#demo3-container','新的width为'+width+'，reset后width变成初始值'+steps.get('width'));
+    })
+    </pre>
+    <p>留意，触发了二次set方法，因为reset()也会触发，如果你的值没改变不会触发set方法。比如原来width为100，你再使用steps.set('width',100)，是不会触发set方法。</p>
+    <p>测试用的KISSY.Steps代码请看dat-11-steps.js。</p>
+</div>
+<script src="http://a.tbcdn.cn/s/kissy/1.1.5/kissy-min.js"></script>
+<script>
+    var S = KISSY,Event = S.Event,DOM = S.DOM;
+    alert(document.getElementById('demo3-container'));
+    //demo1
+    Event.on('#btn-demo1','click',function(ev){
+        var param = {width : 300,color : 'blue'},
+            defaultConfig = {width: 200,color : 'red',act : 0},
+            config = S.merge(defaultConfig,param),
+            html = "<p>合并后的参数：width为"+config.width+",color为"+config.color+",act为"+config.act+"</p><p>默认配置的width为"+defaultConfig.width+"</p>";
+        DOM.html('#demo1-container',html);
+    });
+    //demo2
+    //父类
+    var TestSteps = function(config){
+        var self = this;
+        self.width = config.width;
+    };
+    TestSteps.prototype = {
+        init : function(){
+            alert(this.width);
+        }
+    };
+    //子类
+    S.Steps = function(config){
+        var self = this;
+        self.width = config.width;
+    };
+
+    //继承于TestSteps
+    S.extend(S.Steps,TestSteps);
+    Event.on('#btn-demo2','click',function(ev){
+        var steps = new S.Steps({width:200});
+        steps.init();
+    })
+</script>
+
+<script src="day-11-steps.js"></script>
+<script type="text/javascript">
+    Event.on('#btn-demo3','click',function(ev){
+        var steps = new S.Steps(),width;
+        steps.set('width',300);
+        width = steps.get('width');
+        steps.reset();
+        DOM.html('#demo3-container','新的width为'+width+'，reset后width变成初始值'+steps.get('width'));
+    })
+</script>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify-min.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.ld——jquery多级联动插件 V1.2</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>$.ld——jquery多级联动插件 V1.2</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>插件文档：<a href="http://www.36ria.com/2955">http://www.36ria.com/2955</a></p>    
+    </div>
+</div>
+<h2>示例1：最基础的示例演示，读取json</h2>
+<table width="700" border="0" cellspacing="0" cellpadding="0" class="tab1">
+  <tr>
+  	<td>国家</td>
+  	<td><select  class="ld-select-1" name="country">
+    		<option value="">请选择你的国家</option>
+    	</select>
+    
+    </td>
+    <td>省份</td>
+    <td><select  class="ld-select-1" name="province">
+    		<option value="">请选择你的省份</option>
+    	</select>
+    </td>
+    <td>城市</td>
+    <td><select class="ld-select-1" name="city">
+    		<option value="">请选择你的城市</option>
+    	</select>
+    </td>
+    <td>区县</td>
+    <td><select class="ld-select-1" name="county">
+    		<option value="">请选择你的区县</option>
+    	</select>
+    </td>
+  </tr>
+</table>
+<code>
+$(&quot;.ld-select-1&quot;).ld({ajaxOptions : {&quot;url&quot; : &quot;get_region.php&quot;},<br />
+style : {&quot;width&quot; : 120}<br />
+});
+</code>
+<h2>示例2：不显示国家数据，读取xml</h2>
+<table width="600" border="0" cellspacing="0" cellpadding="0" class="tab1">
+  <tr>
+    <td>省份</td>
+    <td><select  class="ld-select-2" name="province2" width="100">
+    		<option value="">请选择你的省份</option>
+    	</select>
+    </td>
+    <td>城市</td>
+    <td><select class="ld-select-2" name="city2" width="100" >
+    		<option value="">请选择你的城市</option>
+    	</select>
+    </td>
+    <td>区县</td>
+    <td><select class="ld-select-2" name="county2" width="100"  >
+    		<option value="">请选择你的区县</option>
+    	</select>
+    </td>
+  </tr>
+</table>
+<code>
+$(&quot;.ld-select-2&quot;).ld({ajaxOptions : {&quot;url&quot; : &quot;get_region.php&quot;,&quot;dataType&quot;:&quot;xml&quot;,&quot;data&quot;:{&quot;data_type&quot;:&quot;xml&quot;}},<br />
+defaultParentId : 1,<br />
+style : {&quot;width&quot; : 140}<br />
+}); </code>
+<h2>示例3：选择框默认地区数据设置</h2>
+<p>设置默认地区为：福建福州长乐</p>
+<table width="700" border="0" cellspacing="0" cellpadding="0" class="tab1">
+  <tr>
+    <td>省份</td>
+    <td><select  class="ld-select-3" name="province">
+    		<option value="">请选择你的省份</option>
+    	</select>
+    </td>
+    <td>城市</td>
+    <td><select class="ld-select-3" name="city">
+    		<option value="">请选择你的城市</option>
+    	</select>
+    </td>
+    <td>区县</td>
+    <td><select class="ld-select-3" name="county">
+    		<option value="">请选择你的区县</option>
+    	</select>
+    </td>
+  </tr>
+</table>
+<code>
+$(&quot;.ld-select-3&quot;).ld({ajaxOptions : {&quot;url&quot; : &quot;get_region.php&quot;},<br />
+defaultParentId : 1,<br />
+texts : ['福建','福州','长乐'],<br />
+style : {&quot;width&quot; : 120}<br />
+}) </code>
+<h2>示例4：主要方法演示</h2>
+<p><input type="button" value="设置地区" id="set-localtion" />设置地区为：福建厦门思明</p>
+<p><input type="button" value="获取选择框的值" id="get-text" /></p>
+<p><input type="button" value="当设置完地区后获取选择框的值" id="set-localtion-get-text" />设置地区为：福建泉州丰泽(需要使用selected方法的第二个参数（回调函数，当在地区全部加载完毕后触发)</p>
+<p><input type="button" value="获取选择框的数量" id="get-size" /></p>
+<table width="700" border="0" cellspacing="0" cellpadding="0" class="tab1">
+  <tr>
+    <td>省份</td>
+    <td><select  class="ld-select-4" name="province">
+    		<option value="">请选择你的省份</option>
+    	</select>
+    </td>
+    <td>城市</td>
+    <td><select class="ld-select-4" name="city">
+    		<option value="">请选择你的城市</option>
+    	</select>
+    </td>
+    <td>区县</td>
+    <td><select class="ld-select-4" name="county">
+    		<option value="">请选择你的区县</option>
+    	</select>
+    </td>
+  </tr>
+</table>
+<h2>示例5：事件演示</h2>
+<ul class="clearfix selects_list">
+	<li class="l">
+    	<div class="select-column">
+          <select class="ld-select-5" name="province3" width="100">
+                <option value="">请选择你的省份</option>
+            </select>      
+        </div>    
+    </li>
+	<li class="l">
+    	<div class="select-column">
+           <select class="ld-select-5" name="city3" width="100" style="display:none;">
+                    <option value="">请选择你的城市</option>
+                </select>    
+        </div>     
+    </li>
+	<li class="l">
+    	<div class="select-column">
+               <select class="ld-select-5" name="county3" width="100"  style="display:none;" >
+                    <option value="">请选择你的区县</option>
+                </select> 
+        </div>   
+    </li>        
+</ul>
+<div id="log">
+
+</div>
+<script src="js/jquery-1.4.2.min.js"></script>
+<script src="js/jquery.ld.js"></script>
+<script type="text/javascript">
+$(function(){
+	//示例1
+	$(".ld-select-1").ld({ajaxOptions : {"url" : "get_region.php"},
+						  style : {"width" : 120}
+	                     });	
+	//示例2					 
+	$(".ld-select-2").ld({ajaxOptions : {"url" : "get_region.php","dataType":"xml","data":{"data_type":"xml"}},
+						  defaultParentId : 1,
+						  style : {"width" : 140}
+	                     });
+	//示例3					 			 
+	$(".ld-select-3").ld({ajaxOptions : {"url" : "get_region.php"},
+	                      defaultParentId : 1,
+						  texts : ['福建','福州','长乐'],
+						  style : {"width" : 120}
+	                     })	
+	//示例4					 
+	var $ld4 = $(".ld-select-4");					  
+	$ld4.ld({ajaxOptions : {"url" : "get_region.php"},
+	                      defaultParentId : 1,
+						  style : {"width" : 120}
+	                     })	 
+	var ld4_api = $ld4.ld("api");
+	$("#set-localtion").click(function(){
+		ld4_api.selected(['福建','厦门','思明']);
+	})
+	$("#get-text").click(function(){
+		var text = ld4_api.texts().join('');
+		alert(text);
+	})
+	$("#set-localtion-get-text").click(function(){
+		ld4_api.selected(['福建','泉州','丰泽'],function(){
+			var text = ld4_api.texts().join('');
+			alert(text);			
+		});
+	})
+	$("#get-size").click(function(){
+		alert(ld4_api.size());
+	})
+	//示例5
+	var $ld5 = $(".ld-select-5");					  
+	$ld5.ld({ajaxOptions : {"url" : "get_region.php"},
+	                      defaultParentId : 1,
+						  style : {"width" : 120}
+	                     })	 
+	var ld5_api = $ld5.ld("api");
+	//监听change事件	
+	$ld5.bind("change",onchange);
+	//当最后一个选择框加载完数据后触发
+	$ld5.eq(2).bind("afterLoad.ld",afterLoad);
+	
+	function onchange(e){
+		var $target = $(e.target);
+		var index = $ld5.index($target);
+		index ++;
+		$ld5.eq(index).show();
+		
+		logEvent(e);
+	}
+	
+	function afterLoad(e){
+		logEvent(e);
+	}
+	// 打印事件
+	function logEvent(event) {
+		var s = '事件：'+event.type; 
+		// 向面板添加新的消息
+		$('#log').append('<p>'+s+'</p');
+	}
+})
+</script>
+</body>
+</html>

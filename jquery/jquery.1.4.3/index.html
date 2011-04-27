@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>jquery V1.4.3试用报告</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>jquery V1.4.3试用报告</h2>
+      <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3326"> http://www.36ria.com/3326 </a></p>    
+    </div>
+</div>
+<div id="main" class="mar-t10">
+  <h1>一、jquery V1.4.3新方法测试</h1>
+  <h4>1、<a href="http://api.jquery.com/jQuery.isWindow/">jQuery.isWindow</a></h4>
+  <p>这个方法用来判断对象是否是一个window。</p>
+  <p>来看个例子:</p>
+  <p><input type="button" value="测试window是否是一个window对象" id="demo-1" /></p>
+  <script>
+	$('#demo-1').click(function(){
+		alert($.isWindow(window));
+	})
+  </script>
+<pre class="prettyprint">
+$('#demo-1').click(function(){
+    alert($.isWindow(window));
+})
+ </pre>   
+  <p>是不是感觉这个方法很多此一举？在web浏览器，通常我们不会去特意测试window对象。 </p>
+  <h4>2、<a href="http://api.jquery.com/jQuery.type/">jQuery.type()</a></h4>
+  <p>相对于isWindow，type方法非常好用，<a href="http://api.jquery.com/jQuery.type/">jQuery.type()</a>用于专门判断数据类型，判断的正确性高于直接使用typeof，typeof无法直接区分object和array，你甚至可以用<a href="http://api.jquery.com/jQuery.type/">jQuery.type()</a>来判断是不是正则对象。</p>
+<pre class="prettyprint">
+jQuery.type(true) === "boolean"
+jQuery.type(3) === "number"
+jQuery.type("test") === "string"
+jQuery.type(function(){}) === "function"
+jQuery.type([]) === "array"
+jQuery.type(new Date()) === "date"
+jQuery.type(/test/) === "regexp")
+ </pre> 
+ <h4>3、<a href="http://api.jquery.com/jQuery.fx.interval/">jQuery.fx.interval</a></h4>
+ <p>jQuery.fx.interval是一个属性，不是方法，用于设置动画一帧的秒数，默认为11毫秒，设置得越低，动画就越顺滑，当然cpu资源就消耗越大。</p>
+ <p><input type="button" value="运行动画" id="demo-2"/></p>
+ <div id="demo-2-div" style="width:200px; height:30px; margin:5px;background:green;"></div>
+  <script>
+jQuery.fx.interval = 80;
+
+$("#demo-2").click(function(){
+  $("#demo-2-div").toggle( 3000 );
+});
+   </script>
+<pre class="prettyprint">
+jQuery.fx.interval = 80;
+
+$("#demo-2").click(function(){
+  $("#demo-2-div").toggle( 3000 );
+});
+ </pre>  
+ <p>可以明显感觉到动画变的非常不流畅，这是因为将jQuery.fx.interval设置过高的缘故。</p>
+ <h4>4、<a href="http://api.jquery.com/event.namespace/">event.namespace</a></h4>
+ <p>这是event新的一个属性，用于返回事件的命名空间（假如该事件有命名空间） </p>
+ <p id="test-p"></p>
+ <p><input  type="button"  value="显示事件的命名空间" id="demo-3" /></p>
+<script>
+$("#test-p").bind("test.ria", function(event) {
+  alert( event.namespace );
+});
+$("#demo-3").click(function(event) {
+  $("#test-p").trigger("test.ria");
+});  
+</script> 
+<pre class="prettyprint">
+$("#test-p").bind("test.ria", function(event) {
+  alert( event.namespace );
+});
+$("#demo-3").click(function(event) {
+  $("#test-p").trigger("test.ria");
+}); 
+ </pre>  
+ <h1>二、jquery V1.4.3的方法改进</h1>
+ <h4>1、事件方法的改进</h4> 
+ <p>当bind/unbind第二个参数为逻辑类型时，用于直接判断是否阻止浏览器事件默认动作和冒泡。</p>
+ <p><a href="http://www.36ria.com" id="demo-4">猛击这里</a></p>
+ <script>
+ 	$("#demo-4").bind('click',false)
+ </script>
+ <pre class="prettyprint">
+ 	$("#demo-4").bind('click',false)
+ </pre> 
+ <p>这个改进还是非常实用的，可以看到链接不再触发跳转。 </p>
+ <p>事件的第二个改进在于事件方法（比如click）的第一个参数可以为一个对象，click的第二个参数监听函数可以取到该对象的值。</p>
+ <p><input  type="button"  value="获取第一个参数对象的值" id="demo-5" /></p>
+<script>
+ 	$("#demo-5").click({'36ria':'明河共影'},function(evt){
+		alert(evt.data['36ria']);
+	})
+ </script>
+ <pre class="prettyprint">
+$("#demo-5").click({'36ria':'明河共影'},function(evt){
+    alert(evt.data['36ria']);
+})
+ </pre>
+  <h4>2、所有的动画方法支持缓动</h4>
+ <p><input type="button" value="运行动画" id="demo-6"/></p>
+ <div id="demo-6-div" style="width:200px; height:30px; margin:5px;background:green;"></div>
+  <script>
+
+$("#demo-6").click(function(){
+  $("#demo-6-div").toggle('slow','easeOutBounce');
+});
+   </script> 
+  <pre class="prettyprint">
+$("#demo-6").click(function(){
+  $("#demo-6-div").toggle('slow','easeOutBounce');
+});
+ </pre>
+  使用easing（缓动）请先引入easing插件。
+</div>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

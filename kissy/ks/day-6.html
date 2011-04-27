@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第六天node模块解析—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第六天node模块解析—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3275">http://www.36ria.com/3275</a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<p>起始代码</p>
+    <pre class="prettyprint">
+        (function(S){
+            S.use('core',function(){
+                var Event = S.Event,DOM = S.DOM;
+            });
+            
+        })(KISSY);
+    </pre> 
+    还是以拆合菜单为例，来演练dom剩下的方法（去掉了拆合实现代码）。   
+<h4>拆合菜单</h4>
+    <ul id="menu" class="mar-t-10">	
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=1" onclick="return false;">jquery</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=7" target="_blank">jquery插件</a></li>
+                <li><a href="http://www.36ria.com/?cat=6" target="_blank">jquery教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=105" target="_blank">jquery与ajax</a></li>                            
+            </ul>
+        </li>
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=11" onclick="return false;">flex</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=101" target="_blank">flex实例</a></li>
+                <li><a href="http://www.36ria.com/?cat=113" target="_blank">flex教程</a></li>                          
+            </ul>                            
+        </li> 
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=3" onclick="return false;">javascript</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=116" target="_blank">javascript资源</a></li>
+                <li><a href="http://www.36ria.com/?cat=4" target="_blank">javascript教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=9" target="_blank">浏览器</a></li>                            
+            </ul>                             
+        </li>                                                                                                                       
+    </ul>
+	拆合菜单的html代码如下（做了简化处理）：
+    <pre class="prettyprint">
+    &lt;ul id=&quot;menu&quot; class=&quot;mar-t-10&quot;&gt;	<br />        &lt;li class=&quot;menu-item&quot;&gt;<br />            &lt;div&gt;&lt;a href=&quot;http://www.36ria.com/?cat=1&quot; onclick=&quot;return false;&quot;&gt;jquery&lt;/a&gt;&lt;/div&gt;<br />            &lt;ul&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=7&quot; target=&quot;_blank&quot;&gt;jquery插件&lt;/a&gt;&lt;/li&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=6&quot; target=&quot;_blank&quot;&gt;jquery教程&lt;/a&gt;&lt;/li&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=105&quot; target=&quot;_blank&quot;&gt;jquery与ajax&lt;/a&gt;&lt;/li&gt;                            <br />            &lt;/ul&gt;<br />        &lt;/li&gt;<br />    &lt;/ul&gt;    </pre> 
+	<h4>一、one和get的区别</h4>
+	<p>one和get同样是获取符合选择器的第一个元素，但有本质上的区别，one属于node模块，而get属于dom模块。使用one意味着使用类似于jquery获取元素的方式，而get是类似YUI获取元素的方式，二者的返回值也是不同的，接下来以一个demo来具体演示其差别</p>
+    <p><strong>同样获取拆合菜单元素</strong></p>
+    <input type="button" value="使用one" id="demo1-1" />
+    <pre class="prettyprint">
+Event.on('#demo1-1','click',function(evt){
+    var menu = S.one("#menu");
+    alert(menu);
+})    
+    </pre>     
+    <input type="button" value="使用get" id="demo1-2" />
+    <pre class="prettyprint">
+		Event.on('#demo1-2','click',function(evt){
+			var menu = S.get("#menu");
+			alert(menu);
+		}) 
+    </pre>  
+    <p>可以看到二者的返回值是不一样的，一个是object，而另外一个是HTMLUListElement，其实可以把one方法看做是对get的二次封装，而从node源代码中叶印证了这一点：</p>
+    <pre class="prettyprint">
+S.one = function(selector, context) {
+    var elem = S.get(selector, context);
+    return elem ? new Node(elem) : null;
+};
+    </pre>  
+    可以看到当元素存在时，S.one返回的是Node实例（就可以使用类似jquery的链式调用，继续调用node的其他方法） ；不存在返回null。
+    <h4>二、one的链式调用</h4>  
+    先来看上一篇教程中的一段代码：
+    <pre class="prettyprint">
+var menu = S.get("#menu");    
+var menuChildrens = DOM.children(menu);
+    </pre> 
+    用途是获取拆合菜单的子节点，再来看使用one的处理方式
+    <p><input type="button" value="使用o获取拆合菜单的子节点，并返回子节点数量" id="demo2-1" /></p>
+    <pre class="prettyprint">
+Event.on('#demo2-1','click',function(evt){
+    var len = S.one("#menu").children().length;
+    alert(len);
+})	
+    </pre> 
+    <p>可以看到代码简洁多了，1行搞定。</p>
+    既然有children()，可以预见还有prev()、next()、parent()、text()等，只要是dom模块中的方法，node模块都有对应的接口。请<a href="http://kissyteam.github.com/kissy/docs/node/index.html">猛击这里</a>进入node文档查看。
+    <h4>三、node演练：向第二个子菜单添加新的菜单项</h4>
+    使用dom方法的代码如下（参见上一篇教程的demo3）： 
+    <pre class="prettyprint">
+//向第二个子菜单添加新的菜单项
+Event.on('#demo3-1','click',function(evt){
+    var menuChildrens = DOM.children(menu);
+    var secondUl = DOM.children(menuChildrens[1],'ul');
+    //创建一个新的li节点
+    var newLi = DOM.create('&lt;li class=&quot;new&quot;&gt;&lt;a href=&quot;http://www.36ria.com/?cat=113&quot; target=&quot;_blank&quot;&gt;明河共影&lt;/a&gt;&lt;/li&gt;');
+    //留意是secondUl[0]，而不是secondUl
+    secondUl[0].appendChild(newLi);
+})	
+    </pre>
+    <input type="button" value="向第二个子菜单添加新的菜单项" id="demo3-1" /> 
+  <p>来看使用node的API的代码:</p>
+    <pre class="prettyprint">
+//向第二个子菜单添加新的菜单项<br />Event.on('#demo3-1','click',function(evt){<br />    S.one(&quot;#menu&quot;).children().item(1).children('ul').append('&lt;li class=&quot;new&quot;&gt;&lt;a href=&quot;http://www.36ria.com/?cat=113&quot; target=&quot;_blank&quot;&gt;明河共影&lt;/a&gt;&lt;/li&gt;');<br />})	
+    </pre> 
+    一行代码搞定，node模块的简洁性是dom模块无法比拟的，如果你熟悉jquery，那么无疑可以快速掌握node模块用法，node模块的API命名，基本上与jquery的API保持一致，但有一些事不同的，这要留意，比如获取第二个子菜单，jquery是$("#menu").children('li').eq(1)，而kissy是 S.one("#menu").children().item(1)。
+    <h4>四、什么是nodelist模块</h4>
+    <p>nodelist很好理解，就是节点集合，比如你要获取拆合菜单的三个li节点。</p> 
+    <input type="button" value="获取拆合菜单下所有li的个数" id="demo4-1" />
+    <pre class="prettyprint">
+//向第二个子菜单添加新的菜单项
+Event.on('#demo4-1','click',function(evt){
+    var lis = S.all("#menu li");
+    alert(lis.length);
+})	
+    </pre> 
+    <p>all遍历出了拆合菜单下的所有li，包括二级菜单的li。</p>
+    <p>明河备注：S.one("#menu").children('li')返回的是KISSY.NodeList的实例，而不是KISSY.Node的实例</p>
+    <input type="button" value="children()返回的实例判断" id="demo4-2" />  
+    <pre class="prettyprint">
+//children()返回的实例判断
+Event.on('#demo4-2','click',function(evt){
+    alert(S.one("#menu").children('li') instanceof KISSY.Node);
+})	
+    </pre> 
+    <h4>五、each</h4>
+    <p>非常常用的一个方法，用于遍历节点集合。</p> 
+    <input type="button" value="获取一级菜单标题文本值为'flex'的菜单项索引值" id="demo5-1" />   
+    <pre class="prettyprint">
+//获取一级菜单标题文本值为'flex'的菜单项索引值
+Event.on('#demo5-1','click',function(evt){
+    S.all("#menu div").each(function(o,i){
+        var txt = o.text();
+        if(txt == 'flex') alert(i);
+    })
+})	
+    </pre>
+    each的参数为一个函数，该函数带有2个参数，一个是元素（KISSY.Node的实例），一个是元素索引值。
+    <h4>六、明河结语</h4>  
+    node的强大性和易用性，无可置疑，堪称dom开发的利器，为什么不用node来实现拆合菜单呢？有兴趣的朋友们不妨对明河第四天的代码进行下重构，你会发现代码量少了很多。明河会在下一篇教程中发布node版的拆合菜单代码，预告下下一篇教程为anim模板解析，即kissy中的动画。                         
+</div>
+<script src="kissy/build/seed-min.js"></script>
+<script>
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM;
+		
+		Event.on('#demo1-1','click',function(evt){
+			var menu = S.one("#menu");
+			alert(menu);
+		})
+		Event.on('#demo1-2','click',function(evt){
+			var menu = S.get("#menu");
+			alert(menu);
+		})
+		Event.on('#demo2-1','click',function(evt){
+			var len = S.one("#menu").children().length;
+			alert(len);
+		})
+		//向第二个子菜单添加新的菜单项
+		Event.on('#demo3-1','click',function(evt){
+			S.one("#menu").children().item(1).children('ul').append('<li class="new"><a href="http://www.36ria.com/?cat=113" target="_blank">明河共影</a></li>');
+		})
+
+		Event.on('#demo4-1','click',function(evt){
+			var lis = S.all("#menu li");
+			alert(lis.length);
+		})
+		//children()返回的实例判断
+		Event.on('#demo4-2','click',function(evt){
+			alert(S.one("#menu").children('li') instanceof KISSY.Node);
+		})
+		//获取一级菜单标题文本值为'flex'的菜单项索引值
+		Event.on('#demo5-1','click',function(evt){
+			S.all("#menu div").each(function(o,i){
+				var txt = o.text();
+				if(txt == 'flex') alert(i);
+			})
+		})																												
+	});
+	
+	
+	
+})(KISSY);
+</script>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

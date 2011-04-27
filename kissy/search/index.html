@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> Google’s AJAX Search实例</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/css/GgSearch.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>Google’s AJAX Search实例</h2> 
+        <p>作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。</p>
+        <p>文章链接：</p>  
+    </div>
+</div>
+<div id="content" class="page-960 center">
+	<div class="wrapper">
+		<div id="ajax-search">
+		    <form id="search-form" method="post" class="round-2em">
+	           	<input id="s" type="text" class="round-2em" />
+	            <input type="button" value="搜&nbsp;索" id="search-btn" class="round-2em"/>
+		    </form>
+			<!--搜索结果-->
+			<div id="search-results-container">
+				<div id="search-results">
+					<div class="btn-page prev-page">上一页</div>
+					<div class="btn-page next-page">下一页</div>
+					<s class="triangle"><i class="bor"></i><i class="blo"></i></s>	
+				</div>	
+			</div>				  				    		
+		</div>
+		<div id="site-container">
+			<label>搜索范围：</label>
+			<input type="radio" name="sites[]" class="site" value="36ria.com"/>
+			<label>RIA之家</label>
+			<input type="radio" name="sites[]" class="site" value="" checked="checked"  />
+			<label>google</label>						
+		</div>
+        <h2>使用了css3，明河没在IE下调试过，不建议使用IE浏览，V1版本难免有bug，欢迎反馈，谢谢！</h2>  
+<div>
+			<h4>1、明河为什么要做这个示例？</h4>
+			<p>曾几何时，明河在思考一个问题，为什么所有的搜索按钮点击完都要跳转到一个新的页面，如果点击完搜索按钮，直接在当前页面显示会是什么的效果？</p>
+		    <p>幸运的是Google开放了ajax搜索的接口，通过ajax直接取搜索结果，在当前页面显示成为了可能，于是明河做了个这个例子。</p>
+			<h4>2、原理说明</h4>
+			<p>之所以可以实现ajax获取搜索结果，归功于<a href="http://code.google.com/apis/ajaxsearch/documentation/">Google’s AJAX Search API</a>，需要说明的是<a href="http://code.google.com/apis/ajaxsearch/documentation/">Google’s AJAX Search API</a>返回的结果是有带样式的，当然其也提供了接口，用户可以自定义修改搜索结果样式。明河这里并没有直接使用<a href="http://code.google.com/apis/ajaxsearch/documentation/">Google’s AJAX Search API</a>的接口，而是利用http://ajax.googleapis.com/ajax/services/search/web，使用jsonp的方式返回纯数据的json。</p>
+			<p>比如明河的请求路径类似：</p>
+			<p><a href="http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;callback=KISSY.GgSearch.CALLBACKS.jsonp1288146786000&amp;q=site:36ria.com+jquery&amp;rsz=4&amp;start=0">http://ajax.googleapis.com/ajax/services/search/web?v=1.0&amp;callback=KISSY.GgSearch.CALLBACKS.jsonp1288146786000&amp;q=site:36ria.com+jquery&amp;rsz=4&amp;start=0</a>。</p>
+			<p>传递的参数说明：</p>
+			<ul>
+            	<li>V：Google's AJAX Search API的版本号</li>
+                <li>callback：回调函数名</li>
+                <li>q：关键字，如果关键字前有加site:36ria.com，意思是只在36ria.com下搜索</li>
+                <li>rsz：每页显示条目数</li>
+                <li>start：起始条数</li>
+            </ul>
+			<p>那么该服务返回的json数据，类似下面结果：</p>
+            <pre class="prettyprint">
+KISSY.GgSearch.CALLBACKS.jsonp1288146786000({
+      "responseData": {"results":[{
+                           "GsearchResultClass":"GwebSearch",
+                           "unescapedUrl":"http://www.36ria.com/jquery%E6%8F%92%E4%BB%B6%E5%A4%A7%E5%85%A8",
+                           "url":"http://www.36ria.com/jquery%25E6%258F%2592%25E4%25BB%25B6%25E5%25A4%25A7%25E5%2585%25A8",
+                           "visibleUrl":"www.36ria.com",
+                           "cacheUrl":"http://www.google.com/search?q\u003dcache:aj4DjGUBg-4J:www.36ria.com",
+                           "title":"\u003cb\u003ejquery\u003c/b\u003e插件大全（不断更新中） | ria之家--RIA三部曲：\u003cb\u003ejquery\u003c/b\u003e、ext、flex",
+                           "titleNoFormatting":"jquery插件大全（不断更新中） | ria之家--RIA三部曲：jquery、ext、flex","content":"这里我将发表在博客上的所有\u003cb\u003ejquery\u003c/b\u003e插件做成了一个合集，方便各位朋友查看与下载。点击  文字链接就会进入下载和说明页面。如果你有什么想法与疑问，可以在此页面上留言。 \u003cb\u003e...\u003c/b\u003e"
+                          }]
+                       },
+     "responseDetails": null, 
+     "responseStatus": 200
+})           </pre> 
+			 <p>接下来就是用js来处理结果集了。</p>
+             <h4>3、这个demo依赖于kissy1.1.5</h4>
+         <p>明河这段时间都在练习kissy，正好利用这个机会，使用kissy实战了下，kissy很强大，也可易用，只是动画部分用的真是不习惯，目前来看还无法跟jquery相提并论，期待其未来的发展。正在学kissy的朋友，不妨看下这个demo的代码。</p>
+             
+             <p>代码明河做了封装，明河将其命名为：KISSY.GgSearch。             </p>
+             <h4>4、KISSY.GgSearch的配置参数</h4>
+             <p>默认参数如下：</p>
+      <pre class="prettyprint">
+GgSearch.Config = {
+    /**结果集显示容器，重要参数*/
+    resultsContainer : null,
+    /**搜索站点*/
+    site 	: '36ria.com',
+    /**搜索类型，可以是网页、图片、视屏、博客等，目前KISSY.GgSearchV1.0版就支持网页*/
+    type 	: 'web',
+    /**每页显示数*/
+    perPage : 4,
+    /**起始页，默认为0，即从第一页开始*/
+    page    : 0,
+    /**搜索框显示/隐藏动画时间*/
+    duration : 0.5,
+    /**预加载动画图片路径*/
+    preloadImgUrl : '../style/images/preload.gif',
+    /**预加载动画显示动画时间*/
+    preloadShowDuration : 1,
+    /**预加载动画隐藏动画时间*/
+    preloadHideDuration : 1,
+    /**最长url长度*/
+    urlMaxLen : 60,
+    /**搜索结果显示模板*/
+    tpl     : GgSearch.tpl.DEFAULT	 			  
+}                        </pre> 
+            <p>最重要的是resultsContainer，结果集显示容器。用法举例：</p>
+            <pre class="prettyprint">
+var S = KISSY,DOM = S.DOM;
+var ggSearch = new KISSY.GgSearch('#s',{resultsContainer:'#search-results'});                      </pre> 
+	  <h4>4、KISSY.GgSearch的公开方法</h4> 
+     <h5>1.search</h5> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>开始搜索</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无参时搜索第一页）</p>
+             <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+                <thead>
+                      <tr>
+                        <td>参数名</td>
+                        <td>数据类型</td>
+                        <td>描述</td>
+                      </tr>            
+                </thead>
+                <tbody>
+                      <tr>
+                        <td class="strong">page</td>
+                        <td>Number</td>
+                        <td>搜索第几页</td>
+                      </tr> 
+                      <tr>
+                        <td class="strong">perPage</td>
+                        <td>Number</td>
+                        <td>每页显示数</td>
+                      </tr>                                   
+               </tbody>
+            </table>                         
+        </td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{Object} 实例化的KISSY.GgSearch对象</td>
+      </tr>
+      <tr>
+        <td class="td-title">用法举例：</td>
+        <td>
+           <pre class="prettyprint">
+var ggSearch = new KISSY.GgSearch('#s',{resultsContainer:'#search-results'});
+ggSearch.search();                          </pre>
+        </td>
+      </tr>                      
+    </table>
+     <h5>2.next</h5> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>搜索下一页</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无）</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{Object} 实例化的KISSY.GgSearch对象</td>
+      </tr>
+      <tr>
+        <td class="td-title">用法举例：</td>
+        <td>
+           <pre class="prettyprint">	//下一页<br />	S.one('.next-page').on('click',function(){<br />		ggSearch.next();<br />	})</pre>
+        </td>
+      </tr>                      
+    </table>
+     <h5>3.prev</h5> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>搜索上一页</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无）</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{Object} 实例化的KISSY.GgSearch对象</td>
+      </tr>
+      <tr>
+        <td class="td-title">用法举例：</td>
+        <td>
+           <pre class="prettyprint">
+//上一页
+S.one('.prev-page').on('click',function(){
+    ggSearch.prev();
+})           
+           </pre>
+        </td>
+      </tr>                      
+    </table>
+    <h5>4.callbackName</h5> 
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>获取回调函数名，回调函数名，是明河随机生成的，会加入到回调函数名数组，这个方法基本上不会用到</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无）</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{String} 回调函数名</td>
+      </tr>                      
+    </table>
+    <h5>5.callback</h5>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>回调函数,非常重要，用于处理返回的json数据，一般不用修改</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+          <thead>
+            <tr>
+              <td>参数名</td>
+              <td>数据类型</td>
+              <td>描述</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="strong">data</td>
+              <td>Object</td>
+              <td>json数据</td>
+            </tr>
+          </tbody>
+        </table></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>无</td>
+      </tr>
+    </table>
+    <h5>6.show</h5>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>显示搜索结果框</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无）</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{Object} 实例化的KISSY.GgSearch对象</td>
+      </tr>
+    </table>
+    <h5>7.hide</h5>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>隐藏搜索结果框</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无）</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{Object} 实例化的KISSY.GgSearch对象</td>
+      </tr>
+    </table>
+    <h5>8.site</h5>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td>获取/设置搜索站点</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无参时获取搜索站点）</p>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+            <thead>
+              <tr>
+                <td>参数名</td>
+                <td>数据类型</td>
+                <td>描述</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="strong">s</td>
+                <td>String</td>
+                <td>站点域名，比如taobao.com，不加http://</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{String} 搜索站点</td>
+      </tr>
+      <tr>
+        <td class="td-title">用法举例：</td>
+        <td><pre class="prettyprint">
+//选择站点
+S.all('.site').on('change',function(ev){
+    var checked = DOM.attr(ev.target,'checked'),val;
+    if(checked){
+        val = DOM.val(ev.target);
+        ggSearch.site(val);
+    }
+})
+        </pre></td>
+      </tr>
+    </table>
+    <h5>9.keyword</h5>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td> 获取/设置关键字</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无参时获取关键字）</p>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+            <thead>
+              <tr>
+                <td>参数名</td>
+                <td>数据类型</td>
+                <td>描述</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="strong">k</td>
+                <td>String</td>
+                <td>关键字 </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{String} 关键字 </td>
+      </tr>
+    </table>
+    <h5>10.page</h5>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+      <tr>
+        <td class="td-title">描述：</td>
+        <td> 获取/设置当前页</td>
+      </tr>
+      <tr>
+        <td class="td-title">参数：</td>
+        <td><p>（无参时获取当前页）</p>
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+            <thead>
+              <tr>
+                <td>参数名</td>
+                <td>数据类型</td>
+                <td>描述</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="strong">p</td>
+                <td>String</td>
+                <td>当前页 </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>&nbsp;</p></td>
+      </tr>
+      <tr>
+        <td class="td-title">返回：</td>
+        <td>{String} 当前页 </td>
+      </tr>
+    </table>
+    <h4>5、KISSY.GgSearch的事件（暂缺）</h4>
+</div>
+    </div>    
+</div>
+<script src="kissy-min.js"></script>
+<script src="js/GgSearch.js"></script>
+<script type="text/javascript">
+	var S = KISSY,DOM = S.DOM;
+	var ggSearch = new KISSY.GgSearch('#s',{resultsContainer:'#search-results'});
+	var $searchBtn = S.one('#search-btn');
+	$searchBtn.on('click',search);
+	//下一页
+	S.one('.next-page').on('click',function(){
+		ggSearch.next();
+	})
+	//上一页
+	S.one('.prev-page').on('click',function(){
+		ggSearch.prev();
+	})
+	//选择站点
+	S.all('.site').on('change',function(ev){
+		var checked = DOM.attr(ev.target,'checked'),val;
+		if(checked){
+			val = DOM.val(ev.target);
+			ggSearch.site(val);
+		}
+	})			
+	function search(e){
+		ggSearch.search();
+		e.stopPropagation()
+		return false;
+	}	
+	
+</script>
+
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

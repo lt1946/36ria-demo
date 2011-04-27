@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>Uploader Demo</title>
+		<style>
+			.sel {
+				height:21px;
+				position:relative;
+				overflow:hidden;
+			}
+
+			.sel object,
+			.sel embed {
+				position:absolute;
+				left:0;
+				top:0;
+				z-index:10;
+			}
+
+			.sel .browser {
+				display:inline-block;
+				width:60px;
+				height:15px;
+				padding:2px 5px;
+				border:1px solid #eaeaea;
+				background:#fefefe;
+				font-size:12px;
+				text-decoration:none;
+				text-align:center;
+				position:absolute;
+				z-index:1;
+				left:0;
+				top:0;
+			}	
+
+			.sel .hover {
+				border-color:red;
+			}
+
+			.filelist ul {
+				border:1px solid #eaeaea;
+				border-bottom:0;
+				margin:0;
+				padding:0;
+				font-size:12px;
+				width:400px;
+				margin-bottom:10px;
+			}
+
+			.filelist li {
+				margin:0;
+				padding:5px;
+				border-bottom:1px solid #eaeaea;
+				overflow:hidden;
+			}
+			.filelist li a {
+				float:right;
+				margin:0 5px;
+			}
+
+			.filelist button {
+				margin-right:10px;
+			}
+
+			.hidden {
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Uploader Demo</h2>
+		
+		<script src="../../../kissy/build/kissy.js"></script>
+		<script src="../../../kissy/build/flash/flash-pkg.js"></script>
+		<script src="../ajbridge/ajbridge.js"></script>
+		<script src="uploader.js"></script>
+		
+		<div class="box">
+			<div class="sel">
+				<div id="swfcontent"> </div>
+				<a href="demo.html#" class="browser" id="J_Trigger">选择文件</a>
+			</div>
+			<div class="filelist hidden" id="J_List">
+				<ul></ul>
+				<p>
+					<button type="button" class="start">开始上传</button>
+					<button type="button" class="clear">清除文件</button>
+				</p>
+			</div>	
+		</div>
+		
+		<script>
+			(function(S) {
+				var uploader = new AJBridge.Uploader('swfcontent', {
+						src:'uploader.swf',
+						id:"myFlashContent",
+						params:{
+							bgcolor:"#FFCCCC",
+							wmode:"transparent"
+						},
+						attrs: {
+							width:72,
+							height:21
+						},
+						hand:true,
+						btn:true
+					}),
+					D = S.DOM,
+					E = S.Event,
+					trigger = S.get('#J_Trigger'),
+					container = S.get('#J_List'),
+					ul = D.get('ul', container),
+					serverURL ="http://127.0.0.1:8080/upload.php",
+					serverParams = {
+							username:"user",
+							password:"1297ew9jd23888s834u3j2u38"
+						},
+					method = "POST";
+
+
+				//加载事件
+
+				//选中文件后
+				uploader.on('fileSelect', function(ev){
+					var files = ev.fileList,
+						len = files.length,
+						i = 0,
+						one = '<li data-id="{id}"><a href="#" class="upload">上传</a><a href="#" class="delete">删除</a> {name} ( {size} byte )</li>',
+						html = '';
+
+					if(D.hasClass(container, 'hidden')) {
+						D.removeClass(container, 'hidden');
+					}
+
+					for(; i < len; i++) {
+						html += S.substitute(one, files[i]);	
+					}
+
+					ul.innerHTML += html;
+
+				});
+
+
+				uploader.on('mouseOver', function(ev){
+					D.addClass(trigger, 'hover');	
+				});
+
+				uploader.on('mouseDown', function(ev){
+					D.removeClass(trigger, 'hover');	
+				});
+
+				uploader.on('mouseOut', function(ev){
+					D.removeClass(trigger, 'hover');	
+				});
+
+				//删除文件,上传文件
+				E.on(container, 'click', function(ev) {
+					var target = ev.target;
+					if(D.hasClass(target, 'upload')) {
+						ev.preventDefault();
+						//上传单个文件
+						uploader.upload(D.parent(target).getAttribute('data-id'),serverURL, method, serverParams);
+						ul.removeChild(target.parentNode);
+						if(D.children(ul).length == 0) {
+							D.addClass(container, 'hidden');
+						}
+					} else if(D.hasClass(target, 'delete')) {
+						ev.preventDefault();
+						//删除文件
+						uploader.removeFile(D.parent(target).getAttribute('data-id'));
+						ul.removeChild(target.parentNode);
+						if(D.children(ul).length == 0) {
+							D.addClass(container, 'hidden');
+						}
+					} else if(D.hasClass(target, 'clear')) {
+						//清除所有文件
+						while(target = D.children(ul)[0]) {
+							uploader.removeFile(D.parent(target).getAttribute('data-id'));
+							ul.removeChild(target);
+						}
+						uploader.clear();
+						D.addClass(container, 'hidden');
+
+					} else if(D.hasClass(target, 'start')) {
+						//开始上传
+						uploader.uploadAll(serverURL, method, serverParams);
+						while(target = D.children(ul)[0]) {
+							ul.removeChild(target);
+						}
+						D.addClass(container, 'hidden');
+					}
+				});
+
+				//过滤文件类型  
+				// 务必 bridgeReady 后执行
+				uploader.on("bridgeReady",function(ev){
+					// flash 完成代码初始化
+					uploader.browse(true, [{desc:"PNG,GIF", ext:"*.png;*.gif"}, {desc:"SWF", ext:"*.swf"}]);
+				});
+				
+				uploader.on("uploadComplete",function(ev){
+					// flash 完成代码初始化
+					alert(ev.file.name + "上传成功");
+				});
+				
+				uploader.on("uploadListComplete",function(ev){
+					// flash 完成代码初始化
+					alert("全部上传成功");
+				});
+
+			})(KISSY);
+
+
+		</script>
+	</body>
+</html>
+

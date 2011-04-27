@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>float — jquery悬浮层插件</title>
+<script src="js/jquery-1.4.min.js" type="text/javascript"></script>
+<script src="js/float.js" type="text/javascript"></script>
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h2 id="header"> float — 高级应用：设置位置偏移，鼠标滑过显示完整层 </h2>
+<div id="page">
+  <div class="add-rss-to clearfix">
+    <div class="title l">订阅到</div>
+    <div class="float-box-content l">
+      <ul>
+        <li> <a href="http://fusion.google.com/add?feedurl=http://feed.feedsky.com/36ria"> <img src="images/rss/icon_subshot01_google.gif" width="108" height="20" alt="google" /> </a> </li>
+        <li> <a href=""> <img src="images/rss/icon_subshot01_qq.gif" width="108" height="20" alt="qq" /> </a> </li>
+        <li> <a href="http://www.xianguo.com/subscribe.php?url=http://feed.feedsky.com/36ria"> <img src="images/rss/icon_subshot01_xianguo.gif" width="108" height="20" alt="xianguo" /> </a> </li>
+        <li> <a href="http://add.my.yahoo.com/rss?url=http://feed.feedsky.com/36ria"> <img src="images/rss/icon_subshot01_yahoo.gif" width="108" height="20" alt="yahoo" /> </a> </li>
+        <li> <a href="http://reader.youdao.com/b.do?keyfrom=feedsky&url=http://feed.feedsky.com/36ria"> <img src="images/rss/icon_subshot01_youdao.gif" width="108" height="20" alt="youdao" /> </a> </li>
+        <li> <a href="http://www.zhuaxia.com/add_channel.php?url=http://feed.feedsky.com/36ria"> <img src="images/rss/icon_subshot01_zhuaxia.gif" width="108" height="20" alt="zhuaxia" /> </a> </li>
+      </ul>
+    </div>
+  </div>
+  <div class="add-collect-to clearfix">
+    <div class="title r">收藏到</div>
+    <div class="float-box-content r">
+      <div class="addlist">
+        <div class="li"><a href="demo4.html#" item="0" class="add_0">本地收藏</a></div>
+        <div class="li"><a href="demo4.html#" item="1" class="add_1">谷歌书签</a></div>
+        <div class="li"><a href="demo4.html#" item="31" class="add_31">Gmail</a></div>
+        <div class="li"><a href="demo4.html#" item="2" class="add_2">百度搜藏</a></div>
+        <div class="li"><a href="demo4.html#" item="3" class="add_3">雅虎收藏</a></div>
+        <div class="li"><a href="demo4.html#" item="4" class="add_4">QQ书签</a></div>
+        <div class="li"><a href="demo4.html#" item="5" class="add_5">新浪ViVi</a></div>
+        <div class="li"><a href="demo4.html#" item="28" class="add_28">新浪微博</a></div>
+        <div class="li"><a href="demo4.html#" item="21" class="add_21">豆瓣/九点</a></div>
+        <div class="li"><a href="demo4.html#" item="22" class="add_22">人人网</a></div>
+        <div class="li"><a href="demo4.html#" item="23" class="add_23">开心网</a></div>
+        <div class="li"><a href="demo4.html#" item="24" class="add_24">搜狐·白</a></div>
+        <div class="li"><a href="demo4.html#" item="11" class="add_11">微软Live</a></div>
+        <div class="li"><a href="demo4.html#" item="30" class="add_30">GReader</a></div>
+        <div class="li"><a href="demo4.html#" item="27" class="add_27">鲜果</a></div>
+        <div class="li"><a href="demo4.html#" item="6" class="add_6">饭否</a></div>
+        <div class="li"><a href="demo4.html#" item="7" class="add_7">叽歪</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script type="text/javascript">
+$(".add-rss-to").float({
+					   position:"rm",
+					   offset : {right : -133},
+					   style:{width:160}
+					  });
+$(".add-collect-to").float({
+						   position:"lm",
+						   offset : {left : -185},
+						   style:{width:214}
+						  });
+$(".add-rss-to").hover(function(){
+	$(this).float("clearOffset","fast");
+},function(){
+	$(this).float("addOffset");
+})
+$(".add-collect-to").hover(function(){
+	$(this).float("clearOffset");
+},function(){
+	$(this).float("addOffset");
+})    
+</script>
+</body>
+</html>

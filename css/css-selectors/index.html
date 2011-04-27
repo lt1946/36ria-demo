@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>30个你不可不知的css选择器</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="http://gsgd.co.uk/sandbox/jquery/easing/jquery.easing.1.3.js"></script>
+
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>30个你不可不知的css选择器</h2>
+      <p>作者：Jeffrey Way，翻译：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href=" http://www.36ria.com/3416"> http://www.36ria.com/3416 </a></p>    
+    </div>
+</div>
+<div id="main" class="mar-t10">
+  <h1>一、全浏览器支持的css选择器（由于很好理解，demo省略）</h1>
+  <h4>1.*</h4>
+
+  <p>*通配符选择器，经常用于css reset，即样式重置，清理标签的默认样式，但现在一般不提倡直接使用*了，主要是*会匹配所有标签，相当耗资源。*在css的优先级中是最低的。</p>
+  <pre class="prettyprint">
+* {  
+ margin: 0;  
+ padding: 0;  
+}   </pre>   
+  <p>也可以用*来匹配某一元素下的所有子元素：</p>
+  <pre class="prettyprint">
+#container * {  
+ border: 1px solid black;  
+}   </pre>
+  <h4>2.#X</h4>
+  <p>#+id名，这是日常常用的css选择器，用于匹配id为XXX的元素，id选择器的优势是精准，高优先级（优先级基数为100，远高于class的10），作为javascript脚本钩子的不二选择，同样缺点也很明显优先级过高，重用性差，所以在使用id选择器前，我们最好问下自己，真的到了非用id选择器的地步？</p>
+  <pre class="prettyprint">
+#container {  
+   width: 960px;  
+   margin: auto;  
+}    </pre>
+  <h4>3..X</h4>
+  <p>.+class名，标准的样式选择器，与id选择器的区别是样式选择器可以选择多个元素。样式选择器是提倡使用的选择器，我想也是日常前端人员用到最多的选择器了。</p>
+  <pre class="prettyprint">
+.error {  
+  color: red;  
+}   </pre>
+  <h4>4.X Y</h4>
+  <pre class="prettyprint">
+li a {  
+  text-decoration: none;  
+}      </pre>
+  <p>目前非常常用的css选择器，用于选取X元素下子元素Y，这里有个要留意的点是，这种方式的选择器将选取其下所有匹配的子元素，无视层级，所以有的情况是不宜使用的，比如上述的代码去掉li下的所有a的下划线，但li里面还有个ul，我不希望ul下的li的a去掉下划线。</p>
+  <p>使用此子孙选择器的时候要考虑是否希望某样式对所有子孙元素都起作用。</p>
+  <p>这种子孙选择器还有个作用，就是创建类似命名空间的作用。比如上述代码样式的作用域明显为li。  </p>
+  <h4>5.X</h4>
+  <pre class="prettyprint">
+a { color: red; }   
+ul { margin-left: 0; }      </pre>
+  <p>标签选择器，优先级仅仅比*高，常用于css reset。</p>
+  <p>&nbsp;</p>
+  <h1>二、除IE6外浏览器支持的css选择器</h1>
+  <p>&nbsp;</p>
+  <h4>6.X:link X:visited X:hover X:active</h4>
+  <pre class="prettyprint">
+a:link { color: red; }   
+a:visted { color: purple; }     </pre>
+  <p>伪类选择器，visted已被访问过的样式，hover鼠标经过的样式，link未被访问的样式。三种伪类选择器常用于链接，但不是说只适用于链接，可惜的是IE6只支持将这三种伪类选择器作用于链接。</p>
+  <p>这里明河说明一点，由于CSS优先级的关系(后面比前面的优先级高)，这几个伪类的书写顺序，一般是<span class="prettyprint">link</span>、<span class="prettyprint">visted</span>、hover、active。</p>
+  <p><a href="6.html" target="_blank">猛击这里进入这里查看demo</a></p>
+  <h4>7.X + Y</h4>
+  <pre class="prettyprint">
+ul + p {   
+   color: red;   
+}      </pre>
+  <p>相邻选择器，上述代码中就会匹配在ul后面的第一个p，将段落内的文字颜色设置为红色。(只匹配一个元素)</p>
+  <p><a href="7.html" target="_blank">猛击这里进入这里查看demo</a></p>
+  <h4>8.X &gt; Y</h4>
+  <p>子选择器，留意X &gt; Y与X Y的区别，后者是子孙选择器，即无视层级，而X &gt; Y是字选择器，只匹配X下的子元素Y。</p>
+  <p>从理论上来讲X &gt; Y是值得提倡选择器，可惜IE6不支持。</p>
+  <p><a href="8.html" target="_blank">猛击这里进入这里查看demo</a></p>
+  <h4>9.X  ~  Y</h4>
+  <pre class="prettyprint">
+ul ~ p {   
+   color: red;   
+}       </pre>  
+  <p>相邻选择器，与X+Y类似，不同的是X  ~  Y匹配的是元素集合，比如上述代码，匹配的是所有ul相邻的p</p>
+  <p><a href="9.html" target="_blank">猛击这里进入这里查看demo</a></p>
+  <h4>10.X[title]</h4>
+  <pre class="prettyprint">
+a[title] {   
+   color: green;   
+}   </pre> 
+   <p>属性选择器，比如上述代码匹配的是带有title属性的链接元素。</p> 
+   <p><a href="10.html" target="_blank">猛击这里进入这里查看demo</a></p>
+  <h4>11.X[title=""]</h4>
+  <pre class="prettyprint">
+a[title="明河共影"]{
+	color:#096;
+}   </pre> 
+   <p>属性选择器，上述代码不只匹配带有title属性，更匹配title属性等于明河共影的链接元素。[]内不只可用title属性，还可以使用其他属性。</p> 
+   <p><a href="11.html" target="_blank">猛击这里进入这里查看demo</a></p>
+  <h4>12.X[title*=""]</h4>
+  <pre class="prettyprint">
+a[title*="明"]{
+	color:#096;
+}  </pre> 
+   <p>加了*号，意味着是模糊匹配，比如上述代码，会匹配title属性为明或明河或明河共影等带有明字的链接属性。</p> 
+   <p><a href="12.html" target="_blank">猛击这里进入这里查看demo</a></p>  
+  <h4>13.X[title^=""]</h4>
+  <pre class="prettyprint">
+a[title^="明"]{
+	color:#096;
+}  </pre> 
+   <p>模糊匹配,与*的作用相反，^起到排除的作用，比如上述代码，会匹配title属性不带有明字的链接属性。</p> 
+   <p><a href="13.html" target="_blank">猛击这里进入这里查看demo</a></p>
+   <h4>14.X[href$=""]</h4>  
+  <pre class="prettyprint">
+a[href$=".png"] {   
+   color: red;   
+}   </pre> 
+   <p>在属性选择器中多一个$符号，用于匹配结尾为特定字符串的元素，比如上述代码匹配的就是href属性值的结尾为.png的链接。</p> 
+   <p><a href="14.html" target="_blank">猛击这里进入这里查看demo</a></p>
+   <h4>15.X[data-*=""]</h4>  
+  <pre class="prettyprint">
+a[data-filetype="image"] {   
+   color: red;   
+}   </pre> 
+   <p>data-filetype这个属性目前用的实在不多，但有些场合非常好用。比如我要匹配所有的数据类型为图片的链接，如果使用X[href$=""]的方式如下：</p> 
+  <pre class="prettyprint">
+a[href$=".jpg"],   
+a[href$=".jpeg"],   
+a[href$=".png"],   
+a[href$=".gif"] {   
+   color: red;   
+}   </pre> 
+   <p>而使用data-filetype，只要：</p> 
+  <pre class="prettyprint">
+a[data-filetype="image"] {   
+   color: red;   
+}    </pre>   
+   <p>当然前提是你给每一个链接加上data-filetype属性。</p> 
+   <p><a href="15.html" target="_blank">猛击这里进入这里查看demo</a></p>  
+   <h4>16.X[foo~=""]</h4>  
+  <pre class="prettyprint">
+ a[data-info~="external"] {   
+   color: red;   
+}   
+  
+a[data-info~="image"] {   
+   border: 1px solid black;   
+}    </pre> 
+   <p>这也是非常少用的选择器，加上~号，有一种情况特别适用，比如你有个data-filetype="external image"属性，这时候我希望分别针对external和image样式控制。</p> 
+  <pre class="prettyprint">
+ a[data-info~="external"] {   
+   color: red;   
+}   
+  
+a[data-info~="image"] {   
+   border: 1px solid black;   
+}    </pre>    
+   <p>上述代码会匹配data-filetype="external"、data-filetype="image"、data-filetype="external image"的a。</p> 
+   <p><a href="16.html" target="_blank">猛击这里进入这里查看demo</a></p> 
+   <h4>17.X:checked</h4>  
+  <pre class="prettyprint">
+input[type=radio]:checked {   
+   border: 1px solid black;   
+}    </pre> 
+   <p>这个伪类选择器只用于匹配带有checked属性的元素，比如radio、checkbox即单选框和多选框。</p> 
+   <p><a href="17.html" target="_blank">猛击这里进入这里查看demo</a></p>     
+   <p>留意demo中是选中单选框后改变样式。</p> 
+   <p>目前这个伪类选择器，IE9下都不支持，非IE浏览器基本上都支持。</p>  
+  <h1>三、除IE8以下外的浏览器支持的css选择器</h1> 
+   <h4>18.X:after</h4>  
+  <pre class="prettyprint">
+.clearfix:after {   
+    content: "";   
+    display: block;   
+    clear: both;   
+    visibility: hidden;   
+    font-size: 0;   
+    height: 0;   
+    }   
+  
+.clearfix {   
+   *display: inline-block;   
+   _height: 1%;   
+}  </pre> 
+   <p>我想上面这段代码，很多朋友都非常熟悉，是清理浮动时常用的hack方法。:after伪类与content结合使用，用于往元素类追加内容。:after伪类还有个妙用：用于产生阴影，<a href="http://net.tutsplus.com/tutorials/html-css-techniques/quick-tip-getting-clever-with-css3-shadows/" target="_blank">点击这里查看</a>。</p> 
+   <h4>19.X:hover</h4>  
+  <pre class="prettyprint">
+div:hover {   
+  background: #e3e3e3;   
+}  </pre> 
+  <p> hover在前面已经介绍过，IE6下只支持a的hover。</p>
+  <p>在原文教程中提到一个东西很有意思，即使用border-bottom: 1px solid black; 要好于text-decoration: underline;，不妨看下下面明河制作的demo。</p>
+  <p><a href="19.html" target="_blank">猛击这里进入这里查看demo</a></p> 
+  <p>从实际的效果来看，使用border-bottom的距离比text-decoration来的合理，但使用border-bottom存在一些风险，比如颜色问题。</p>
+   <h4>20.X:not(selector)</h4>  
+  <pre class="prettyprint">
+div:not(#container) {   
+   color: blue;   
+}  </pre> 
+  <p>否定伪类选择器，这还是比较好理解的，上述将会把非id为container的div的字体颜色设置为蓝色。</p>
+  <p>:not伪类IE8并不支持，IE9已经支持了。</p>
+   <h4>21.X::pseudoElement</h4>  
+  <pre class="prettyprint">
+p::first-line {   
+   font-weight: bold;   
+   font-size: 1.2em;   
+}  
+ </pre> 
+  <p>::伪类，用于给元素的片段添加样式，这如何理解呢？比如你要让一个段落的第一行的文字加粗，那么这个选择器是不二之选。</p>
+  <p><a href="21.html" target="_blank">猛击这里进入这里查看demo</a></p> 
+  <p>除此之外，你还可以给第一个字加上特殊样式，这个应用还是非常常见的</p>
+  <pre class="prettyprint">
+p::first-letter {   
+   float: left;   
+   font-size: 2em;   
+   font-weight: bold;   
+   font-family: cursive;   
+   padding-right: 2px;   
+}  
+ </pre>
+ <p>IE6居然支持！这足以让人惊喜的.....</p>
+ <h1>四、css3 结构性伪类选择器</h1>   
+   <h4>22.X:nth-child(n)</h4>  
+  <pre class="prettyprint">
+li:nth-child(3) {   
+   color: red;   
+}  
+ </pre> 
+  <p>接下来的几个伪类选择器使用上非常类似，功能也比较接近。</p>
+  <p>:nth-child(n)，用于匹配索引值为n的子元素。索引值从1开始。</p>
+  <p><a href="22.html" target="_blank">猛击这里进入这里查看demo</a></p>  
+  <p>X:nth-child()用法实际上有三种变化，demo的用法是最简单的，X:nth-child()更强大的用处在于奇偶匹配，明河不展开讲，有兴趣的请看<a href="http://reference.sitepoint.com/css/understandingnthchildexpressions">《Understanding :nth-child Pseudo-class Expressions》</a>,<a href="http://blog.guitarbean.com/2008/08/css3-nth-child-pseudo-class-selector.html">《CSS3 :nth-child()伪类选择器》</a></p>  
+   <h4>23.X:nth-last-child(n)</h4>  
+  <pre class="prettyprint">
+li:nth-last-child(2) {   
+   color: red;   
+}    
+ </pre> 
+  <p>:nth-child(n)，是从第一个开始算索引，而X:nth-last-child(n)是从最后一个开始算索引。</p>
+  <p><a href="23.html" target="_blank">猛击这里进入这里查看demo</a></p> 
+   <h4>24.X:nth-of-type(n)</h4>  
+  <pre class="prettyprint">
+ul:nth-of-type(3) {   
+   border: 1px solid black;   
+}     
+ </pre> 
+  <p>nth-of-type与nth-child的效果是惊人的相似，想要更多的了解nth-of-type请看<a href="http://www.thebrightlines.com/2010/01/04/alternative-for-nth-of-type-and-nth-child/">《Alternative for :nth-of-type() and :nth-child()》</a>，<a href="http://reference.sitepoint.com/css/pseudoclass-nthoftype">:nth-of-type(N)</a></p>
+  <p><a href="24.html" target="_blank">猛击这里进入这里查看demo</a></p> 
+   <h4>25.X:nth-last-of-type(n)</h4>  
+  <pre class="prettyprint">
+ul:nth-last-of-type(3) {   
+   border: 1px solid black;   
+}     
+ </pre> 
+  <p>:nth-last-child效果相似。</p>
+   <h4>26.X:first-child</h4>  
+  <pre class="prettyprint">
+ul li:first-child {   
+   border-top: none;   
+}     
+ </pre> 
+  <p>匹配子集的第一个元素。IE7就可以支持了，这个伪类还是非常有用的。</p>   
+  <p><a href="26.html" target="_blank">猛击这里进入这里查看demo</a></p>
+   <h4>27.X:last-child</h4>  
+  <pre class="prettyprint">
+ul > li:last-child {   
+   color: green;   
+}      
+ </pre> 
+  <p>与:first-child效果相反</p>   
+  <p><a href="26.html" target="_blank">猛击这里进入这里查看demo</a></p>   
+  <p>留意IE8支持:first-child,但不支持:last-child。</p>
+  <h4>28.X:only-child</h4>
+  <pre class="prettyprint">
+div p:only-child {   
+   color: red;   
+}      
+ </pre>   
+  <p>这个伪类一般用的比较少，比如上述代码匹配的是div下的有且仅有一个的p，也就是说，如果div内有多个p，将不匹配。</p> 
+  <p><a href="28.html" target="_blank">猛击这里进入这里查看demo</a></p>   
+  <h4>29.X:only-of-type</h4>
+  <pre class="prettyprint">
+li:only-of-type {   
+   font-weight: bold;   
+}        
+ </pre>   
+  <p>与:only-child类似。</p>
+  <h4>30.X:first-of-type</h4>
+  <pre class="prettyprint">
+ul:first-of-type{   
+   font-weight: bold;   
+}  
+      
+ </pre>   
+  <p>等价于:nth-of-type(1)，匹配集合元素中的第一个元素。</p>      
+  <h4>五、明河结语</h4>
+  <p>明河翻译这边文章费了不下6个时间，自己的确受益匪浅，如果你有任何疑问，都可以给明河留言。</p>                           
+</div>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+    </script>
+</body>
+</html>

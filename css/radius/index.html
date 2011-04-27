@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>css3圆角Border-radius详解</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>css3圆角Border-radius详解</h2> 
+        <p>demo制作：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。</p>
+        <p>文章链接：<a href="http://www.36ria.com/3087">http://www.36ria.com/3087</a></p>  
+    </div>
+</div>
+<div class="page-960 center">
+	<div class="wrapper clearfix">
+	  <p id="demo-1" class="demo-p">这是第一个圆角示例，兼容 Firefox, Safari/Chrome, Opera, IE9</p>
+        <code>#demo-1{<br />
+border-radius:10px;<br />
+-moz-border-radius: 10px;<br />-webkit-border-radius: 10px;<br />
+}</code>
+	 <p id="demo-2" class="demo-p mar-t-10">这是第二个圆角示例，演示border-bottom-left-radius, border-bottom-right-radius, border-top-left-radius, border-top-right-radius的使用，这里以border-top-left-radius为例，留意左上角的圆角和火狐下的特殊写法</p>	
+     <code>#demo-2{<br />
+border-top-left-radius: 100px 10px;<br />
+-moz-border-radius-topleft: 100px 10px;<br />
+}
+     </code>
+     <p class="mar-t-10">W3C标准圆角写法和Mozilla圆角写法对照</p>
+     <table width="50%" border="0" cellspacing="0" cellpadding="0" class="mar-t-10">
+        <thead>
+          <tr>
+            <td> W3C 的圆角属性  </td>
+            <td> Mozilla （火狐）的圆角属性  </td>
+          </tr>        
+        </thead>
+        <tbody>	
+          <tr>
+            <td> border-radius </td>
+            <td> -moz-border-radius </td>
+          </tr>
+          <tr>
+            <td> border-top-left-radius </td>
+            <td> -moz-border-radius-topleft </td>
+          </tr>
+          <tr>
+            <td> border-top-right-radius </td>
+            <td> -moz-border-radius-topright </td>
+          </tr>
+          <tr>
+            <td> border-bottom-right-radius </td>
+            <td> -moz-border-radius-bottomright </td>
+          </tr>
+          <tr>
+            <td> border-bottom-left-radius </td>
+            <td> -moz-border-radius-bottomleft </td>
+          </tr>
+        </tbody>  
+     </table>
+	 <p id="demo-3" class="mar-t-10"></p>
+     <p>这是第三个示例，演示如何使用圆角，制作一个圆，留意这里宽度、高度和圆角属性值的关系</p>	
+     <code class="mar-t-10">#demo-3{<br />
+height: 70px;<br />
+width: 70px;<br />
+-moz-border-radius: 35px;<br />
+border-radius: 35px;<br />
+background-color:#999;<br />
+}</code>
+    </div>    
+</div>
+</body>
+</html>

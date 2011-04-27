@@ -1,0 +1,404 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>YUI3的css栅格系统解析</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/css/yui3-css-grid.css" rel="stylesheet" type="text/css">
+<style>
+.sub{
+	float:left;
+	width:25%;
+}
+.main{
+	float:left;
+	width:50%;
+}
+.extra{
+	float:left;
+	width:25%;
+}
+.content{
+	background-color:#09F;
+	border:1px solid #06F;
+	padding:20px;
+	margin-right:10px;
+}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>YUI3的css栅格系统解析</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3399 ">http://www.36ria.com/3399 </a></p>    
+    </div>
+</div>
+<div id="main" class="mar-t10">
+  <h1>一、YUI3的css栅格系统与浮动布局的比较</h1>
+  
+  <p>css的布局方案不胜枚举，主流的有以下几种：浮动布局、负外边距布局、绝对/相对定位布局法、表格布局法，而浮动布局是目前应用最广的，但总所周知，浮动布局固然简单，也多了个清理浮动的过程，而且在各浏览器下的表现是存在差异的（IE6存在怪异bug），经常会出现容器溢出的情况,宽度自适应太差等问题，始终困扰着前端人员。</p>
+  <p>你看完这篇文章，可以彻底的抛弃浮动布局！感受一种更为稳定的布局系统，来自YUI的css grid！</p>
+  <h4>以经典的三列布局（总宽度是经典的960px）为例</h4>
+  <h5>浮动布局方式：</h5>
+  <div class="w960 center clearfix">
+  	   <div class="sub">
+       		<div class="content">sub</div>
+       </div>
+  	   <div class="main">
+       	    <div class="content">main</div>
+       </div>
+  	   <div class="extra">
+       		<div class="content">extra</div>
+       </div>                
+  </div>
+  html代码：
+ <pre class="prettyprint">
+  &lt;div class=&quot;w960 center clearfix&quot;&gt;<br>  	   &lt;div class=&quot;sub&quot;&gt;<br>       		&lt;div class=&quot;content&quot;&gt;sub&lt;/div&gt;<br>       &lt;/div&gt;<br>  	   &lt;div class=&quot;main&quot;&gt;<br>       	    &lt;div class=&quot;content&quot;&gt;main&lt;/div&gt;<br>       &lt;/div&gt;<br>  	   &lt;div class=&quot;extra&quot;&gt;<br>       		&lt;div class=&quot;content&quot;&gt;extra&lt;/div&gt;<br>       &lt;/div&gt;                <br>  &lt;/div&gt;
+ </pre>  
+ css代码：
+ <pre class="prettyprint">
+.sub{
+	float:left;
+	width:25%;
+}
+.main{
+	float:left;
+	width:50%;
+}
+.extra{
+	float:left;
+	width:25%;
+}
+.content{
+	background-color:#09F;
+	border:1px solid #06F;
+	padding:20px;
+	margin-right:10px;
+}
+*-----清理浮动---*/
+.clearfix:after{
+content:"."; display:block; height:0; clear:both;
+visibility:hidden;
+}
+*html .clearfix{
+ height:1%;
+}
+*+html .clearfix{
+ height:1%;
+}
+ </pre>
+ 浮动的布局的关键是清理浮动部分
+ <h5>YUI的css grid布局方式：</h5>  
+ <div class="yui3-g w960 center">
+<div class="yui3-u-1-4">
+            <div class="content">sub</div>
+        </div>
+<div class="yui3-u-1-2">
+            <div class="content">main</div>
+        </div>
+<div class="yui3-u-1-4">
+            <div class="content">extra</div>
+    </div>
+  </div> 
+  html代码：
+ <pre class="prettyprint">
+ &lt;div class=&quot;yui3-g w960 center&quot;&gt;<br>        &lt;div class=&quot;yui3-u-1-4&quot;&gt;<br>            &lt;div class=&quot;content&quot;&gt;sub&lt;/div&gt;<br>        &lt;/div&gt;<br>        &lt;div class=&quot;yui3-u-1-2&quot;&gt;<br>            &lt;div class=&quot;content&quot;&gt;main&lt;/div&gt;<br>        &lt;/div&gt;        <br>        &lt;div class=&quot;yui3-u-1-4&quot;&gt;<br>            &lt;div class=&quot;content&quot;&gt;extra&lt;/div&gt;<br>    &lt;/div&gt;<br>  &lt;/div&gt; </pre>  
+ css代码：
+ <pre class="prettyprint">
+.yui3-g {
+    letter-spacing: -0.31em; /* webkit: collapse white-space between units */
+    *letter-spacing: normal; /* reset IE < 8 */
+    word-spacing: -0.43em; /* IE < 8 && gecko: collapse white-space between units */
+}
+.yui3-u-1-2,.yui3-u-1-4{
+    display: inline-block;
+    zoom: 1; *display: inline; /* IE < 8: fake inline-block */
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+}
+.yui3-u-1-4{
+	width:25%;
+}
+.yui3-u-1-2{
+	width:50%;
+}
+ </pre>  
+  <h1>二、YUI3的css栅格系统的原理</h1>
+  <p>YUI3的css栅格系统的核心是<span class="prettyprint"> display: inline-block;</span>的使用，<span class="prettyprint">inline-block</span>这个属性用的不多，主要是由于IE6、IE7不支持（通过hack修正：<span class="prettyprint">zoom: 1; *display: inline;</span>），实际上<span class="prettyprint">inline-block</span>在布局上非常好用，<span class="prettyprint">inline-block</span>结合了内联模型和块状模型的优点，即可设置宽度、高度、边距、外边距的内联元素。关于<span class="prettyprint">inline-block</span>，圆心有一篇颇为详细的介绍文章，请猛击<a href="http://www.planabc.net/2007/03/11/display_inline-block/">《display:inline-block的深入理解》</a>。</p>
+  <p>&nbsp;</p>
+  <h1>三、YUI3的css栅格系统的优越性</h1>
+  <ul>
+  	<li>1.稳定性好，没有浮动布局的各式莫名其妙的的bug。</li>
+    <li>2.兼容性好，支持全部主流的浏览器</li>
+    <li>3.非常容易使用</li>
+    <li>4.无论css代码还是html结构都很简练。</li>
+    <li>5.囊括大部分网页的布局方式，不管是二栏、三栏等。</li>
+    <li>6.优秀的扩展性，其实宽度可以自由设置，只要你需要。</li>
+  </ul>
+  <h1>四、YUI3的css栅格系统的常用布局</h1>
+  <p>&nbsp;</p>
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        <div class="content">1/2</div>
+    </div>
+    <div class="yui3-u-1-2">
+        <div class="content">1/2</div>
+
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-3-4">
+
+        <div class="content">3/4</div>
+    </div>
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-1-3">
+        <div class="content">1/3</div>
+
+    </div>
+    <div class="yui3-u-1-3">
+        <div class="content">1/3</div>
+    </div>
+    <div class="yui3-u-1-3">
+        <div class="content">1/3</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-1-3">
+        <div class="content">1/3</div>
+    </div>
+    <div class="yui3-u-2-3">
+        <div class="content">2/3</div>
+    </div>
+</div>
+<div class="yui3-g">
+
+    <div class="yui3-u-1-5">
+        <div class="content">1/5</div>
+    </div>
+    <div class="yui3-u-2-5">
+        <div class="content">2/5</div>
+    </div>
+    <div class="yui3-u-2-5">
+        <div class="content">2/5</div>
+
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-3-5">
+        <div class="content">3/5</div>
+    </div>
+    <div class="yui3-u-2-5">
+        <div class="content">2/5</div>
+    </div>
+
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-1-6">
+        <div class="content">1/6</div>
+    </div>
+    <div class="yui3-u-1-6">
+        <div class="content">1/6</div>
+    </div>
+    <div class="yui3-u-1-6">
+
+        <div class="content">1/6</div>
+    </div>
+    <div class="yui3-u-1-6">
+        <div class="content">1/6</div>
+    </div>
+    <div class="yui3-u-1-6">
+        <div class="content">1/6</div>
+
+    </div>
+    <div class="yui3-u-1-6">
+        <div class="content">1/6</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-1-6">
+        <div class="content">1/6</div>
+    </div>
+
+    <div class="yui3-u-5-6">
+        <div class="content">5/6</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-1-8">
+        <div class="content">1/8</div>
+    </div>
+    <div class="yui3-u-3-8">
+
+        <div class="content">3/8</div>
+    </div>
+    <div class="yui3-u-3-8">
+        <div class="content">3/8</div>
+    </div>
+    <div class="yui3-u-1-8">
+        <div class="content">1/8</div>
+
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-3-8">
+        <div class="content">3/8</div>
+    </div>
+    <div class="yui3-u-5-8">
+        <div class="content">5/8</div>
+    </div>
+
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-7-8">
+        <div class="content">7/8</div>
+    </div>
+    <div class="yui3-u-1-8">
+        <div class="content">1/8</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+    <div class="yui3-u-1-2">
+        <div class="content">1/2</div>
+    </div>
+    <div class="yui3-u-1-4">
+
+        <div class="content">1/4</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-1-8">
+        <div class="content">1/8</div>
+    </div>
+    <div class="yui3-u-1-2">
+        <div class="content">1/2</div>
+
+    </div>
+    <div class="yui3-u-1-8">
+        <div class="content">1/8</div>
+    </div>
+    <div class="yui3-u-1-4">
+        <div class="content">1/4</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-1-12">
+        <div class="content">1/12</div>
+    </div>
+    <div class="yui3-u-5-12">
+        <div class="content">5/12</div>
+    </div>
+    <div class="yui3-u-5-12">
+
+        <div class="content">5/12</div>
+    </div>
+    <div class="yui3-u-1-12">
+        <div class="content">1/12</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-7-12">
+
+        <div class="content">7/12</div>
+    </div>
+    <div class="yui3-u-5-12">
+        <div class="content">5/12</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-11-12">
+
+        <div class="content">11/12</div>
+    </div>
+    <div class="yui3-u-1-12">
+        <div class="content">1/12</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-1-24">
+
+        <div class="content">1/24</div>
+    </div>
+    <div class="yui3-u-5-24">
+        <div class="content">5/24</div>
+    </div>
+    <div class="yui3-u-7-24">
+        <div class="content">7/24</div>
+
+    </div>
+    <div class="yui3-u-11-24">
+        <div class="content">11/24</div>
+    </div>
+</div>
+
+<div class="yui3-g">
+    <div class="yui3-u-17-24">
+        <div class="content">17/24</div>
+
+    </div>
+    <div class="yui3-u-7-24">
+        <div class="content">7/24</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-19-24">
+        <div class="content">19/24</div>
+    </div>
+
+    <div class="yui3-u-5-24">
+        <div class="content">5/24</div>
+    </div>
+</div>
+<div class="yui3-g">
+    <div class="yui3-u-23-24">
+        <div class="content">23/24</div>
+    </div>
+    <div class="yui3-u-1-24">
+
+        <div class="content">1/24</div>
+    </div>
+</div>
+
+  
+</div>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

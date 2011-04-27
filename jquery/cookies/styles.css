@@ -1,0 +1,89 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+body{
+	/* Setting default text color, background and a font stack */
+	color:#555555;
+	font-size:0.825em;
+	background: #fcfcfc;
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+.section{
+	margin:0 auto 60px;
+	text-align:center;
+	width:600px;
+}
+
+.counter{
+	color:#79CEF1;
+	font-size:180px;
+}
+
+.jq-text{
+	display:none;
+	color:#79CEF1;
+	font-size:80px;
+
+}
+
+p{
+	font-size:11px;
+	padding:0 200px;
+}
+
+form{
+	margin-bottom:15px;
+}
+
+input[type=text]{
+	border:1px solid #BBBBBB;
+	color:#444444;
+	font-family:Arial,Verdana,Helvetica,sans-serif;
+	font-size:14px;
+	letter-spacing:1px;
+	padding:2px 4px;
+}
+
+/* The styles below are only necessary for the styling of the demo page: */
+
+h1{
+	background:#F4F4F4;
+	border-bottom:1px solid #EEEEEE;
+	font-size:20px;
+	font-weight:normal;
+	margin-bottom:15px;
+	padding:15px;
+	text-align:center;
+}
+
+h2 {
+	font-size:12px;
+	font-weight:normal;
+	padding-right:40px;
+	position:relative;
+	right:0;
+	text-align:right;
+	text-transform:uppercase;
+	top:-48px;
+}
+
+a, a:visited {
+	color:#0196e3;
+	text-decoration:none;
+	outline:none;
+}
+
+a:hover{
+	text-decoration:underline;
+}
+
+.clear{
+	clear:both;
+}
+
+h1,h2,p.tutInfo{
+	font-family:"Myriad Pro",Arial,Helvetica,sans-serif;
+}

@@ -1,0 +1,130 @@
+<html>
+<head>
+<title>jQuery Dock from Queness WebBlog</title>
+<script type="text/javascript" src="js/jquery-1.3.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+
+<script>
+
+$(document).ready(function() {
+
+	var top = '-' + $('#slidedown_content .content').css('height');
+	var easing = 'easeOutBounce';
+	
+	$('#slidedown_top').mouseover(function() {
+		$('#slidedown_content').animate({'top' : 0}, {queue:false, duration:1000, easing: easing});
+	});
+	
+	$('#slidedown_bottom').mouseover(function() {
+		$('#slidedown_content').animate({'top' : top}, {queue:false, duration:500, easing: easing});
+	});
+
+});
+
+</script>
+<style>
+body {
+margin:0; 
+padding:0
+}
+
+#slidedown_top {
+height: 70px;
+background-color:#666;
+}
+
+#slidedown_bottom {
+position: absolute;
+width: 100%;
+height:100%;
+background-color:#666;
+}
+
+#slidedown_content {
+position: absolute;
+width: 100%;
+height: 250px;
+top: -205px;
+text-align:center;
+background:url(bg.gif) repeat-x 0 bottom;
+z-index:999;
+} 
+
+#slidedown_content .content {
+margin:0 auto; 
+width:830px;
+height:205px;
+}
+
+/* Styles for content */
+
+#slidedown_content .content .block {
+float:left; 
+width:250px;
+padding:0 4px 0 4px; 
+margin: 0 4px 0 4px;
+
+text-align:left;
+font-family:georgia; 
+font-size:11px; 
+color:#ccc; 
+}
+
+#slidedown_content .footer {
+height:40px;
+}
+
+#slidedown_content .content li {
+padding:0; 
+margin:4px 0
+}
+
+.clear {clear:both}
+</style>
+</head>
+<body>
+
+
+<div id="slidedown_top"></div> <!-- slidedown_top -->
+<div id="slidedown_content">
+
+	<div class="content">
+		<div class="block">
+			<img src="footerAuthor.gif"/><br/>
+			<p>A passionate web designer, developer who keens to contribute to web development industry.</p> 
+			<p>Feel free to say hi to me, or follow me on twitter. </p>
+		</div>
+		<div class="block">
+			<img src="footerTwitter.gif"/><br/>
+			<ul>
+				<li>I have a new inspiration using easing method, stay tuned!</li>
+				<li>Dock menu with jQuery! pretty cool huh...</li>
+			</ul>
+		</div>
+		<div class="block">
+			<img src="footerPartner.gif"/><br/>
+			<ul>
+				<li>Smashing Magazine</li>
+				<li>Vandelay Design</li>
+				<li>Sixrevision</li>
+				<li>CSS Mania</li>
+				<li>Web Designer Depot</li>
+				<li>Queness</li>
+			</ul>		
+		</div>
+		<div class="clear"></div>
+	</div> <!-- content -->
+	
+	<div class="footer">
+	</div> <!-- footer -->
+	
+</div> <!-- slidedown_content -->
+
+<div id="slidedown_bottom">
+<!-- Website Content Start Here -->
+test
+</div>
+
+</body>
+</head>
+</html>

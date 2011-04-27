@@ -1,0 +1,143 @@
+<html>
+
+<head>
+<title>kissy实例—ajax调用Google Calendar</title>
+<link href="http://www.36ria.com/style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="http://www.36ria.com/style/css/demo.css" rel="stylesheet" type="text/css" />
+<script src="http://assets.taobaocdn.com/s/kissy/1.1.6/kissy-min.js"></script>
+</head>
+
+<script  type="text/javascript">
+
+var RSSRequestObject = false; // XMLHttpRequest Object
+var Backend = 'eventrss.php'; // Backend url
+window.setInterval("update_timer()", 1200000); // update the data every 20 mins
+
+
+if (window.XMLHttpRequest) // try to create XMLHttpRequest
+	RSSRequestObject = new XMLHttpRequest();
+
+if (window.ActiveXObject)	// if ActiveXObject use the Microsoft.XMLHTTP
+	RSSRequestObject = new ActiveXObject("Microsoft.XMLHTTP");
+
+
+/*
+* onreadystatechange function
+*/
+function ReqChange() {
+
+	// If data received correctly
+	if (RSSRequestObject.readyState==4) {
+	
+		// if data is valid
+		if (RSSRequestObject.responseText.indexOf('invalid') == -1) 
+		{ 	
+			// Parsing Feeds
+			var node = RSSRequestObject.responseXML.documentElement; 
+			
+			// Get the calendar title
+			var title = node.getElementsByTagName('title').item(0).firstChild.data;
+			
+			content = '<div class="channeltitle">'+title+'</div>';
+		
+			// Browse events
+			var items = node.getElementsByTagName('entry');
+			if (items.length == 0) {
+				content += '<ul><li><div class=error>No events</div></li></ul>';
+			} else {
+				content += '<ul>';
+				for (var n=items.length-1; n >= 0; n--)
+				{
+					var itemTitle = items[n].getElementsByTagName('title').item(0).firstChild.data;
+					var Summary = items[n].getElementsByTagName('summary').item(0).firstChild.data;
+					var itemLink = items[n].getElementsByTagName('id').item(0).firstChild.data;
+					try 
+					{ 
+						var itemPubDate = '<font color=gray>['+items[n].getElementsByTagName('published').item(0).firstChild.data+'] ';
+					} 
+					catch (e) 
+					{ 
+						var itemPubDate = '';
+					}
+					
+				
+					content += '<li>'+itemPubDate+'</font><a href="'+itemLink+'">'+itemTitle+'</a></li>';
+				}
+				
+	
+				content += '</ul>';
+			}
+			// Display the result
+			document.getElementById("ajaxreader").innerHTML = content;
+
+			// Tell the reader the everything is done
+			document.getElementById("status").innerHTML = "Done.";
+			
+		}
+		else {
+			// Tell the reader that there was error requesting data
+			document.getElementById("status").innerHTML = "<div class=error>Error requesting data.<div>";
+		}
+		
+		HideShow('status');
+	}
+	
+}
+
+/**
+ * 发送ajax请求
+ */
+function RSSRequest() {
+
+	// change the status to requesting data
+	HideShow('status');
+	document.getElementById("status").innerHTML = "请求数据中...";
+	
+	// Prepare the request
+	RSSRequestObject.open("GET", Backend , true);
+	// Set the onreadystatechange function
+	RSSRequestObject.onreadystatechange = ReqChange;
+	// Send
+	RSSRequestObject.send(null); 
+}
+
+/*
+* Timer
+*/
+function update_timer() {
+	RSSRequest();
+}
+
+
+function HideShow(id){
+	var el = GetObject(id);
+	if(el.style.display=="none")
+	el.style.display='';
+	else
+	el.style.display='none';
+}
+
+function GetObject(id){
+	var el = document.getElementById(id);
+	return(el);
+}
+
+</script>
+
+<body>
+<div id="header" class="clearfix">
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div>
+  <div class="l mar-t5">
+        <h2>kissy实例—ajax调用Google Calendar</h2>
+        <p>作者：明河共影，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p>
+        <p>文章链接：<a href=" http://www.36ria.com/3746" target="_blank">http://www.36ria.com/3787</a></p>
+    </div>
+</div>
+<h2>Google Calendar Events - RSS Reader</h2>
+<div id="status" style="display:none"></div>
+<div id="ajaxreader">
+
+</div>
+</body>
+
+</html>

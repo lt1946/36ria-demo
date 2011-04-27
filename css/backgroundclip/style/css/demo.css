@@ -1,0 +1,42 @@
+body{background-color:#FAFDEF;line-height:24px;}
+#header{
+	height:100px;line-height:32px;
+	padding:10px;
+	background:url(../images/header-bg.png) 0px 0px repeat-x;
+	font-size:14px;color:#FFC;
+}
+#logo{
+	margin-right:10px;
+}
+#header  h2{
+	font-size:16px;
+	color:#FFF;
+	margin:0px !important;
+	border:none !important;
+
+}
+#header a{
+	color:#3CF;
+	text-decoration:underline;
+}
+#header a:hover{
+	color:#CCC !important;
+}	
+
+h2{
+	margin:10px 0px;
+}
+code{
+	font-size:14px;
+	display:block;
+	background:#F6FCE2;
+	border:1px dashed #CCC;
+	padding:10px;margin:10px;
+	color:#666;
+}
+#page{
+	padding:20px;font-size:14px;color:#333;line-height:28px;
+}
+pre.prettyprint{border:1px dashed #CCC !important;background-color:#E9F4FB;margin:10px 0px;padding:10px !important;line-height:18px !important;}
+h4{font-size:16px;color:#609574;padding:5px 0px;border-bottom:2px dashed #609574;margin-bottom:10px;}
+h2{font-size:25px;color:#C58080;font-family:ºÚÌå;border-bottom:1px solid #E1E1E1; }

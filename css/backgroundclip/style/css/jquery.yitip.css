@@ -1,0 +1,112 @@
+/*=============jquery.yitip的样式=============*/
+.yitip{
+	position:absolute;	
+	background-color:white;
+	/*圆角*/
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	display:none;
+}
+.yitip .yitip-content{
+	padding:6px 12px;
+	font-size:12px;white-space:nowrap;text-align:center;text-shadow:0 0 1px white;color:#5b5316;	
+}
+.yitip .yitip-trigon,.yitip .yitip-trigon-border{
+	position:absolute;
+	border:6px solid;
+	width:0px;height:0px;
+	overflow:hidden;
+}
+.yitip .yitip-trigon-border{border-width:7px !important;}
+/* =========不同位置下的三角方向 =========*/
+/*-------上中-------*/
+.topMiddle .yitip-trigon,.topMiddle .yitip-trigon-border{
+	border-style:solid dashed dashed dashed;
+	border-bottom-color:transparent !important;border-left-color:transparent !important;border-right-color:transparent !important;
+	bottom:-12px;
+	left:50%;margin-left:-6px;	
+}
+.topMiddle .yitip-trigon-border{
+	bottom:-14px;margin-left:-7px;
+}
+/*-------下中-------*/
+.bottomMiddle .yitip-trigon,.bottomMiddle .yitip-trigon-border{
+	border-style:dashed dashed solid dashed;
+	border-top-color:transparent !important;border-left-color:transparent !important;border-right-color:transparent !important;
+	top:-12px;
+	left:50%;margin-left:-6px;	
+}
+.bottomMiddle .yitip-trigon-border{
+	top:-14px;margin-left:-7px;
+}
+/*-------左中-------*/
+.leftMiddle .yitip-trigon,.leftMiddle .yitip-trigon-border{
+	border-style:dashed dashed dashed solid;
+	border-top-color:transparent !important;border-right-color:transparent !important;border-bottom-color:transparent !important;
+	top:50%;margin-top:-6px;
+	right:-12px;	
+}
+.leftMiddle .yitip-trigon-border{
+	right:-14px;margin-top:-7px;
+}
+/*-------右中-------*/
+.rightMiddle .yitip-trigon,.rightMiddle .yitip-trigon-border{
+	border-style:dashed solid dashed dashed;
+	border-top-color:transparent !important;border-left-color:transparent !important;border-bottom-color:transparent !important;
+	top:50%;margin-top:-6px;
+	left:-12px;	
+}
+.rightMiddle .yitip-trigon-border{
+	left:-14px;margin-top:-7px;
+}
+/* =========不同颜色的模板========= */
+/*-------黄色-------*/
+.yitip.yellow{
+	background-color:#f9f2ba;
+	border:1px solid #e9d315;
+	color:#5b5316;
+}
+.yitip.yellow .yitip-trigon{ border-color:#f9f2ba;}
+.yitip.yellow .yitip-trigon-border{ border-color:#e9d315;}
+/*-------蓝色-------*/
+.yitip.blue{
+	background-color:#d9f1fb;
+	border:1px solid #7fcdee;
+	color:#1b475a;
+}
+.yitip.blue .yitip-trigon{ border-color:#d9f1fb;}
+.yitip.blue .yitip-trigon-border{ border-color:#7fcdee;}
+/*-------绿色-------*/
+.yitip.green{
+	background-color:#f2fdf1;
+	border:1px solid #b6e184;
+	color:#558221;
+}
+.yitip.green .yitip-trigon{ border-color:#f2fdf1;}
+.yitip.green .yitip-trigon-border{ border-color:#b6e184;}
+/*-------红色-------*/
+.yitip.red{
+	background-color:#bb3b1d;
+	border:1px solid #8f2a0f;
+	color:#fcfcfc;
+}
+.yitip.red .yitip-trigon{ border-color:#bb3b1d1;}
+.yitip.red .yitip-trigon-border{ border-color:#8f2a0f;}
+/*-------黑色-------*/
+.yitip.black{
+	background-color:#333;
+	border:1px solid #111;
+	color:#fcfcfc;
+}
+.yitip.black .yitip-trigon{ border-color:#333;}
+.yitip.black .yitip-trigon-border{ border-color:#111;}
+/*-------白色-------*/
+.yitip.white{
+	background-color:white;
+	border:1px solid #DDDDDD;
+	color:#555555;
+}
+.yitip.white .yitip-trigon{ border-color:white;}
+.yitip.white .yitip-trigon-border{ border-color:#ddd;}
+

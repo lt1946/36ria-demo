@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自定义事件（事件高级篇）—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>自定义事件（事件高级篇）—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href=" http://www.36ria.com/4192"> http://www.36ria.com/4192</a></p>
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+    <div id="demo1"></div>
+</div>
+<script src="http://a.tbcdn.cn/s/kissy/1.1.6/kissy-min.js"></script>
+<script src="day-14-steps.js"></script>
+<script>
+    var S = KISSY,Event = S.Event,DOM = S.DOM,
+        //实例化组件
+        steps = new S.Steps('#demo1');
+    //监听组件运行后事件
+    steps.on('render',function(ev){
+        S.log('组件已经运行！' + '作者名称：' + ev.author);
+    });
+    //监听颜色改变事件
+    steps.on('afterColorChange',function(ev){
+        S.log('颜色已经改变！' + '新的颜色：' + ev.newVal);
+    });
+    //运行组件
+    steps.render();
+    //改变颜色
+    steps.set('color','green');
+</script>
+
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify-min.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="yijs/jquery-1.3.1.min.js"></script>
+<script type="text/javascript" src="yijs/ImagesView.js"></script>
+<link href="css/imagesView.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+	$(function(){
+		var ImagesView = new yijs.ImagesView({applyTo:'#images',
+											 width:960,
+											 height:240});
+		ImagesView.render();
+	})
+</script>
+</head>
+
+<body>
+<div id="images">
+	<IMG src="images/02.jpg" largeImageSrc="images/2.jpg" title="一个海岛" text="美景如画的海景|天蓝海蓝" pic="2">
+    <IMG src="images/01.jpg" largeImageSrc="images/1.jpg" title="一片麦穗" text="春华秋实" pic="1">
+    <IMG src="images/03.jpg" largeImageSrc="images/3.jpg" title="一树绿叶" text="郁郁葱葱的生命" pic="3">
+    <IMG src="images/04.jpg" largeImageSrc="images/4.jpg" title="一棵大树" text="孤独的一棵老树|等谁呢？" pic="4">
+</div>
+</body>
+</html>

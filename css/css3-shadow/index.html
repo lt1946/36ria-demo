@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:1="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>css3实战—制作照片卷曲阴影效果</title>
+<link href="http://www.36ria.com/style/css/doc.css" type="text/css" rel="stylesheet" />
+<style>
+.photo-box{
+    position: relative;
+    background: #ffffff;
+    border:1px solid #cccccc;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 60px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
+    width:640px;
+    height:200px;
+}
+.photo-box:after {
+    z-index: 1;
+    position: absolute;
+    background: transparent;
+    width: 70%;
+    height: 55%;
+    content: '';
+    right: 15px;
+    bottom: 22px;
+    transform: skew(15deg) rotate(6deg);
+    -webkit-transform: skew(15deg) rotate(6deg);
+    -moz-transform: skew(15deg) rotate(6deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.photo-box:before {
+    z-index: 2;
+    position: absolute;
+    background: transparent;
+    width: 70%;
+    height: 55%;
+    content: '';
+    left: 15px;
+    bottom: 22px;
+    transform: skew(-15deg) rotate(-6deg);
+    -webkit-transform: skew(-15deg) rotate(-6deg);
+    -moz-transform: skew(-15deg) rotate(-6deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.photo-box img{
+    display:block;
+    position:relative;
+    z-index:3;
+}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>css3实战—制作照片卷曲阴影效果</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3964">http://www.36ria.com/3964</a></p>
+    </div>
+</div>
+<div id="main" style="margin-top:20px;" class="w950 mar-t10">
+    <div class="photo-box">
+        <img src="test.png" />
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery中的ajax方面的方法所触发的完整事件流演示</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>jquery中的ajax方面的方法所触发的完整事件流演示</h2> 
+        <p>demo制作：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。</p>
+        <p>文章链接：<a href="http://www.36ria.com/2882">http://www.36ria.com/2882</a></p>  
+    </div>
+</div>
+<div class="page-960 center">
+	<div class="wrapper clearfix">
+		<p><input type="button" value="成功的ajax请求" id="getSuccessData" />&nbsp;&nbsp;&nbsp;<input type="button" value="失败的ajax请求" id="getErrorData" /></p>
+        <div id="log" class="mar-t-10">
+        </div>
+        
+    </div>    
+</div>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	// 绑定ajax全局事件
+	$(document).ajaxStart(onStart)
+		       .ajaxStop(onStop)
+		       .ajaxSend(onSend)
+		       .ajaxComplete(onComplete)
+		       .ajaxSuccess(onSuccess)
+		       .ajaxError(onError);
+	
+	function onStart(event) {
+		logEvent(event);
+	}
+	function onStop(event) {
+		logEvent(event);
+	}
+	function onSend(event, xhr, settings) {
+		logEvent(event, xhr, settings);
+	}
+	function onComplete(event, xhr, settings) {
+		logEvent(event, xhr, settings);
+	}
+	function onSuccess(event, xhr, settings) {
+		logEvent(event, xhr, settings);
+	}
+	function onError(event, xhr, settings, err) {
+		logEvent(event, xhr, settings, err);
+	}
+	
+	// 打印事件
+	function logEvent(event, xhr, settings, err) {
+		var s = '事件名（event）：'; 
+		s += event.type && event.type+"（全局）" || event;
+		//状态码
+		if (xhr && xhr.readyState > 1) s += '；  状态码（statusCode）： ' + xhr.status;
+		//数据源路径
+		if (settings) s += '；  数据源路径（url）： ' + settings.url;
+		//错误信息
+		if (err) s += '；  错误（error）： ' + err;
+		// 向面板添加新的消息
+		$('#log').append('<div>'+s+'</div>');
+	}
+		
+	//成功获取获取数据
+	$("#getSuccessData").click(function(){
+		$("#log").html("");
+		$.ajax({
+		   type: "get",
+		   url: "data.xml",
+		   beforeSend : function(){
+			   logEvent("beforeSend");
+		   },
+		   success : function(data){
+			   logEvent("success");
+		   },
+		   complete : function(event){
+		       logEvent("complete");
+		   }
+		});	
+	})
+	
+	$("#getErrorData").click(function(){
+		$("#log").html("");
+		$.ajax({
+		   type: "get",
+		   url: "error.xml",
+		   beforeSend : function(){
+			   logEvent("beforeSend");
+		   },
+		   success : function(data){
+				logEvent("success");
+		   },
+		   complete : function(){
+		   		logEvent("complete");
+		   }
+		});		
+	}) 
+})
+</script>
+</body>
+</html>

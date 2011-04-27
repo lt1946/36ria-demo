@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第七天anim动画详解（上篇）—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<style>
+.demo-div{background-color:#0CF;border:1px solid #06F;padding:10px;width:100px;height:100px;}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第七天anim动画详解（上篇）—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href=" http://www.36ria.com/3302"> http://www.36ria.com/3302</a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+<h4>拆合菜单</h4>
+    <ul id="menu" class="mar-t-10">	
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=1" onclick="return false;">jquery</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=7" target="_blank">jquery插件</a></li>
+                <li><a href="http://www.36ria.com/?cat=6" target="_blank">jquery教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=105" target="_blank">jquery与ajax</a></li>                            
+            </ul>
+        </li>
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=11" onclick="return false;">flex</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=101" target="_blank">flex实例</a></li>
+                <li><a href="http://www.36ria.com/?cat=113" target="_blank">flex教程</a></li>                          
+            </ul>                            
+        </li> 
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=3" onclick="return false;">javascript</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=116" target="_blank">javascript资源</a></li>
+                <li><a href="http://www.36ria.com/?cat=4" target="_blank">javascript教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=9" target="_blank">浏览器</a></li>                            
+            </ul>                             
+        </li>                                                                                                                       
+    </ul>
+	拆合菜单的html代码如下（做了简化处理）：
+    <pre class="prettyprint">
+    &lt;ul id=&quot;menu&quot; class=&quot;mar-t-10&quot;&gt;	<br />        &lt;li class=&quot;menu-item&quot;&gt;<br />            &lt;div&gt;&lt;a href=&quot;http://www.36ria.com/?cat=1&quot; onclick=&quot;return false;&quot;&gt;jquery&lt;/a&gt;&lt;/div&gt;<br />            &lt;ul&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=7&quot; target=&quot;_blank&quot;&gt;jquery插件&lt;/a&gt;&lt;/li&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=6&quot; target=&quot;_blank&quot;&gt;jquery教程&lt;/a&gt;&lt;/li&gt;<br />                &lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=105&quot; target=&quot;_blank&quot;&gt;jquery与ajax&lt;/a&gt;&lt;/li&gt;                            <br />            &lt;/ul&gt;<br />        &lt;/li&gt;<br />    &lt;/ul&gt;    </pre> 
+在上一篇的教程中，明河曾说到使用node模块来实现拆合菜单的交互，不知道读者朋友有没有尝试过？现在来看明河用node实现的完整代码：
+    <pre class="prettyprint">
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM;
+		//获取菜单元素
+		var $menu = S.one('#menu');
+		//TODO:给变量加$，是明河写jquery时保留下的习惯，用加$的变量表示待操作的元素，在kissy中只有方法返回的是Node或NodeList实例（比如one、all）时，才加$前缀
+		
+		//子菜单
+		var $childrenMenus = S.all('#menu ul');
+		//隐藏所有子菜单
+		$childrenMenus.hide();
+		var $menuItemHeader = S.all("#menu div");
+		$menuItemHeader.on('click',function(ev){
+			//隐藏所有子菜单
+			$childrenMenus.hide();
+			//给子菜单标题，删除箭头样式
+			S.all('#menu .arrow-down').removeClass('arrow-down');			
+			var $menu = S.one(ev.target).next();
+			var $arrow = S.one(ev.target).children();
+			var display = $menu.css('display');
+			//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方向
+			if(display == 'none'){
+				$menu.show();
+				$arrow.addClass('arrow-down');
+			}else{
+				$menu.hide();
+				$arrow.removeClass('arrow-down');
+			}			
+			return false;		
+		})																															
+	});	
+})(KISSY);
+ </pre>
+ <p>（上述代码依旧不够优雅，但可读性还行。再日后的教程明河会讲到如何写出优雅的kissy代码。）</p> 
+  <p>上述脚本明河不再做过多的解释，不理解的可以看下上一篇的教程。明河完成的拆合菜单效果还是过于乏味，今天讲解下如何在交互中引入动画效果，即kissy的anim模块的应用。</p>
+  <h4>一、什么是anim模块？</h4>
+  anim模块是kissy的动画模块，共有三个子模块：
+  <ul>
+    <li> <a href="http://kissyteam.github.com/kissy/docs/anim/anim.html">anim</a>：  动画基础模块；</li>
+    <li> <a href="http://kissyteam.github.com/kissy/docs/anim/anim-easing.html">anim-easing</a>：文档上的解释是"  提供 easeIn/Out, elasticIn/Out, backIn/Out, bounceIn/Out 等平滑函数  "，明河觉得这更像描述，比较准确的应该称之为缓动模块更恰当些；</li>
+    <li> <a href="http://kissyteam.github.com/kissy/docs/anim/anim-node-plugin.html">anim-node-plugin</a>：文档上的解释是"  将动画方法耦合到 Node/NodeList 中  "，简单点理解就是让one、all返回的Node实例支持动画函数。</li>  	
+  </ul>
+  <p>&nbsp;</p>
+  <h4>二、anim子模块</h4>
+  <p>anim子模块即  <em>Anim</em>类，共有五个参数，二个方法。参数还是比较多的，但并不复杂，五个参数依次是：动画元素、动画属性、动画时长、缓动函数、动画结束后的回调函数。</p>
+  <p>还是来看个具体的例子：</p>
+  <p><input type="button" value="点此改变下面层的宽度" id="demo-1" /></p>
+  <div class="demo-div" id="demo-1-div"></div>
+<pre class="prettyprint">
+Event.on('#demo-1','click',function(evt){
+    //当第三参数即动画时长越小时，动画速度越快
+    var anim = new S.Anim('#demo-1-div','width:200px',0.5);
+    anim.run();
+    //TODO:在实例化S.Anim后，run方法是必不可少的
+})
+ </pre>  
+  <p>S.Anim只有前二个参数是必须的，第三个参数为动画时长，默认为1。</p>
+  <p>留意：在实例化S.Anim后，run方法是必不可少的。</p>
+  <p><input type="button" value="点此改变下面层的宽度和高度" id="demo-2" /></p>
+  <div class="demo-div" id="demo-2-div"></div> 
+<pre class="prettyprint">
+Event.on('#demo-2','click',function(evt){
+    //留意第二个参数与demo1中的差异
+    var anim = new S.Anim('#demo-2-div',{'width':'200px','height':'50px'},0.5);
+    anim.run();
+})	
+ </pre>   
+ <p>这个例子演示了第二个参数使用Object做参数传参的情况，参数中的值中的px单位是必不可少的。明河推荐使用这种传第二参数的方式。</p>
+ <p><input type="button" value="使用缓动效果" id="demo-3" /></p>
+ <div class="demo-div" id="demo-3-div"></div>  
+<pre class="prettyprint">
+Event.on('#demo-3','click',function(evt){
+    //留意第四个参数
+    var anim = new S.Anim('#demo-3-div',{'width':'200px','height':'50px'},1,S.Easing.bounceOut);
+    anim.run();
+})	
+ </pre> 
+ <p>从demo中可以看到，给动画加上缓动效果后，动画的趣味性增强不少。kissy内置了大部分常用的动画缓动效果，包括easeIn、easeOut、easeBoth、easeInStrong、easeOutStrong、easeBothStrong、elasticIn、elasticOut、elasticBoth、backIn、backOut、backBoth、bounceIn、bounceOut、bounceBoth，读者可以自行修改代码尝试不同的动画缓动效果。 </p>
+ <p><input type="button" value="层的宽度先到200px再到50px" id="demo-4" /></p>
+ <div class="demo-div" id="demo-4-div"></div>
+<pre class="prettyprint">
+Event.on('#demo-4','click',function(evt){
+    //留意第五个参数
+    var anim = new S.Anim('#demo-4-div',{'width':'200px'},1,S.Easing.easeNone,function(){
+        var anim2 = new S.Anim('#demo-4-div',{'width':'50px'},1);
+        anim2.run();
+    });
+    anim.run();
+})	
+ </pre>  
+ 这里不得不提下其不够人性化的地方，当我只需要回调函数而不需要缓动效果时，第四个参数（缓动）也必须设置（设置为S.Easing.easeNone）。
+ <p>demo中调用了二个动画。</p>
+ <p><input type="button" value="运行动画" id="demo-5" /><input type="button" value="终止动画" id="demo-6" /><input type="button" value="终止动画，并跳到最后一帧" id="demo-7" /></p>
+ <div class="demo-div" id="demo-5-div"></div>
+<pre class="prettyprint">
+var anim = new S.Anim('#demo-5-div',{'width':'400px'},3,S.Easing.bounceOut);
+Event.on('#demo-5','click',function(evt){
+    anim.run();
+})
+Event.on('#demo-6','click',function(evt){
+    anim.stop();
+})
+Event.on('#demo-7','click',function(evt){
+    anim.stop(true);
+})
+ </pre> 
+ 体会stop方法有无参数的区别。 
+ <h4>三、明河结语</h4>
+ kissy的动画模块明河基本上已经讲解完毕呢。那如何在拆合菜单中加入动画呢？读者可自行试验下，明河将在下一篇的教程中贴出代码，同时再在下一篇教程中讲解anim的第三个子模块anim-node-plugin。
+</div>
+<script src="kissy/build/seed-min.js"></script>
+<script>
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM;
+		//获取菜单元素
+		var $menu = S.one('#menu');
+		//TODO:给变量加$，是明河写jquery时保留下的习惯，用加$的变量表示待操作的元素，在kissy中只有方法返回的是Node或NodeList实例（比如one、all）时，才加$前缀
+		
+		//子菜单
+		var $childrenMenus = S.all('#menu ul');
+		//隐藏所有子菜单
+		$childrenMenus.hide();
+		var $menuItemHeader = S.all("#menu div");
+		$menuItemHeader.on('click',function(ev){
+			//隐藏所有子菜单
+			$childrenMenus.hide();
+			//给子菜单标题，删除箭头样式
+			S.all('#menu .arrow-down').removeClass('arrow-down');			
+			var $menu = S.one(ev.target).next();
+			var $arrow = S.one(ev.target).children();
+			var display = $menu.css('display');
+			//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方向
+			if(display == 'none'){
+				$menu.show();
+				$arrow.addClass('arrow-down');
+			}else{
+				$menu.hide();
+				$arrow.removeClass('arrow-down');
+			}			
+			return false;		
+		})
+		
+		Event.on('#demo-1','click',function(evt){
+			//当第三参数即动画时长越小时，动画速度越快
+			var anim = new S.Anim('#demo-1-div','width:200px',0.5);
+			anim.run();
+			//TODO:在实例化S.Anim后，run方法是必不可少的
+		})
+		Event.on('#demo-2','click',function(evt){
+			//留意第二个参数与demo1中的差异
+			var anim = new S.Anim('#demo-2-div',{'width':'200px','height':'50px'},0.5);
+			anim.run();
+		})
+		Event.on('#demo-3','click',function(evt){
+			//留意第四个参数
+			var anim = new S.Anim('#demo-3-div',{'width':'200px','height':'50px'},1,S.Easing.bounceOut);
+			anim.run();
+		})
+		Event.on('#demo-4','click',function(evt){
+			//留意第五个参数
+			var anim = new S.Anim('#demo-4-div',{'width':'200px'},1,S.Easing.easeNone,function(){
+				var anim2 = new S.Anim('#demo-4-div',{'width':'50px'},1);
+				anim2.run();
+			});
+			anim.run();
+		})
+		
+		var anim = new S.Anim('#demo-5-div',{'width':'400px'},3,S.Easing.bounceOut);
+		Event.on('#demo-5','click',function(evt){
+			anim.run();
+		})
+		Event.on('#demo-6','click',function(evt){
+			anim.stop();
+		})
+		Event.on('#demo-7','click',function(evt){
+			anim.stop(true);
+		})																																																	
+	});	
+})(KISSY);
+</script>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

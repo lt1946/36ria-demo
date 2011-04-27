@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.verticalTab - 垂直选项卡</title>
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../js/jquery.verticalTab.js"></script>
+<link href="../style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/36ria.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	var VT = $("#ria-home").verticalTab({titlesApplyTo:"#ria-home-titles",
+	                         contentsApplyTo : "#ria-home-contents",
+							 currentTitleCls : "ria-home-current-title",
+							 animateType : "fade"})
+						   .verticalTab("api");	
+	//添加预加载图片
+	var loading = '<div class="loading"><img src="images/loading.gif" /></div>';					   
+	VT.$contents.html(loading);
+	//加载默认索引值的选项卡内容
+	var defaultShow = VT.defaultShow;
+	var $d = VT.$contents.eq(defaultShow);	
+	var url = "data/"+defaultShow+".html";
+	loadContent($d,url);						   
+	//改变选项卡内容后触发				   
+	VT.addEventListener("afterChange",function(e){
+		var $current = VT.$contents.eq(e.currentIndex);
+		var url = "data/"+e.currentIndex+".html";
+		loadContent($current,url);
+		
+	});
+	
+	function loadContent($obj,url){
+		var $current = $obj;
+		//判断是否已经加载过了
+		if(!$current.data("aleadyLoad") || $current.data("aleadyLoad") == null){
+			$.get(url,function(data){
+				$current.children().fadeOut("slow").end().html(data);
+				$current.data("aleadyLoad",true);
+			})		
+		}	
+	}
+	
+
+				  
+})
+</script>
+</head>
+
+<body>
+<h2 id="header">
+<p>$.verticalTab - 垂直选项卡</p>
+<p>ajax获取选项卡内容</p>
+作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。
+</h2>
+                        <div class="mar-t-10 clearfix" id="ria-home">
+                        	<div class="l" id="ria-home-titles">
+                                <ul>
+                                    <li>
+                                        相关文章
+                                    </li> 
+                                    <li>
+                                        最新文章
+                                    </li>
+                                    <li>
+                                        最热文章
+                                    </li>
+                                    <li class="bor-b-no">
+                                        随机文章
+                                    </li>                                                                                                
+                                </ul>                            
+                            </div>
+                            <div class="l" id="ria-home-contents">
+                                <ul>
+                                    <li>
+                                                                    
+                                    </li>     
+                                    <li>
+         
+                                    </li>
+                                    <li>
+
+                                    </li>
+                                    <li>
+  
+                                    </li>                                                                                                     
+                                </ul>                            
+                            </div>
+                        </div> 
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<title>AJBridge Store Test Runner</title>
+		<!-- include jasmine  -->
+		<link rel="stylesheet" href="../../../tools/jasmine/jasmine.css">
+		<script src="../../../tools/jasmine/jasmine.js"></script>
+		<script src="../../../tools/jasmine/jasmine-html.js"></script>
+		
+		<!-- basic -->
+        <script src="http://a.tbcdn.cn/s/kissy/1.1.6/kissy-min.js"  type="text/javascript"></script>
+		<script src="http://localhost/demo/kissy1.1.7/build/flash/flash-pkg.js"></script>
+		
+		<!-- ajbridge -->
+		<script src="../../ajbridge/ajbridge.js"></script>
+		
+		<!-- comp... -->
+		<script src="../store.js"></script>
+		<script src="store-spec.js"></script>
+		
+	</head>
+	<body>
+		<script>
+		    jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+		    jasmine.getEnv().execute();
+		</script>
+		
+		<h2>FC_ConfigurableStore:</h2>
+		<div id="FC_ConfigurableStore">
+		    <a href="http://www.adobe.com/go/getflashplayer">
+		        <img src="../../assets/get_flash_player.gif" alt="Get Adobe Flash player"/>
+		    </a>
+		</div>
+		
+		<h2>FC_UnconfigurableStore:</h2>
+		<div id="FC_UnconfigurableStore">
+		    <a href="http://www.adobe.com/go/getflashplayer">
+		        <img src="../../assets/get_flash_player.gif" alt="Get Adobe Flash player"/>
+		    </a>
+		</div>
+		<p>application window size is at least 215 x 138 pixels</p>
+		
+	</body>
+</html>

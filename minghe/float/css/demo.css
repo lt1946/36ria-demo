@@ -1,0 +1,118 @@
+#header,#footer{
+	background-color:#ECF4FC;
+	border-bottom:1px solid #A0AFC3;
+	margin:0px;
+	margin-bottom:10px;
+	padding:20px;
+	width:100%;
+	line-height:24px;
+}	
+#footer{
+	margin:0px;
+	border-top:1px solid #A0AFC3;
+	border-bottom:none;
+}
+#demo_list{
+	margin:20px;
+}
+#demo_list li{
+	height:40px;
+	font-size:16px;
+}
+#page{
+	height:1000px;
+	width:960px;
+	margin:0px auto;
+	border:1px solid #999;
+	background-color:#CCC;
+	
+}
+.float-box{border:1px solid #FF9;background-color:#FFC;width:140px;height:100px;padding:10px;}
+#to-right,#to-left{
+	background-color:#29567D;
+	width:27px;height:65px;
+	color:#FFF;font-size:14px;font-weight:bold;text-align:center;
+	padding-top:20px;
+	cursor:pointer;
+}
+
+.add-rss-to,add-collect-to{
+	overflow:hidden;	
+}
+.add-rss-to .title,.add-collect-to .title{
+	background-color:#29567D;
+	width:27px;height:65px;
+	color:#FFF;font-size:14px;font-weight:bold;text-align:center;
+	padding-top:20px;
+	cursor:pointer;
+}
+.add-collect-to .title{
+	float:right;
+}
+.btn_lists{
+	border:1px solid #29567D; 
+	width:116px;
+	height:100%;
+}
+.float-box-content{
+	border:2px solid #A0AFC3;
+	background-color:#ECF4FC;
+}
+.float-box-content ul{
+	margin:10px;
+}
+.float-box-content ul li{
+	padding:2px 0px;
+}
+
+
+.add-collect-to .float-box-content{width:180px;}
+.addlist{margin:6px;}
+.addlist .li{float:left;width:50%;line-height:24px;}
+.addlist .li a{display:block;padding-left:20px;margin:0px 4px;color:#999;}
+.addlist .li a:hover{color:#666;}
+.add_0{ background:url(http://pic.yupoo.com/f-bull/223348323b3d/x0egjjcu.jpg) no-repeat left;}
+.add_1{ background:url(http://pic.yupoo.com/f-bull/112548323d4f/586rq73t.jpg) no-repeat left;}
+.add_2{ background:url(http://pic.yupoo.com/f-bull/887128323d57/xc3y7c2v.jpg) no-repeat left;}
+.add_3{ background:url(http://pic.yupoo.com/f-bull/637818323d5a/lxgsnw37.jpg) no-repeat left;}
+.add_4{ background:url(http://pic.yupoo.com/f-bull/960388323d5d/airh8slg.jpg) no-repeat left;}
+.add_5{ background:url(http://pic.yupoo.com/f-bull/923318323d5e/viaskc8i.jpg) no-repeat left;}
+.add_6{ background:url(http://pic.yupoo.com/f-bull/588558323d5e/o2vabx75.jpg) no-repeat left;}
+.add_7{ background:url(http://pic.yupoo.com/f-bull/230468323d60/biopze7d.jpg) no-repeat left;}
+.add_8{ background:url(http://pic.yupoo.com/f-bull/198868323d60/j6eejlft.jpg) no-repeat left;}
+.add_9{ background:url(http://pic.yupoo.com/f-bull/955388323d5f/25rfyyj9.jpg) no-repeat left;}
+.add_10{ background:url(http://pic.yupoo.com/f-bull/708688323d60/ggp7rsxo.jpg) no-repeat left;}
+.add_11{ background:url(http://pic.yupoo.com/f-bull/949358323d61/qzhbv3n1.jpg) no-repeat left;}
+.add_12{ background:url(http://pic.yupoo.com/f-bull/471048323d61/xcgi7i4b.jpg) no-repeat left;}
+.add_13{ background:url(http://pic.yupoo.com/f-bull/349768323d61/kii5v1s9.jpg) no-repeat left;}
+.add_14{ background:url(http://pic.yupoo.com/f-bull/622988323d62/gr2tguzo.jpg) no-repeat left;}
+.add_15{ background:url(http://pic.yupoo.com/f-bull/241158323d62/i07l5zky.jpg) no-repeat left;}
+.add_16{ background:url(http://pic.yupoo.com/f-bull/714948323d61/3872bf8y.jpg) no-repeat left;}
+.add_17{ background:url(http://pic.yupoo.com/f-bull/544958323d61/zm5n7s67.jpg) no-repeat left;}
+.add_18{ background:url(http://pic.yupoo.com/f-bull/285648323d62/ds24bq4o.jpg) no-repeat left;}
+.add_19{ background:url(http://pic.yupoo.com/f-bull/945688323d63/t0vb3ft8.jpg) no-repeat left;}
+.add_20{ background:url(http://pic.yupoo.com/f-bull/678068323d63/5lxzwly8.jpg) no-repeat left;}
+.add_21{ background:url(http://pic.yupoo.com/f-bull/475458323d63/situpd7v.jpg) no-repeat left;}
+.add_22{ background:url(http://pic.yupoo.com/f-bull/295478323d63/z786k193.jpg) no-repeat left;}
+.add_23{ background:url(http://pic.yupoo.com/f-bull/847638323d63/lidlbvfk.jpg) no-repeat left;}
+.add_24{ background:url(http://pic.yupoo.com/f-bull/726758323d64/vxcobce9.jpg) no-repeat left;}
+.add_25{ background:url(http://pic.yupoo.com/f-bull/915748323d64/cq2ny6wx.jpg) no-repeat left;}
+.add_26{ background:url(http://pic.yupoo.com/f-bull/077388323d63/oowezxw0.jpg) no-repeat left;}
+.add_27{ background:url(http://pic.yupoo.com/f-bull/3981889edd1d/a9oup4rq.jpg) no-repeat left;}
+.add_28{ background:url(http://pic.yupoo.com/f-bull/4106189edd1c/2psw0x7w.jpg) no-repeat left;}
+.add_29{ background:url(http://pic.yupoo.com/f-bull/1212389edd1c/hskn02tf.jpg) no-repeat left;}
+.add_30{ background:url(http://pic.yupoo.com/f-bull/0564689edd1d/x2vppgbh.jpg) no-repeat left;}
+.add_31{ background:url(http://pic.yupoo.com/f-bull/7965789edd1c/3m47kyqv.jpg) no-repeat left;}
+.add_32{ background:url(http://pic.yupoo.com/f-bull/5754789edd1d/dxnb2vju.jpg) no-repeat left;}
+.add_33{ background:url(http://pic.yupoo.com/f-bull/2015989edd1d/qjiwtbz5.jpg) no-repeat left;}
+.add_34{ background:url(http://pic.yupoo.com/f-bull/4027589edd1e/uj4d5dpm.jpg) no-repeat left;}
+.add_71{ background:url(http://pic.yupoo.com/f-bull/460568323d65/jpp04qgc.jpg) no-repeat left;}
+.add_72{ background:url(http://pic.yupoo.com/f-bull/130798323d64/b3rr0z71.jpg) no-repeat left;}
+.add_73{ background:url(http://pic.yupoo.com/f-bull/682138323d65/rbumtxw4.jpg) no-repeat left;}
+.add_74{ background:url(http://pic.yupoo.com/f-bull/500578323d65/lhqhg8ii.jpg) no-repeat left;}
+.add_75{ background:url(http://pic.yupoo.com/f-bull/244278323d65/kvx9utt0.jpg) no-repeat left;}
+.add_76{ background:url(http://pic.yupoo.com/f-bull/930458323d66/sk1osaoz.jpg) no-repeat left;}
+.add_101{ background:url(http://pic.yupoo.com/f-bull/840158744f15/prj9sxsp.jpg) no-repeat left;}
+.add_888{ background:url(http://pic.yupoo.com/f-bull/2785389ede2b/igafa5ny.jpg) no-repeat left;}
+.add_999{ background:url(http://pic.yupoo.com/f-bull/231708323d65/r13wbl5w.jpg) no-repeat left;}
+

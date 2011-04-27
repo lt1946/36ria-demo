@@ -1,0 +1,78 @@
+/*
+
+Screen Stylesheet for jQuery Realistic Hover Effect
+Created by Adrian Pelletier
+http://www.adrianpelletier.com
+
+*/
+
+
+/* =Imports
+============================================================================== */
+
+	@import url("resets.css");
+
+
+/* =Base Structure
+============================================================================== */
+	
+	body {
+		font: 12px/1.5 Georgia, Palatino, "Palatino Linotype", serif;
+		background: #eaf5ff;
+		color: #555;
+		}
+
+	#content {
+		width: 800px;
+		margin: 100px auto;
+		}
+		
+	h1 {
+		font-size: 20px;
+		color: #7f2d2d;
+		text-align: center;
+		}
+		
+	p {
+		text-align: center;
+		}
+#nav-shadow {
+	margin: 0 auto 50px auto;
+	padding: 50px 0 0 127px;
+	width: 650px;
+	min-height: 130px;
+	text-align: center;
+	background: url(../images/page-shadow.jpg) top center no-repeat;
+	list-style: none;
+	}
+	
+#nav-shadow li {
+	margin-right: 15px;
+	width: 81px;
+	height: 76px;
+	position: relative;
+	float: left;
+	}
+	
+#nav-shadow a{
+	margin: 0 auto;
+	width: 64px;
+	height: 64px;
+	text-indent: -9999px;
+	overflow: hidden;
+	display: block;
+	position: relative;
+	z-index: 2;
+	}
+#nav-shadow a img{
+	display:block;
+}		
+/* Button Shadow */
+
+#nav-shadow li img.shadow {
+	margin: 0 auto;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	}

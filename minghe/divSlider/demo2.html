@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图片滑动demo - $.divSlider</title>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.divSlider.js"></script>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/divSlider.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	$("#images").divSlider({itemWidth:300});
+})
+</script>
+<style>
+	#images{
+		width:600px;
+		border:2px solid #F0F2F0;
+		overflow:hidden;
+		height:140px;
+	}	
+	
+</style>
+</head>
+
+<body>
+<h2 id="header">
+$.divSlider —— jquery滑动门插件<br /> 
+作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。
+</h2>
+    <ul class="clearfix" id="images">
+       	 <li><img src="style/images/test/31-300x140.jpg" /></li>
+       	 <li><img src="style/images/test/32-300x140.jpg" /></li>
+       	 <li><img src="style/images/test/31-300x140.jpg" /></li>
+       	 <li><img src="style/images/test/Snap2-300x140.png" /></li>
+       	 <li><img src="style/images/test/31-300x140.jpg" /></li>		 		 		                  
+    </ul>
+</body>
+</html>

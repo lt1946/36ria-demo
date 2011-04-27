@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第三天event事件（基础篇）—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第三天event事件（基础篇）—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3202">http://www.36ria.com/3202</a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<p>还记得上一篇教程的测试代码吗？将测试部分去掉</p>
+    <pre class="brush: javascript;">
+        (function(S){
+            S.use('core',function(){
+                var Event = S.Event;
+            });
+            
+        })(KISSY);
+    </pre>  
+      
+	<p>KISSY.Event包含了所有的事件方法，会多次用到，为了方便将其赋值给Event变量，这是明河推荐的做法：</p>
+    <pre class="brush: javascript;">
+		var Event = S.Event;
+    </pre>
+	<h4>实例1:监听一个按钮的单击事件</h4>
+    <p><input type="button" value="监听事件" id="demo1" /></p>
+    <pre class="brush: javascript;">
+		Event.add('#demo1','click',function(ev){
+			alert('你触发了'+ev.type+'事件,目标对象id为'+ev.target.id);
+		});
+    </pre>
+	<h4>实例2:取消目标对象的单击事件监听</h4>
+    <p><input type="button" value="取消事件监听" id="demo2" /></p>
+    <p>点击“取消事件监听”后再点击实例1中的“监听事件”，你就会发现没有单击事件触发了。</p>
+    <pre class="brush: javascript;">
+    	Event.remove('#demo1','click');
+    </pre> 
+    <h4>实例3:目标对象同时监听多个事件</h4> 
+    <p><div id="demo3">这是一个用于测试的层</div></p>  
+    <pre class="brush: javascript;">
+		Event.add('#demo3','mouseover mouseout',function(ev){
+			if(ev.type == 'mouseover'){
+				//鼠标划过，添加划过样式
+				S.DOM.addClass('#demo3','demo3-over');
+			}else if(ev.type == 'mouseout'){
+				//鼠标移开，移除划过样式
+				S.DOM.removeClass('#demo3','demo3-over');
+			}
+			//是不是觉得上述写法很烦琐？之后的教程明河会说道将上述代码用1行代码搞定！
+		})
+      </pre> 
+      <p>给测试层绑定鼠标划过和鼠标移开事件。 </p>
+      <p>demo3-over样式如下</p>
+      <pre class="brush: css;">
+    	.demo3-over{background-color:#09F !important;color:#000 !important;}
+      </pre> 
+      <h4>实例4:取消特定监听函数的监听</h4>
+      <p><input type="button" value="弹出2个对话框" id="demo4" /></p>
+      <p><input type="button" value="取消第二个监听函数的监听" id="demo4-cancel-2" /></p>
+      <pre class="brush: javascript;">
+		Event.add('#demo4','click',click1);
+		Event.add('#demo4','click',click2);
+		
+		function click1(ev){
+			alert("事件1");
+		}
+		function click2(ev){
+			alert("事件2");
+		}
+		
+		Event.add('#demo4-cancel-2','click',function(){
+			Event.remove('#demo4','click',click2);
+			alert('已经取消第二个监听函数的监听！');
+		})
+      </pre> 
+      取消后，只弹出一个对话框。
+      <h4>实例5:修改监听函数内部this的指向</h4> 
+      <p><input type="button" value="单击这里" id="demo5" /></p>  
+      <pre class="brush: javascript;">
+		Event.add('#demo5','click',function(ev){
+			alert('你触发了'+ev.type+'事件,目标对象id为'+ev.target.id+'，但是this指向id为'+this.id+'的对象');
+		},S.DOM.get('#demo4'))
+      </pre>  
+      <h4>实例6:target与currentTarget区别</h4> 
+      请点击下面的li。
+      <ul id="demo6">
+      		<li>测试1</li>
+            <li>测试2</li>
+            <li>测试3</li>
+            <li>测试4</li>
+      </ul> 
+      <pre class="brush: javascript;">
+		Event.add('#demo6','click',function(ev){
+			alert(S.DOM.text(ev.currentTarget));
+			alert(S.DOM.text(ev.target));
+		})
+      </pre>              
+</div>
+<script src="kissy/build/seed-min.js"></script>
+<script>
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event;
+		Event.add('#demo1','click',function(ev){
+			alert('你触发了'+ev.type+'事件,目标对象id为'+ev.target.id);
+		});
+		
+		Event.add('#demo2','click',function(ev){
+			Event.remove('#demo1','click');
+			alert('取消对#demo1单击事件的监听！');
+		})
+		
+		Event.add('#demo3','mouseover mouseout',function(ev){
+			S.DOM[ev.type == 'mouseover' && 'addClass' || ev.type == 'mouseout' && 'removeClass']('#demo3','demo3-over');
+		})
+		
+		Event.add('#demo4','click',click1);
+		Event.add('#demo4','click',click2);
+		
+		function click1(ev){
+			alert("事件1");
+		}
+		function click2(ev){
+			alert("事件2");
+		}
+		
+		Event.add('#demo4-cancel-2','click',function(){
+			Event.remove('#demo4','click',click2);
+			alert('已经取消第二个监听函数的监听！');
+		})
+		
+		Event.add('#demo5','click',function(ev){
+			alert('你触发了'+ev.type+'事件,目标对象id为'+ev.target.id+'，但是this指向id为'+this.id+'的对象');
+		},S.DOM.get('#demo4'))
+		
+		Event.add('#demo6','click',function(ev){
+			alert(S.DOM.text(ev.currentTarget));
+			alert(S.DOM.text(ev.target));
+		})
+	});
+	
+})(KISSY);
+</script>
+<!--为了让代码更易读，这里明河引入jquery的代码高亮插件-->
+<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script>
+<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shThemeDefault.css"/>
+<script type="text/javascript">
+	SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	//SyntaxHighlighter.defaults.toolbar = false;
+	SyntaxHighlighter.config.toolbarItemWidth = 16;
+	SyntaxHighlighter.config.toolbarItemHeight = 16;
+	SyntaxHighlighter.config.strings = {
+			expandSource : '展开代码',
+			viewSource : '查看代码',
+			copyToClipboard : '复制代码',
+			copyToClipboardConfirmation : '代码复制成功',
+			print : '打印',
+			help : '?',
+			alert: '语法高亮\n\n',
+			noBrush : '不能找到刷子: ',
+			brushNotHtmlScript : 'Brush wasn\'t configured for html-script option: ',
+			
+			// this is populated by the build script
+			aboutDialog : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About SyntaxHighlighter</title></head><body style="font-family:Geneva,Arial,Helvetica,sans-serif;background-color:#fff;color:#000;font-size:1em;text-align:center;"><div style="text-align:center;margin-top:3em;"><div style="font-size:xx-large;">SyntaxHighlighter</div><div style="font-size:.75em;margin-bottom:4em;"><div>version 2.0.320 (May 03 2009)</div><div><a href="http://alexgorbatchev.com" target="_blank" style="color:#0099FF;text-decoration:none;">http://alexgorbatchev.com</a></div></div><div>JavaScript code syntax highlighter.</div><div>Copyright 2004-2009 Alex Gorbatchev.</div></div></body></html>'
+		}
+	//SyntaxHighlighter.config.tagName = 'div';
+	SyntaxHighlighter.all();
+</script>
+</body>
+</html>

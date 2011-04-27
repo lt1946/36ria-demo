@@ -1,0 +1,95 @@
+.yijs_file_queue{
+	width: 400px;
+	overflow: auto;
+	border: 1px solid #E5E5E5;
+	border-bottom:none;
+	display:none;
+}
+.yijs_file_queue_item{
+	font-size:12px;
+	background-color: #F5F5F5;
+    padding:10px;
+	position:relative;
+	display:none;
+	border-bottom : 1px solid #E5E5E5; 
+}
+.yijs_file_queue_item_cancel{
+	position:absolute;
+	right:10px;
+	top:10px;
+	width:16px;
+	height:16px;
+	background:url(images/file_queue_item_cancel.gif) 0px 0px no-repeat;
+	cursor:pointer;
+}
+.yijs_file_queue_item_cancel_hover{
+	background-position:0px -18px;
+}
+.yijs_file_queue_item_name{
+	
+}
+.yijs_file_queue_item_name span{
+	color:#03F;
+}
+.yijs_file_queue_item_progress{
+	height:16px;
+	margin-top:10px;
+	border:1px solid #9EB0BC;
+	position:relative;
+}
+.yijs_file_queue_item_progressBar{
+	height:100%;
+    width:0px;
+	background:url(images/file_queue_item_progressbar.jpg) 0px 0px repeat-x;
+	text-align:center;
+	background-color:#FFF;
+}
+.uploadifyError {
+	border: 2px solid #FBCBBC !important;
+	background-color: #FDE5DD !important;
+}
+.uploadifyQueueItem .cancel {
+	float: right;
+}
+.uploadifyProgress {
+	background-color: #FFFFFF;
+	border-top: 1px solid #808080;
+	border-left: 1px solid #808080;
+	border-right: 1px solid #C5C5C5;
+	border-bottom: 1px solid #C5C5C5;
+	margin-top: 10px;
+	width: 100%;
+}
+.uploadifyProgressBar {
+	background-color: #0099FF;
+	width: 1px;
+	height: 3px;
+}
+.yijs_file_queue_item_percentage{
+	color:#333;
+	position:absolute;
+	top:1px;
+	left:45%;
+}
+.yijs_file_queue_item_error{
+	margin-top:10px;
+	color:red;
+}
+.file_btn{
+	border:1px solid #DDDDDD;
+	text-align:center;
+	padding:3px 12px;
+	color:#CECECD;
+	margin-top:11px;
+	cursor:pointer;
+	margin-left:10px;
+	width:60px;
+}
+.file_btn_enable{
+	border:1px solid #BBBBBB;
+	text-align:center;
+	padding:4px 12px;
+	color:#464646;
+}
+.file_btn_hover{border:1px solid #777777 !important;}
+.file_upload_caption{color:#C00;padding:10px;}

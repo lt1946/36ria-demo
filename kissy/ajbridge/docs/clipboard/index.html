@@ -1,0 +1,349 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>clipboard - AJBridge Docs</title>
+<link rel="stylesheet" href="../assets/base-min.css" />
+<link rel="stylesheet" href="../assets/docs.css" />
+</head>
+<body class="w866">
+<div id="header">
+    <a class="logo" href="../index.html"><img src="../assets/logo.png" alt="KISSY"  /></a>
+    <p class="rel-nav">
+         <a href="http://github.com/kissyteam/kissy-ajbridge/">src files</a>
+    </p>
+</div>
+<div id="content" class="layout grid-s232m0">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="section summary">
+				<dl>
+					<dt>本章节将假设您已了解以下内容：</dt>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/embed-swf-onto-webpage.html">嵌入SWF的几种方式</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/flashplayer-parameters.html">Flash播放器参数</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a></dd>
+					<dd><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">静态发布方式</a></dd>
+					<dt>Requires:</dt>
+					<dd><a href="http://github.com/kissyteam/kissy/blob/master/build/packages/core.js">KISSY CORE</a></dd>
+					<dd><a href="http://github.com/kissyteam/kissy/blob/master/build/flash/flash-pkg.js" target="_blank">Flash package</a></dd>
+					<dt>Editors:</dt>
+					<dd><a href="mailto:longzang@taobao.com">龙藏</a>,Taobao,Inc</dd>
+				</dl>
+			</div>
+			 <p class="notice">由于 flash player 自身安全因素限制，浏览本地文件需要通过 用户行为激发 swf 实例，请通过覆盖按钮方式实现本功能。 </p>
+			 <p>粘贴板支持内容格式(format) 说明：</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>format</th>
+				            		<th>Flash Player 9+</th>
+									<th>Flash Player 10+</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+									<th><code>text</code></th>
+				           			<td>支持</td>
+									<td>支持</td>
+									<td>纯文本</td>
+								</tr>
+								<tr>
+				           			<th><code>html</code></th>
+									<td>N/A</td>
+									<td>支持</td>
+									<td>HTML</td>
+								</tr>
+				           		<tr>
+				           			<th><code>rtf</code></th>
+									<td>N/A</td>
+									<td>-</td>
+									<td>富文本格式</td>
+								</tr>
+				          	</tbody>
+						</table> 
+            <div class="section" id="static">
+                <h3>Properties(Static)</h3>
+
+                <div class="member prop">
+                    <h4>
+                    	<a name="prop_version">version</a> - <code>String</code>
+					</h4>
+                    <div class="detail">
+                       <p>版本信息</p>
+                    </div>
+                </div>
+            </div>
+			<div class="section" id="constructor">
+				 <h3>Constructor</h3>
+				 <div class="member method">
+                    <h4>
+                        <a name="method_init">Uploader</a>
+                        <code> <em>Uploader</em>(id, config)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>构造函数</p>
+                        <p>创建一个 Uploader 对象</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">id</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	指定的 SWF 的 id。
+                            </dd>
+                            <dd>
+                                <code class="param-name">config</code>
+                                <code class="param-type">&lt;String&gt;|&lt;Array&gt;</code>
+                               	指定Flash的一些配置信息。
+                            </dd>
+                        </dl>
+						<p> Uploader 的 config 新增以下可配置属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>默认值</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+				           			<td><code>btn</code>:Boolean</td>
+									<td><code>false</code></td>
+									<td>启用按钮模式。该模式下会激发鼠标事件。</td>
+								</tr>
+								<tr>
+				           			<td><code>hand</code>:Boolean</td>
+									<td><code>false</code></td>
+									<td>启用手型指针。鼠标显示为手型。</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+                </div>
+			</div>
+				
+			<div class="section" id="properties">
+                <h3>Properties</h3>
+                <div class="member prop">
+                   	<p class="tips"><a href="../ajbridge/index.html#part_properties" >查看继承的属性 </a></p>
+                </div>
+				<h3>Methods</h3>
+				<p class="tips"><a href="../ajbridge/index.html#part_methods" >查看继承的方法 </a></p>
+                <div class="member method">
+                    <h4>
+                        <a name="method_setData">setData</a>
+                        <code>void <em>setData</em>(data, format, serializable)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>将数据写入粘贴板</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">data</code>
+                                <code class="param-type">&lt;any&gt;</code>
+								理论上支持多种 格式，但js获取功能受限 ，目前仅支持 字符串。
+                            </dd>
+							<dd>
+                                <code class="param-name">format</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                                <code class="param-default">text</code>
+								目前仅支持 html 和  text 2种格式 内容。如果 flash 版本在 9.x 则仅支持  text.
+                            </dd>
+							<dd>
+                                <code class="param-name">serializable</code>
+                                <code class="param-type">&lt;Boolean&gt;</code>
+                                <code class="param-default">true</code>
+								serializable 参数确定引用和副本是否都可用，或是否只有对象的引用才可用。将 serializable 设置为 true 可使该数据对象的引用和副本都可用。将 serializable 设置为 false 则只使对象引用可用。对象引用仅在当前应用程序中有效，因此，将 serializable 设置为 false 还意味着使用该格式的数据将对其他  应用程序不可用。组件可以通过在访问该格式的数据时设置适当的剪贴板传输模式来选择获取该对象的引用或获取该对象的副本。
+                            </dd>
+                        </dl>
+						<p class="notice">注意，此函数为需要在  mouseup 事件进行设置，在 mousedown 事件中执行则请确保不出现任何中断用户操作，如各种默认提示框、意外的错误等。 </p>
+						<p>示例</p>
+<pre class="example-code"><code>
+clipboard.on("mouseUp",function(ev){
+	clipboard.setData('123');
+});
+</code></pre>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_clearData">clearData</a>
+                        <code>void <em>clearData</em>(format)</code>
+                    </h4>
+					<div class="detail">
+						<p>清除指定格式内容，请注意Flash播放器版本 </p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">format</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								目前仅支持 html 和  text 2种格式 内容。如果 flash 版本在 9.x 则仅支持  text.
+                            </dd>
+                        </dl>
+						<p class="notice">注意，此函数为需要在  mouseup 事件进行设置，在 mousedown 事件中执行则请确保不出现任何中断用户操作，如各种默认提示框、意外的错误等。 </p>
+<pre class="example-code"><code>
+clipboard.on("mouseUp",function(ev){
+	clipboard.clearData();
+});
+</code></pre>	
+					</div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getData">getData</a>
+                        <code>void <em>getData</em>(format,transferMode)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>获得粘贴板内容</p>
+						<p class="notice">仅支持 Flash 播放器版本 10 以上</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">format</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								目前仅支持 html 和  text 2种格式 内容。如果 flash 版本在 9.x 则仅支持  text.
+                            </dd>
+							<dd>
+                                <code class="param-name">transferMode</code>
+                                <code class="param-type">&lt;String&gt;</code>
+								传输模式提供有关访问剪贴板中所包含的对象时是返回一个引用还是返回一个副本的提示
+								目前暂不支持
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="section" id="events">
+				 
+				 <h3>JS Events</h3>
+				 <p class="tips"><a href="../ajbridge/index.html#part_events" >查看继承的事件 </a></p>
+				
+				
+				 <h3>SWF Event</h3>
+				 <p>来自 SWF 定义的事件 </p>
+				 <p class="tips"><a href="../ajbridge/index.html#part_events" >查看继承的事件 </a></p>
+				<div class="member event">
+                    <h4>
+                        <a name="event_contentReady">contentReady</a>
+                    </h4>
+                    <div class="detail">
+                        <p> SWF 内容准备就绪。</p>
+						<p class="notice"> 仅在<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a>有该事件。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_clipboardClear">clipboardClear</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 粘贴板清除事件。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_clipboardSet">clipboardSet</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 粘贴板设置成功事件。</p>
+                        <p> 事件说明。</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值类型</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+				           			<td><code>data</code></td>
+									<td><code>Boolean</code></td>
+									<td>是否设置成功的标记，成功则为 true 仅适用 Flash 播放器 10以上。</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_mouseOver">mouseOver</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标悬停。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_mouseDown">mouseDown</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标按下。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_listComplete">mouseUp</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标弹起。</p>
+                        <p>建议在此事件中进行 setData 。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_mouseOut">mouseOut</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标移开。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_click">click</a>
+                    </h4>
+                    <div class="detail">
+                        <p> 鼠标单击。</p>
+						<p>建议在此事件中 进行 检查结果  。</p>
+                    </div>
+				</div>
+			</div>
+            <div class="section notes">
+                <p>
+                    	测试：<a>coming soon!</a>
+                </p>
+				<p>
+                    	Demo：<a>coming soon!</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sub">
+        <div class="sub-wrap">
+            <div class="loc"><a href="../index.html">home</a> &rsaquo; Uploader :</div>
+            <div class="toc">
+				<h3>Constructor</h3>
+				<ul>
+                    <li><a href="index.html#constructor">Clipboard</a></li>
+                </ul>
+				<h3>Methods</h3>
+				<ul>
+                    <li><a href="index.html#method_setData">setData</a></li>
+                    <li><a href="index.html#method_clearData">clearData</a></li>
+                    <li><a href="index.html#method_getData">getData</a></li>
+                </ul>
+				<h3>Events</h3>
+				<ul>
+                    <li><a href="index.html#event_contentReady">contentReady</a></li>
+                    <li><a href="index.html#event_clipboardClear">clipboardClear</a></li>
+                    <li><a href="index.html#event_clipboardSet">clipboardSet</a></li>
+                    <li><a href="index.html#event_mouseOver">mouseOver</a></li>
+                    <li><a href="index.html#event_mouseDown">mouseDown</a></li>
+                    <li><a href="index.html#event_mouseUp">mouseUp</a></li>
+                    <li><a href="index.html#event_mouseOut">mouseOut</a></li>
+                    <li><a href="index.html#event_click">click</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p class="copyright">&copy; 2009 - 2029 KISSY UI LIBRARY</p>
+</div>
+</body>
+</html>

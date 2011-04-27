@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>proxy()</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+</head>
+
+<body>
+<input name="t" id="t" type="button" value="不使用proxy()" />
+<input name="test" id="test" type="button" value="使用proxy()" />
+	
+<script>
+var obj = {
+  name: "RIA之家",
+  test: function() {
+    alert(this.name);
+   // $("#test").unbind("click", obj.test);
+  }
+};
+var obj2 = {
+  name: "36ria"
+};
+$("#t").click(function(){
+	obj.test();
+})
+$("#test").click(jQuery.proxy(obj.test, obj2) );
+
+// This also works:
+// $("#test").click( jQuery.proxy( obj.test, obj ) );
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>添加收藏</title>
+	<link href="http://www.36ria.com/style/css/doc.css" type="text/css" rel="stylesheet" />
+	<!--代码高亮-->
+	<link href="http://www.36ria.com/prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="http://www.36ria.com/prettify/prettify-min.js"></script>
+<script type="text/javascript">
+//子页面1路径
+var url1 = 'http://www.36ria.com/demo/html5-postMessage/iframe1.html';
+//子页面2路径
+var url2 = 'http://www.mybar100.com/iframe2.html';
+//iframe尺寸
+var iframeWidth = 400;
+var iframeHeight = 200;
+var frameborder = 0;
+
+window.onload = function() {
+  
+  // 检查浏览器是否支持postMessage
+  if (typeof window.postMessage == 'undefined') {
+    var div = document.createElement('div');
+    div.innerHTML = '你的浏览器不支持postMessage!';
+    document.body.innerHTML = '';
+    document.body.appendChild(div);
+    return;
+  }
+
+  createIframe(url1);
+  createIframe(url2); 
+};
+/**
+*
+*创建子iframe
+*/
+function createIframe(url){
+  var iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.width = iframeWidth;
+  iframe.height = iframeHeight;
+  iframe.frameborder = frameborder;  
+  iframe.style.border = 'solid black 1px;';
+  document.getElementById("main").appendChild(iframe);
+}
+</script>
+
+</head>
+<body>
+<div id="header" class="clearfix"> 
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div> 
+  <div class="l mar-t5"> 
+        <h2>利用HTML5的window.postMessage实现跨域通信</h2> 
+        <p>作者：明河共影，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p> 
+        <p>文章链接：<a href="http://www.36ria.com/3890" target="_blank">http://www.36ria.com/3890</a></p>    
+  </div> 
+</div>
+<div id="main" style="margin-top:10px;">
+</div>
+</body>
+</html>

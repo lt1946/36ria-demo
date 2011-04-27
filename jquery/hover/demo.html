@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jQuery中的hover方法教程</title>
+
+<link rel="stylesheet" type="text/css" href="styles.css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+						   
+	$('.selectorClass').hover(
+	function(){
+		$(this).stop().fadeTo('slow',0.4);
+	},
+	function(){
+		$(this).stop().fadeTo('slow',1);
+	});
+	
+	$('.selectorClass2').mouseenter(function(){
+		$(this).stop().fadeTo('slow',0.4);
+	}).mouseleave(function(){
+		$(this).stop().fadeTo('slow',1);
+	});
+	$('.selectorClass3').mouseover(function(){
+		$(this).stop().fadeTo('slow',0.4);
+		alert(1);
+	}).mouseout(function(){
+		$(this).stop().fadeTo('slow',1);
+	});
+	$('.selectorClass4').hover(function(){
+		this.check = this.check || 1;
+		$(this).stop().fadeTo('slow',this.check++%2==0 ? 1 : 0.4);
+	});
+
+});
+</script>
+
+</head>
+
+<body>
+<h1>jQuery中的hover方法教程</h1>
+<div class="example">
+
+    <div class="demo">
+
+	  <div class="selectorClass demoObject">鼠标移到这里</div>
+    
+  </div>
+    
+    <div class="code"><pre>$('.selectorClass').hover(
+function(){
+	$(this).stop().fadeTo('slow',0.4);
+},
+function(){
+	$(this).stop().fadeTo('slow',1);
+});
+</pre></div>
+
+	<div class="clear"></div>
+</div>
+
+<h2>使用mouseenter和mouseleave代替hover，可以看到效果一样</h2>
+<div class="example">
+
+  <div class="demo">
+
+		<div class="selectorClass2 demoObject">鼠标移到这里</div>
+    
+    </div>
+    
+    <div class="code"><pre>$('.selectorClass2').mouseenter(function(){
+	$(this).stop().fadeTo('slow',0.4);
+}).mouseleave(function(){
+	$(this).stop().fadeTo('slow',1);
+});
+</pre></div>
+
+	<div class="clear"></div>
+</div>
+
+<h2>使用mouseover和mouseout代替hover，体会下其中的区别</h2>
+<div class="example">
+
+    <div class="demo">
+        	<div class="selectorClass3 demoObject"><div class="demoObject_div"></div>鼠标移到这里</div>
+
+		
+    
+  </div>
+    
+    <div class="code"><pre>$('.selectorClass3').mouseover(function(){
+	$(this).stop().fadeTo('slow',0.4);
+}).mouseout(function(){
+	$(this).stop().fadeTo('slow',1);
+});
+</pre></div>
+
+	<p>请在背景红色的层移进移出看看，你就会发现其中的问题。我是给整个“demoObject”层绑定了事件，按理说在其内部移动是不会触发mouseout事件的，诡异的当你在里面的子元素一进一出时，它居然冒泡触发父容器的mouseout事件！</p>
+</div>
+
+<div class="example">
+
+    <div class="demo">
+
+		<div class="selectorClass4 demoObject">鼠标移到这里</div>
+    
+    </div>
+    
+    <div class="code"><pre>$('.selectorClass4').hover(function(){
+	this.check = this.check || 1;
+	$(this).stop().fadeTo('slow',
+    this.check++%2==0 ? 1 : 0.4);
+});
+</pre></div>
+
+	<div class="clear"></div>
+</div>
+
+</body>
+</html>

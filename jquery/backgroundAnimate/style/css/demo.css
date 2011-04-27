@@ -1,0 +1,43 @@
+body{background-color:#FAFDEF;}
+#header{
+	height:100px;line-height:32px;
+	padding:10px;
+	background:url(../images/header-bg.png) 0px 0px repeat-x;
+	font-size:14px;color:#FFC;
+}
+#logo{
+	margin-right:10px;
+}
+#header  h2{
+	font-size:16px;
+	color:#FFF;
+
+}
+#header a{
+	color:#3CF;
+	text-decoration:underline;
+}
+#header a:hover{
+	color:#CCC !important;
+}	
+
+
+/*------------正式样式----------------*/
+.wrapper{
+	margin-top:20px;
+	padding:20px;
+	background-color:#FFF;
+	border:1px solid #999;
+	line-height:24px;
+}
+h2	{clear:both;padding:20px 0px;}
+ul {list-style:none;margin:0;padding:0;}
+li {float:left;width:100px;margin:0;padding:0;text-align:center;font-size:14px;}
+li a {display:block;padding:5px 10px;height:100%;color:#FFF;text-decoration:none;border-right:1px solid #FFF;}
+li a {background:url(../images/bg2.jpg) repeat 0 0;}
+li a:hover, li a:focus, li a:active {background-position:-150px 0;}
+#a a {background:url(../images/bg.jpg) repeat -20px 35px;}
+#b a {background:url(../images/bg2.jpg) repeat 0 0;}
+#c a {background:url(../images/bg3.jpg) repeat 0 0;}
+#d a {background:url(../images/bg4.jpg) repeat 0 0;}
+

@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>利用css中的border生成三角</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>利用css中的border生成三角，兼容包括IE6的主流浏览器</h2> 
+        作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。  
+    </div>
+</div>
+<div id="page" class="center page-960 mar-t-10">
+	<h2>1、生成四个不同颜色方向的梯形</h2>
+    <div class="wrapper clearfix">
+    	<div class="l w-50-per">
+        	<div id="ladder"></div>
+        </div>
+    	<div class="l w-50-per">
+        	<p>代码</p>
+            <code>
+                #ladder{
+                    width:20px; height:20px;
+                    border:10px solid; border-color:#ff3300 #0000ff #339966 #00ff00;
+                }        
+            </code>
+        </div>
+    </div>
+    <h2>2、只显示一个方向的梯形</h2>
+    <div class="wrapper clearfix">
+    	<div class="l w-50-per">
+        	<div id="ladder-top"></div>
+        </div>
+    	<div class="l w-50-per">
+        	<p>代码</p>
+            <code>
+                #ladder-top{
+                    width:20px; height:20px;
+                    border:10px solid; border-color:#ff3300 transparent transparent transparent;
+                    border-style:solid dashed dashed dashed;
+                }       
+            </code>
+        </div>
+    </div> 
+    <div class="wrapper clearfix">
+    	<div class="l w-50-per">
+        	<div id="ladder-bottom"></div>
+        </div>
+    	<div class="l w-50-per">
+        	<p>代码</p>
+            <code>
+                #ladder-bottom{
+                    width:20px; height:20px;
+                    border:10px solid; border-color:transparent transparent #339966 transparent;
+                    border-style:dashed dashed solid dashed;	
+                }   
+            </code>
+        </div>
+    </div> 
+    <h2>3、设置宽度和高度为0，使梯形转换为三角形</h2>  
+    <div class="wrapper clearfix">
+    	<div class="l w-50-per">
+        	<div id="triangle-top"></div>
+        </div>
+    	<div class="l w-50-per">
+        	<p>代码</p>
+            <code>
+                #triangle-top{
+                    width:0px; height:0px;
+                    border:10px solid; border-color:#ff3300 transparent transparent transparent;/
+                    border-style:solid dashed dashed dashed;
+                }  
+            </code>
+        </div>
+    </div> 
+    <div class="wrapper clearfix">
+    	<div class="l w-50-per">
+        	<div id="triangle-bottom"></div>
+        </div>
+    	<div class="l w-50-per">
+        	<p>代码</p>
+            <code>
+                #triangle-bottom{
+                    width:0px; height:0px;
+                    border:10px solid; border-color:transparent transparent #339966 transparent;/
+                    border-style:dashed dashed solid dashed;	
+                }
+            </code>
+        </div>
+    </div>
+    <h2>4、实战：纯css实现文字提示框</h2>
+    <div class="wrapper clearfix">
+    	<div class="l w-50-per pos-rel yitip-wrapper">
+        	<a href="index.html#" title="这个示例由明河制作">这是一个链接</a>
+            <div class="yitip">
+                这个示例由明河制作
+            	<div class="pointyTipShadow"></div>
+                <div class="pointyTip"></div>
+            </div>
+        </div>
+    	<div class="l w-50-per">
+        	<p>代码</p>
+            <code>
+                .yitip-wrapper{
+                    padding-top:20px;
+                }
+                .yitip{
+                    position:absolute;	
+                    left:-40px;
+                    top:-14px;
+                    padding:6px 12px;	
+                    background-color:white;
+                    font-size:12px;
+                    line-height:1;
+                    text-decoration:none;
+                    text-align:center;
+                    text-shadow:0 0 1px white;
+                    white-space:nowrap;
+                    
+                    -moz-border-radius:4px;
+                    -webkit-border-radius:4px;
+                    border-radius:4px;
+                    
+                    background-color:#f9f2ba;
+                    border:1px solid #e9d315;
+                    color:#5b5316;	
+                }
+                .yitip .pointyTipShadow,.yitip .pointyTip{
+                    position:absolute;
+                    border:6px solid; border-color:#e9d315 transparent transparent transparent;
+                    border-style:solid dashed dashed dashed;
+                    bottom:-12px;
+                    width:0;height:0;
+                    left:50%;
+                    margin-left:-6px;
+                }
+                .yitip .pointyTip{
+                    border-top-color:#f9f2ba;
+                }
+                .yitip .pointyTipShadow{
+                    border-width:7px !important;
+                    bottom:-14px;
+                    margin-left:-7px;
+                }
+            </code>
+        </div>
+    </div>                 
+</div>
+</body>
+</html>

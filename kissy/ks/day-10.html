@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第十天kissy1.1.6新增的ajax方法—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<style>
+.zuosa-public-list{
+	background-color:#fff;
+	border:1px solid #ccc;
+	padding:10px;
+	margin:10px 0px;
+}
+.zuosa-public-list li{
+	padding:10px 0px;
+	border-bottom:1px dashed #ccc;
+	margin-left:0px;
+}
+.zuosa-public-list li .user{
+	width:80px;
+	margin-right:10px;
+}
+.zuosa-public-list li .user img{
+	border:1px solid #ccc;padding:1px;
+}
+.zuosa-public-list li .user p{
+	text-align:center;
+	font-weight:bold;
+	color:#333;
+	font-size:14px;
+}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第十天kissy1.1.6新增的ajax方法—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3696">http://www.36ria.com/3696</a></p>
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<p>在上一篇的教程中，明河说到kissy截止到1.1.5还没有真正的ajax方法（KISSY.getScript()除外）,本不对kissy的ajax方面的ajax抱有期望，没想到kissy小组发布了kissy1.1.6，而这个版本最重要的更新在于新增了ajax方法。 <p>
+    <p>关于kissy1.1.6的更新说明，可以<a href="https://github.com/kissyteam/kissy/blob/master/CHANGELOG.md" target="_blank">猛击这里</a>。</p>
+    <p>kissy的ajax文档，可以<a href="https://github.com/kissyteam/kissy/blob/master/CHANGELOG.md" target="_blank">猛击这里</a>进入查看。</p>
+    <p>kissy的ajax有独立的命名空间：<strong>KISSY.IO</strong>。</p>
+    <p>接下来的demo还是以获取做啥的公共消息为例，演示使用kissy的ajax获取json、xml、html的情况。</p>
+    <p>请从本示例移到本地服务器测试。</p>
+    <h2>一、KISSY.io()测试</h2>
+    <p>KISSY.io()实际上等价于KISSY.ajax()，明河建议使用KISSY.ajax()，（使用jquery太久了，看io有点别扭，KISSY.ajax()更通俗些）。</p>
+    <h4>1、获取json数据</h4>
+    <p>由于存在跨域问题，无法远程请求,数据源是明河模拟的，放在“test-data”文件夹下。</p>
+	<p><input type="button" value="获取json数据" id="btn-demo1"/></p>
+	<div class="zuosa-container">
+		<ul class="zuosa-public-list" id="demo1-ul">
+
+		</ul>
+	</div>
+    <pre class="prettyprint">
+Event.on('#btn-demo1','click',function(){
+     S.io({
+         //请求类型，可以取值为 GET,POST 等,默认为 GET
+         type : 'GET',
+         //请求地址
+         url : jsonUrl,
+         //发起请求需要附加的数据,默认为 null（指的的请求时发送的参数）
+         data : null,
+         //请求数据类型,将决定返回值 data 的类型,若不指定，返回值data的类型由响应头决定，可取值为 json | jsonp | script | xml | html | text
+         dataType : 'json',
+         //请求成功的回调,回调参数为 data(内容),textStatus(请求状态),xhr(ajax对象)
+         success : function(data){
+              //处理返回回来的数据
+              processJson('#demo1-ul',data);
+         }
+     })
+});
+    </pre>
+    <p><strong>processJson</strong>这个函数，明河就不贴出了，请看源码。</p>
+    <h4>2、获取xml数据</h4>
+	<p><input type="button" value="获取xml数据" id="btn-demo2"/></p>
+	<div class="zuosa-container">
+		<ul class="zuosa-public-list" id="demo2-ul">
+
+		</ul>
+	</div>
+    <pre class="prettyprint">
+ Event.on('#btn-demo2','click',function(){
+     S.io({
+         //请求类型，可以取值为 GET,POST 等,默认为 GET
+         type : 'GET',
+         //请求地址
+         url : xmlUrl,
+         //发起请求需要附加的数据,默认为 null（指的的请求时发送的参数）
+         data : {'test':'明河共影'},
+         //请求数据类型,将决定返回值 data 的类型,若不指定，返回值data的类型由响应头决定，可取值为 json | jsonp | script | xml | html | text
+         dataType : 'xml',
+         //请求成功的回调,回调参数为 data(内容),textStatus(请求状态),xhr(ajax对象)
+         success : function(data){
+              //处理返回回来的数据
+              processXml('#demo2-ul',data);
+         }
+     })
+});
+    </pre>
+    <p><strong>processXml</strong>这个函数，明河就不贴出了，请看源码，话说使用kissy处理xml，真是别扭。</p>
+    <h4>3、发送jsonp请求</h4>
+	<p><input type="button" value="发送jsonp请求" id="btn-demo3"/></p>
+	<div class="zuosa-container">
+		<ul class="zuosa-public-list" id="demo3-ul">
+
+		</ul>
+	</div>
+    <pre class="prettyprint">
+//示例3
+Event.on('#btn-demo3','click',function(){
+     S.io({
+         type : 'GET',
+         url : jsonpUrl,
+         //必不可少
+         dataType : 'jsonp',
+         //指定 callback 的别名,请求url会生成 "url?{$jsonp}=jsonp123456"
+         jsonp : 'callback',
+         //指定 callback 的参数,请求 url 会生成 "url?callback={$jsonpCallback}"
+         jsonpCallback : 'processJsonp'
+     })
+});
+    </pre>
+    <p>回调函数：</p>
+    <pre class="prettyprint">
+function processJsonp(data){
+    processJson('#demo3-ul',data);
+}
+    </pre>
+    <p>这是KISSY的ajax的亮点，直接在KISSY.ajax()内可以使用jsonp。</p>
+    <h2>二、KISSY.IO下的简化ajax方法</h2>
+    <h4>1、KISSY.IO.get()</h4>
+	<p><input type="button" value="快速发送get请求" id="btn-demo4"/></p>
+	<div class="zuosa-container">
+		<ul class="zuosa-public-list" id="demo4-ul">
+
+		</ul>
+	</div>
+    <pre class="prettyprint">
+//示例4
+Event.on('#btn-demo4','click',function(){
+     S.IO.get(jsonUrl,function(data,textStatus,xhr) {
+           processJson('#demo4-ul',data);
+     },'json');
+});
+    </pre>
+    <p>比繁琐的KISSY.io()简单多。类似的方法还有KISSY.IO.post()、KISSY.IO.jsonp()，用法上非常相似，明河就偷个懒，不再一一展示。</p>
+
+</div>
+<script src="http://a.tbcdn.cn/s/kissy/1.1.6/kissy-min.js"></script>
+<script>
+var S = KISSY;
+var Event = S.Event,DOM = S.DOM,
+    MAX = 5,jsonUrl = 'test-data/json.js',xmlUrl = 'test-data/xml.xml',jsonpUrl = 'http://api.zuosa.com/statuses/public_timeline.json',
+    //回调函数名（用于jsonp）
+    CALLBACK = 'getPublic';
+    //示例2
+    Event.on('#btn-demo1','click',function(){
+         S.io({
+             //请求类型，可以取值为 GET,POST 等,默认为 GET
+             type : 'GET',
+             //请求地址
+             url : jsonUrl,
+             //发起请求需要附加的数据,默认为 null（指的的请求时发送的参数）
+             data : null,
+             //请求数据类型,将决定返回值 data 的类型,若不指定，返回值data的类型由响应头决定，可取值为 json | jsonp | script | xml | html | text
+             dataType : 'json',
+             //请求成功的回调,回调参数为 data(内容),textStatus(请求状态),xhr(ajax对象)
+             success : function(data){
+                  //处理返回回来的数据
+                  processJson('#demo1-ul',data);
+             }
+         })
+    });
+    //示例2
+    Event.on('#btn-demo2','click',function(){
+         S.io({
+             //请求类型，可以取值为 GET,POST 等,默认为 GET
+             type : 'GET',
+             //请求地址
+             url : xmlUrl,
+             //发起请求需要附加的数据,默认为 null（指的的请求时发送的参数）
+             data : {'test':'明河共影'},
+             //请求数据类型,将决定返回值 data 的类型,若不指定，返回值data的类型由响应头决定，可取值为 json | jsonp | script | xml | html | text
+             dataType : 'xml',
+             //请求成功的回调,回调参数为 data(内容),textStatus(请求状态),xhr(ajax对象)
+             success : function(data){
+                  //处理返回回来的数据
+                  processXml('#demo2-ul',data);
+             }
+         })
+    });
+    //示例3
+    Event.on('#btn-demo3','click',function(){
+         S.io({
+             type : 'GET',
+             url : jsonpUrl,
+             //必不可少
+             dataType : 'jsonp',
+             //指定 callback 的别名,请求url会生成 "url?{$jsonp}=jsonp123456"
+             jsonp : 'callback',
+             //指定 callback 的参数,请求 url 会生成 "url?callback={$jsonpCallback}"
+             jsonpCallback : 'processJsonp'
+         })
+    });
+    //示例4
+    Event.on('#btn-demo4','click',function(){
+         S.IO.get(jsonUrl,function(data,textStatus,xhr) {
+               processJson('#demo4-ul',data);
+         },'json');
+    });
+/**
+ * 将json数据转成html插入到容器中
+ * @param {String} container 容器选择器
+ * @param {Objectt} data 数据
+ */
+function processJson(container,data){
+	if(data.length > 0){
+		var arrHtml = [],_li = null,user;
+		//数据处理
+		S.each(data,function(item,i){
+            if(i >= MAX ) return;
+			user = item["user"];
+			_li = "<li class='clearfix'><div class='user l'><img src='"+user['profile_image_url']+"' /><p>"+user["screen_name"]+"</p></div>"+item["text"]+"</li>";
+			arrHtml.push(_li);
+		});
+		//将生成的li添加到列表内
+		S.DOM.html(container,arrHtml.join(""));
+	}
+}
+/**
+ * 将xml数据转成html插入到容器中
+ * @param {String} container 容器选择器
+ * @param {Objectt} data 数据
+ */
+function processXml(container,data){
+    var statuses = DOM.children(data)[0],status = DOM.children(statuses);
+    if(status.length > 0){
+        var arrHtml = [],_li = null,user,name,face,text;
+        S.each(status,function(item,i){
+             if(i >= MAX ) return;
+             user = DOM.children(item)[8];
+             name = DOM.text(DOM.children(user)[2]);
+             face = DOM.text(DOM.children(user)[5]);
+             text = DOM.text(DOM.children(item)[2]);
+			 _li = "<li class='clearfix'><div class='user l'><img src='"+face+"' /><p>"+name+"</p></div>"+text+"</li>";
+			 arrHtml.push(_li);
+        })
+		//将生成的li添加到列表内
+		S.DOM.html(container,arrHtml.join(""));
+    }
+}
+/**
+ * jsonp请求的回调函数
+ * @param {Objectt} data 数据
+ */
+function processJsonp(data){
+    processJson('#demo3-ul',data);
+}
+</script>
+
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify-min.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

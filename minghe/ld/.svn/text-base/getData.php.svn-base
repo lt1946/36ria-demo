@@ -1,0 +1,37 @@
+<?php
+function runSQL($rsql) {
+	$hostname = 'localhost';// 数据库服务器
+	$username = 'root';		// 数据库用户名
+	$password = '123';	    // 数据库密码
+	$dbname   = 'ld';			// 数据库名
+	$connect = mysql_connect($hostname,$username,$password) or die ("Error: could not connect to database");
+	$db = mysql_select_db($dbname);
+	mysql_query('set names gbk');
+	$result = mysql_query($rsql); 
+	return $result;
+	mysql_close($connect);
+}
+
+header("Content-type: text/xml;charset=gbk");
+
+if(isset($_POST['parent_id'])){
+	$where = "WHERE parent_id = ".$_POST['parent_id']." ";
+}else{
+	$where = "WHERE parent_id = 0 ";
+}
+$sql = "SELECT * FROM region $where";
+$result = runSQL($sql);
+
+$xml = "<?xml version='1.0' encoding='UTF-8'?>";
+$xml .= "<root>";
+$xml .="<success>1</success>";
+$xml .="<total>0</total>";
+while ($row = mysql_fetch_array($result)) {
+	$xml .= "<record>";
+	$xml .= "<value>".$row['region_id']."</value>";
+	$xml .= "<text>".$row['region_name']."</text>";
+	$xml .= "</record>";
+}
+$xml .="</root>";
+echo $xml;
+?>

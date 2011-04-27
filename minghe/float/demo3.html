@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>float — jquery悬浮层插件</title>
+<script src="js/jquery-1.4.min.js" type="text/javascript"></script>
+<script src="js/float.js" type="text/javascript"></script> 
+<link href="css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<h2 id="header">
+float — 底部窗体悬浮
+</h2>
+<div id="page">
+  
+</div>
+<div id="right-float-box" class="float-box">
+这是右边悬浮窗体
+</div>
+<div id="left-float-box" class="float-box">
+这是左边悬浮窗体
+</div>
+<h2 id="footer" style="margin-top:10px;">
+	作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。
+</h2>
+<script type="text/javascript">
+$("#right-float-box").float({position:"rb",delay:500});
+$("#left-float-box").float({position:"lb",delay:500});     
+</script>
+</body>
+</html>

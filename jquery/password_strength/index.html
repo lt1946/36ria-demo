@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>密码强度验证</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.passwordStrength.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var $pwd = $('input[name="password"]');					   
+	$pwd.passwordStrength();
+	$(".Generate_password").click(function(){	
+		//产生随机八位密码
+		var pwd = $.passwordStrength.getRandomPassword(8);
+		//将随机密码写入密码框，并触发验证
+		$pwd.val(pwd).trigger("keyup");
+		return false;
+	})
+	$(".get_password").click(function(){
+		alert($pwd.val());							  
+		return false;
+	})
+
+});
+</script>
+<link href="style/css/password_strength.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+body{font-size:12px;}
+.clearfix:after{
+content:"."; display:block; height:0; clear:both;
+visibility:hidden;
+}
+*html .clearfix{
+ height:1%;
+}
+*+html .clearfix{
+ height:1%;
+}
+.l{float:left;}
+.form_item{margin-bottom:6px;}
+.form_item label{width:100px;text-align:right;margin-right:4px;display:block;float:left;padding-top:2px;}
+.form_item .text{height:14px;padding:2px;width:132px;border:1px solid #999;}
+.form_item  div a{margin-left:6px;}
+#passwordStrengthDiv{margin-top:6px;}
+</style>
+</head>
+
+<body>
+<div class="form_item clearfix">
+	<label>密&nbsp;&nbsp;码：</label>
+    <div class="l">
+        <div><input type="password" name="password" class="text"/><a href="" class="Generate_password">产生随机密码</a><a href="" class="get_password">获取密码值</a></div>
+        <div id="passwordStrengthDiv" class="is0"></div>    
+    </div>
+</div>
+<div class="form_item clearfix">
+	<label>确认密码：</label>
+    <div class="l">
+        <div><input type="password" name="confirm_password" class="text"/></div>  
+    </div>
+</div>
+</body>
+</html>
+

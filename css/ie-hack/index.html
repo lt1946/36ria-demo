@@ -1,0 +1,115 @@
+<!DOCTYPE HTML> 
+<html> 
+<head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>7个你不可不知的IE hack</title>
+    <link href="http://www.36ria.com/style/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="http://www.36ria.com/style/css/demo.css" rel="stylesheet" type="text/css" />
+    <style>
+	.demo-div{
+		border:1px solid #CCC;
+		background-color:#FFC;
+		padding:10px 20px;
+	}
+	*html .demo-1{
+		background-color:#0CF;
+	}
+	.demo-2{
+		_background-color:#0CF;
+		_color:red;
+	}
+	.demo-3{
+		_background-color/**/:/**/#0CF;
+	} 
+	*+html .demo-4{
+		background-color:#0CF;
+	}
+	*:first-child+html .demo-5{
+		background-color:#0CF;
+	}
+	.demo-6{
+		*background-color:#0CF;
+	} 
+	.demo-7{background-color:#0CF\0/;}		
+	</style>
+</head> 
+ 
+<body> 
+<div id="header" class="clearfix"> 
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div> 
+  <div class="l mar-t5"> 
+        <h2>7个你不可不知的IE hack</h2> 
+        <p>作者：明河共影，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p> 
+        <p>文章链接：<a href="http://www.36ria.com/3664" target="_blank">http://www.36ria.com/3664</a></p>    
+    </div> 
+</div> 
+<div id="main" class="mar-t10"> 
+    <p>IE6以下版本的IE，明河就不予说明了，意义不是太大。</p>  
+    <h2>一.适用于IE6的hack</h2>
+    <h4>1.*html {} </h4>
+    <p>这应该是使用最多的IE6 hack，也是明河推荐使用的hack。</p> 
+    <div class="demo-div demo-1">这是个用于测试IE6 hack的层</div> 
+    <pre class="prettyprint"> 
+*html .demo-1{
+    background-color:#0CF;
+}    
+    </pre> 
+    <p>在IE6下你将看到一个蓝色背景的层。</p>
+    <h4>2. .demo-2{_background-color:#0CF;}</h4>
+    <p>在属性名前加一个“_”，与第一种方法相比，创建更为快速，缺点是扩展性差。</p>
+    <div class="demo-div demo-2">这是个用于测试IE6 hack的层</div>
+    <pre class="prettyprint"> 
+.demo-2{
+    _background-color:#0CF;
+    _color:red;
+}    
+    </pre>
+    <h4>3. .demo-3{_background-color/**/:/**/ #0CF;}</h4>
+    <p>这个hack非常少用，算是一个颇为偏门的hack，在属性和值中插入二个空注释。</p> 
+    <div class="demo-div demo-3">这是个用于测试IE6 hack的层</div> 
+    <pre class="prettyprint"> 
+.demo-3{
+	_background-color/**/:/**/#0CF;
+}    
+    </pre> 
+    <h2>二.适用于IE7的hack</h2>
+    <h4>4. *+html  {} </h4>
+    <p>最常用的IE7 hack，与IE6的*html很相似。</p>  
+    <div class="demo-div demo-4">这是个用于测试IE7 hack的层</div>       
+    <pre class="prettyprint"> 
+*+html .demo-4{
+    background-color:#0CF;
+}   
+    </pre> 
+    <h4>5. *:first-child+html  {} </h4> 
+    <p>不常用的IE7 hack，跟写法上过于繁琐有直接关系。</p>
+    <div class="demo-div demo-5">这是个用于测试IE7 hack的层</div>
+    <pre class="prettyprint"> 
+*:first-child+html .demo-5{
+    background-color:#0CF;
+} 
+    </pre> 
+    <h4>6. .demo-6{*background-color:#0CF;} </h4>
+    <p>IE7及以下都支持，在属性前加“*”。</p>
+    <div class="demo-div demo-6">这是个用于测试IE7 hack的层</div>
+    <pre class="prettyprint"> 
+.demo-6{
+    *background-color:#0CF;
+} 
+    </pre>
+    <h2>三.适用于IE8的hack</h2> 
+    <h4>7. .demo-7{background-color:#0CF\0/;} </h4>
+    <p>有点诡异的hack，在属性值后面跟上\0/;</p>
+    <div class="demo-div demo-7">这是个用于测试IE8 hack的层</div> 
+    <pre class="prettyprint"> 
+.demo-7{background-color:#0CF\0/;}
+    </pre>             
+</div> 
+<!--为了让代码更易读，这里明河引入prettify代码高亮--> 
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" /> 
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script> 
+<script> 
+prettyPrint();
+</script> 
+</body> 
+</html> 

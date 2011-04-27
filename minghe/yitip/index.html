@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>yitip - jquery文字提示插件</title>
+<link rel="stylesheet" type="text/css" href="style/css/base.css" />
+<link rel="stylesheet" type="text/css" href="style/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="style/css/jquery.yitip.css" />
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>jquery.yitip V0.1——jquery文字提示插件</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/2765">http://www.36ria.com/2765</a></p>    
+    </div>
+</div>
+<div id="page">
+      <h2><a href="http://www.36ria.com/" title="这款的插件名为yitip">默认提示框</a></h2>
+      <p>给所有带有title的目标容器加上提示框</p>
+      <code>
+		   $('[title]').yitip();
+      </code>   
+      <h2><a href="http://www.36ria.com/" color="blue" title="欢迎你访问RIA之家">demo1：这是第一个标题</a></h2>  
+      <p>给目标容器加上color属性，即可更改提示框的颜色</p> 
+      <p>目前共有以下颜色：黄色（默认）、蓝色、绿色、红色、黑色、白色</p> 
+      <h2><a href="http://www.36ria.com/" color="green" title="这款的插件名为yitip" id="demo2-title">demo2：这是第二个标题</a></h2>  
+      <p>将提示框的位置改成目标容器之下</p>
+      <code>
+        var demo2Tip = $("#demo2-title").yitip("api");<br />
+        demo2Tip.setPosition("bottomMiddle");
+      </code> 
+      <p>目前你可以设置的位置为：上中、下中、左中、右中</p> 
+      <h2><a href="http://www.36ria.com/" title="yitip的作者为明河共影" id="demo3-title">demo3：这是第三个标题</a></h2>
+      <p>给位置加上偏移值，这里是在默认的基础上向右移动10px</p> 
+      <code>
+        var demo3Tip = $("#demo3-title").yitip("api");<br />
+        demo3Tip.options.offest = {"left":10,"top":0};<br />
+        demo3Tip.setPosition("rightMiddle");<br />
+      </code>                   
+  	  <h2><a href="http://www.36ria.com/" title="这是大标题，鼠标滑过显示图片" id="demo4-title">demo4：这是第四个标题</a></h2>
+      <p>重新改变大标题提示框的内容、颜色、位置，代码如下：</p>
+      <code>
+      var singleTitleTip = $(&quot;#single-title&quot;).yitip(&quot;api&quot;);<br />
+singleTitleTip.setContent('&lt;img src=&quot;demo-images/1.png&quot;  width=&quot;159&quot; height=&quot;135&quot; /&gt;');<br />
+singleTitleTip.setPosition(&quot;rightMiddle&quot;);<br />
+singleTitleTip.setColor(&quot;blue&quot;); <br />
+      </code> 
+      <h2><a href="http://www.36ria.com/" title="yitip的作者为明河共影" id="demo5-title">demo5：这是第五个标题</a></h2>
+      <p>ajax方式获取数据并修改提示框的内容</p> 
+      <code>
+        var demo5Tip = $("#demo5-title").yitip("api");<br />
+        demo5Tip.setContent({url:"demo-html/test.html",type:"get"});
+      </code>   
+      <h2><a href="http://www.36ria.com/" id="demo6-title">demo6：这是第6个标题</a></h2> 
+      <p>单击才出现提示框，手动关闭提示框</p>  
+      <code>
+            $("#demo6-title").yitip({"showEvent" :"click",<br />
+                                     "hideEvent" : null});<br />
+            var demo6Tip = $("#demo6-title").yitip("api");<br />
+            demo6Tip.setContent({url:"demo-html/test2.html",type:"get",<br />
+                                 success:function(data){<br />
+                                    demo6Tip.$yitip.find("#close").click(function(){<br />
+                                        demo6Tip.hide(0);<br />
+                                    })<br />
+                                 }});<br />
+      </code>           	
+</div>
+
+
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.yitip.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('[title]').yitip();
+	
+	var demo2Tip = $("#demo2-title").yitip("api");
+	demo2Tip.setPosition("bottomMiddle");
+	
+	var demo3Tip = $("#demo3-title").yitip("api");
+	demo3Tip.options.offest = {"left":10,"top":0};
+	demo3Tip.setPosition("rightMiddle");
+	
+	var demo4Tip = $("#demo4-title").yitip("api");
+	demo4Tip.setContent('<img src="demo-images/1.png"  width="159" height="135" />');
+	demo4Tip.setPosition("rightMiddle");
+	demo4Tip.setColor("blue");
+	
+	var demo5Tip = $("#demo5-title").yitip("api");
+	demo5Tip.setContent({url:"demo-html/test.html",type:"get"});
+    
+	$("#demo6-title").yitip({"showEvent" :"click",
+	                         "hideEvent" : null});
+	var demo6Tip = $("#demo6-title").yitip("api");
+	demo6Tip.setContent({url:"demo-html/test2.html",type:"get",
+	                     success:function(data){
+							demo6Tip.$yitip.find("#close").click(function(){
+								demo6Tip.hide(0);
+							})
+						 }});	
+	
+})
+</script>
+</body>
+</html>

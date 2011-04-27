@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>detach()</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+<style>p { background:yellow; margin:6px 0; } p.off { background: black; }</style>
+</head>
+
+<body>
+  <button>添加/删除段落</button>
+  <p>这是一个用于测试的段落</p> 
+<script>
+    var p;
+    $("button").click(function(){
+      if (p) {
+        p.appendTo("body");
+        p = null;
+      } else {
+        p = $("p").detach();
+      }
+    });
+</script>
+
+
+</body>
+</html>

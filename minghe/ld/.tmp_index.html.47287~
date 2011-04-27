@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>二级联动+改变内容</title>
+		<script src="lib/jquery/jquery.js"></script>
+<script>
+	var aOneOptions = new Array();
+	aOneOptions[1] = "各行展会";
+	aOneOptions[3] = "各月展会";
+	aOneOptions[6] = "各国展会";
+	var aTowOptions = new Array();
+	aTowOptions[1] = new Array();
+	aTowOptions[1][8] = "汽配展"	;
+	aTowOptions[1][9] = "摩配展"	;
+	aTowOptions[1][10] = "五金展"	;
+	aTowOptions[3] = new Array();
+	aTowOptions[3][11] = "一月"	;
+	aTowOptions[3][12] = "二月"	;
+	aTowOptions[3][13] = "三月"	;
+	aTowOptions[6] = new Array();
+	aTowOptions[6][14] = "德国"	;
+	aTowOptions[6][15] = "美国"	;
+	aTowOptions[6][16] = "意大利"	;	
+	function appOneOptions(oName,aOne){
+		var optionsHtml = "";
+		for(var i = 0;i <aOne.length ; i++){
+			if(aOne[i] != undefined){
+				optionsHtml += "<option value='"+i+"'>"+aOne[i]+"</option>";
+			}
+		}
+		$(oName).append(optionsHtml);
+		return optionsHtml;
+	}
+	function appTowOptions(oName,aTow,oneId){
+		var oneId = Number(oneId);
+		var optionsHtml = "";
+		for(var i = 0;i <aTow[oneId].length ; i++){
+			if(aTow[oneId][i] != undefined){
+				optionsHtml += "<option value='"+i+"'>"+aTow[oneId][i]+"</option>";
+			}
+		}
+		$(oName).html(optionsHtml);
+		return optionsHtml;		
+	}
+	function changeContent(oName,id,pre){
+		var _thisName = pre + id;
+		$(oName).append($("#"+_thisName+""));
+		$(oName).children().hide("fast");
+		$("#"+_thisName+"").show("fast");
+	}
+	$(function(){
+		appOneOptions("#oneOptions",aOneOptions);
+		$("#oneOptions").change(function(){
+			var oneId = Number($(this).val());
+			appTowOptions("#towOptions",aTowOptions,oneId);
+		})
+		appTowOptions("#towOptions",aTowOptions,1);
+		$("#towOptions").change(function(){
+			var id = $(this).val();
+			changeContent("#div_content",id,"div_");
+		})
+	})
+</script>
+    </head>
+    <body>
+        <h1>二级联动改变新闻内容</h1>
+        <select name="oneOptions" id="oneOptions">
+
+        </select>
+         <select name="towOptions" id="towOptions">
+
+        </select>  
+		<div id="div_content">
+			<div>这里是要被替换的内容</div>
+		</div>	     
+		<div id="div_8" style="display:none;">
+			这是ID为8的栏目文章列表
+		</div>
+		<div id="div_9" style="display:none;">
+			这是ID为9的栏目文章列表
+		</div>		
+    </body>
+</html>

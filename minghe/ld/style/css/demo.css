@@ -1,0 +1,50 @@
+body{background-color:#FAFDEF;}
+#header{
+	height:100px;line-height:32px;
+	padding:10px;
+	background:url(../images/header-bg.png) 0px 0px repeat-x;
+	font-size:14px;color:#FFC;
+}
+#logo{
+	margin-right:10px;
+}
+#header  h2{
+	font-size:16px;
+	color:#FFF;
+	margin:0px !important;
+
+}
+#header a{
+	color:#3CF;
+	text-decoration:underline;
+}
+#header a:hover{
+	color:#CCC !important;
+}
+code{
+	font-size:14px;
+	display:block;
+	background:#F6FCE2;
+	border:1px dashed #CCC;
+	padding:10px;margin:10px;
+	color:#666;
+}	
+
+h2{
+	margin:10px 10px;
+}
+p{margin-left:10px;}
+.tab1{
+	margin:10px;
+}
+.tab1 td{
+	padding:6px;
+}
+.comboBox{
+	width:120px;
+	padding:4px;
+}
+
+.selects_list li{
+	margin:5px;
+}

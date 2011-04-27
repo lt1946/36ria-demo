@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.divSlider.js"></script>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/divSlider.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	$("#nav").divSlider({itemWidth:240});
+})
+</script>
+</head>
+
+<body style="padding:20px;">
+<div id="content-top" class="clearfix">
+	<div class="l"><img src="style/images/slider-left.png" /></div>
+    <ul class="l" id="nav">
+       	 <li class="clearfix">
+         	<div class="l"><img src="style/images/icon_jquery.png" /></div>
+            <div class="l">
+            	<h4>jquery</h4>
+                <p>jquery插件、教程、ajax</p>
+            </div>
+         </li>
+       	 <li class="clearfix">
+         	<div class="l"><img src="style/images/icon_flex.png" /></div>
+            <div class="l">
+            	<h4>flex</h4>
+                <p>flex实例、教程、actionscript</p>
+            </div>
+         </li>
+       	 <li class="clearfix">
+         	<div class="l"><img src="style/images/icon_html5.png" /></div>
+            <div class="l">
+            	<h4>html5</h4>
+                <p>html5教程、css3教程</p>
+            </div>
+         </li>
+       	 <li class="clearfix">
+         	<div class="l"><img src="style/images/icon_air.png" /></div>
+            <div class="l">
+            	<h4>air</h4>
+                <p>air与ajax、air与flex教程</p>
+            </div>
+         </li>
+       	 <li class="clearfix">
+         	<div class="l"><img src="style/images/icon_design.png" /></div>
+            <div class="l">
+            	<h4>网站设计</h4>
+                <p>优秀网站设计欣赏</p>
+            </div>
+         </li>
+       	 <li class="clearfix">
+         	<div class="l"><img src="style/images/icon_wordpress.png" /></div>
+            <div class="l">
+            	<h4>wordpress</h4>
+                <p>wordpress插件、主题、教程</p>
+            </div>
+         </li>                   
+    </ul>
+    <div class="r"><img src="style/images/slider-right.png" /></div>
+</div>
+</body>
+</html>

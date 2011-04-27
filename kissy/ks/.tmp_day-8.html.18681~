@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第八天anim动画详解（下篇）�?5天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<style>
+.demo-div{background-color:#0CF;border:1px solid #06F;padding:10px;width:100px;height:100px;display:block;}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第八天anim动画详解（下篇）�?5天学会kissy</h2>
+      <p>作�?：明河共影，博客�?a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接�?a href="http://www.36ria.com/3418"> http://www.36ria.com/3418 </a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+<h4>拆合菜单</h4>
+    <ul id="menu" class="mar-t-10">	
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=1" onclick="return false;">jquery</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=7" target="_blank">jquery插件</a></li>
+                <li><a href="http://www.36ria.com/?cat=6" target="_blank">jquery教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=105" target="_blank">jquery与ajax</a></li>                            
+            </ul>
+        </li>
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=11" onclick="return false;">flex</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=101" target="_blank">flex实例</a></li>
+                <li><a href="http://www.36ria.com/?cat=113" target="_blank">flex教程</a></li>                          
+            </ul>                            
+        </li> 
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=3" onclick="return false;">javascript</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=116" target="_blank">javascript资源</a></li>
+                <li><a href="http://www.36ria.com/?cat=4" target="_blank">javascript教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=9" target="_blank">浏览�?/a></li>                            
+            </ul>                             
+        </li>                                                                                                                       
+    </ul>
+	<p>（拆合菜单的html代码不再贴出。）	 </p>
+	<p> 在上�?��的教程中，明河曾说到给拆合菜单加动画，现在来看完整代码： </p>
+	<pre class="prettyprint">
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM,h;		
+        //kissy的height\width方法，当元素的display:none时，获取的高度\高度为负数，期待新的版本可以修正这个问题				
+		function height($el){
+			var h = 0,display = $el.css('display'),position = $el.css('position'),visibility = $el.css('hidden');
+			if($el.css('display') == 'none'){
+				//TODO:kissy的css()存在bug，不返回KISSY.Node，导致断�?
+				$el.css({'display':'block','position':'absolute','visibility':'hidden'});
+				h = $el.height();
+				$el.css({'display':'none','position':position,'visibility':visibility});
+			}else{
+				h = $el.height();
+			}
+			return h;	
+		}
+		//获取菜单元素
+		var $menu = S.one('#menu');
+		//TODO:给变量加$，是明河写jquery时保留下的习惯，用加$的变量表示待操作的元素，在kissy中只有方法返回的是Node或NodeList实例（比如one、all）时，才�?前缀
+		
+		//子菜�?
+		var $childrenMenus = S.all('#menu ul');
+		//隐藏�?��子菜�?
+		$childrenMenus.hide();
+		var $menuItemHeader = S.all("#menu div");
+		
+
+		$menuItemHeader.on('click',function(ev){
+			//给子菜单标题，删除箭头样�?
+			S.all('#menu .arrow-down').removeClass('arrow-down');			
+			var $menu = S.one(ev.target).next(),$arrow = S.one(ev.target).children(),
+			    display = $menu.css('display');	
+
+			//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方�?
+			if(display == 'none'){
+				h = height($menu);
+				$menu.css({height: 0,display: 'block',overflow:'hidden'});
+				//TODO:不加缓动和加缓动，�?度差异明�?
+				$menu.animate({'height':h+'px'},1,'elasticOut');
+				$arrow.addClass('arrow-down');
+			}else{
+				h = $menu.height();
+				$menu.animate('height:0',0.3,S.Easing.easeNone,function(){
+					$menu.hide().height(h);
+				});							
+				$arrow.removeClass('arrow-down');
+			}			
+			return false;		
+		})
+																																																		
+	});	
+})(KISSY);
+    </pre>
+    
+	<p>kissy的动画类存在�?��问题！调用起来不是非常顺手，这是个不少的问题�?/p>
+	<h4>代码中height()函数说明</h4>
+  <pre class="prettyprint">
+        //kissy的height\width方法，当元素的display:none时，获取的高度\高度为负数，期待新的版本可以修正这个问题				
+		function height($el){
+			var h = 0,display = $el.css('display'),position = $el.css('position'),visibility = $el.css('hidden');
+			if($el.css('display') == 'none'){
+				//TODO:kissy的css()存在bug，不返回KISSY.Node，导致断�?
+				$el.css({'display':'block','position':'absolute','visibility':'hidden'});
+				h = $el.height();
+				$el.css({'display':'none','position':position,'visibility':visibility});
+			}else{
+				h = $el.height();
+			}
+			return h;	
+		}
+    </pre>    
+  <p>为什么要加这个函数？</p>
+  <p>因为kissy<span class="prettyprint">的height\width方法，当元素的display:none时，获取的高度\高度为负�?/span>，有兴趣的朋友可以测试下。�?拆合菜单的子菜单默认是不显示了，没办法明河只好临时写了这个函数应急下�?/p>
+  <h4> <a href="anim-node-plugin.html">anim-node-plugin</a>模块存在bug�?/h4>
+  <p>当调用show、hide、slideDown、slideUp、toggle时有时会报错，更关键上写法上有缺陷，当元素没有设置高度时，作者为了动画处理方便，使用height:auto/width:auto！�?不是去获取元素的真实高度，当height、width被设置成auto，不可避免存在一些风险，有兴趣的朋友可以把代码中的动画部分改成slideDown、slideUp或toggle试下。这方面的问题，明河日后会专门写篇文章介绍�?</p>
+  <p>尽管anim-node-plugin存在问题，明河还是介绍下几个常用方法�?/p>
+  <h4>1�? animate方法</h4>
+  <p>这是颇为常用的方法，对应KISSY.  Anim，所�?KISSY.  Anim的几个参�? animate方法都有，比�? 动画属�?�? 动画时长 、缓动函数�?回调函数�?/p>
+  <p>写法举例（可以看拆合菜单部分代码�?</p>
+<pre class="prettyprint">
+h = $menu.height();
+$menu.animate('height:0',0.3,S.Easing.easeNone,function(){
+    $menu.hide().height(h);
+});	
+ </pre>
+  <h4>2�? show/hide方法</h4>
+  <p><input type="button" value="显示\隐藏下面的层" id="demo-1" /></p>
+  <div class="demo-div" id="demo-1-div" style="display:none;"></div>
+  <pre class="prettyprint">
+Event.on('#demo-1','click',function(evt){
+    var $div = S.one("#demo-1-div");
+    $div.show(0.5);
+    //使用hide的方法直接报�?
+    /*
+    if($div.css("display") == 'block'){
+        $div.hide(0.5);
+    }else{
+        $div.show(0.5);
+    }
+    */
+    
+})	
+    </pre>
+  <p>由于使用hide的方法会报错，明河注释掉了隐藏代�?</p>
+  <h4>2、fadeIn/fadeOut方法</h4>
+  <p>常见的淡入淡出效�?/p>
+  <p><input type="button" value="淡入\淡出下面的层" id="demo-2" /></p>
+  <div class="demo-div" id="demo-2-div" style="display:none;"></div>
+  <pre class="prettyprint">
+Event.on('#demo-2','click',function(evt){
+    var $div = S.one("#demo-2-div");
+    $div.css({'opacity':'0'})
+    //使用hide的方法直接报�?
+    if($div.css("display") == 'none'){
+        $div.fadeIn(0.5,function(){
+            $div.css({'display':'block'});
+        });
+    }else{
+        $div.fadeOut(0.5,function(){
+            $div.css({'display':'none'});
+        });
+    }
+})
+    </pre>
+    <p>多点击几下，你就会发现，容器的宽度和高度莫名其妙丢了，原来是函数将height\width设置成了auto.......... </p>
+    <p>而且fadeOut还是无效�?....</p>
+  <h4>3、slideDown/slideUp/toggle方法</h4>
+    
+    <p>由于都存在fadeOut类似的问题，这里明河不再累述，因为意义实在不大，目前的这几个方法，明河不推荐使用�?/p>
+  <p>&nbsp;</p>
+  <h4>4、明河结�?/h4>
+ kissy的anim-node-plugin模块的bug无疑让人很沮丧，其他下一个版本有个更好的anim-node-plugin模块�?
+</div>
+<script src="kissy/build/seed.js"></script>
+<script>
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM,h;		
+        //kissy的height\width方法，当元素的display:none时，获取的高度\高度为负数，期待新的版本可以修正这个问题				
+		function height($el){
+			var h = 0,display = $el.css('display'),position = $el.css('position'),visibility = $el.css('hidden');
+			if($el.css('display') == 'none'){
+				//TODO:kissy的css()存在bug，不返回KISSY.Node，导致断�?
+				$el.css({'display':'block','position':'absolute','visibility':'hidden'});
+				h = $el.height();
+				$el.css({'display':'none','position':position,'visibility':visibility});
+			}else{
+				h = $el.height();
+			}
+			return h;	
+		}
+		//获取菜单元素
+		var $menu = S.one('#menu');
+		//TODO:给变量加$，是明河写jquery时保留下的习惯，用加$的变量表示待操作的元素，在kissy中只有方法返回的是Node或NodeList实例（比如one、all）时，才�?前缀
+		
+		//子菜�?
+		var $childrenMenus = S.all('#menu ul');
+		//隐藏�?��子菜�?
+		$childrenMenus.hide();
+		var $menuItemHeader = S.all("#menu div");
+		
+
+		$menuItemHeader.on('click',function(ev){
+			//给子菜单标题，删除箭头样�?
+			S.all('#menu .arrow-down').removeClass('arrow-down');			
+			var $menu = S.one(ev.target).next(),$arrow = S.one(ev.target).children(),
+			    display = $menu.css('display');	
+
+			//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方�?
+			if(display == 'none'){
+				h = height($menu);
+				$menu.css({height: 0,display: 'block',overflow:'hidden'});
+				//TODO:不加缓动和加缓动，�?度差异明�?
+				$menu.animate({'height':h+'px'},1,'elasticOut');
+				$arrow.addClass('arrow-down');
+			}else{
+				h = $menu.height();
+				$menu.animate('height:0',0.3,S.Easing.easeNone,function(){
+					$menu.hide().height(h);
+				});							
+				$arrow.removeClass('arrow-down');
+			}			
+			return false;		
+		})
+		
+		Event.on('#demo-1','click',function(evt){
+			var $div = S.one("#demo-1-div");
+			$div.show(0.5);
+			//使用hide的方法直接报�?
+			/*
+			if($div.css("display") == 'block'){
+				$div.hide(0.5);
+			}else{
+				$div.show(0.5);
+			}
+			*/
+			
+		})
+		Event.on('#demo-2','click',function(evt){
+			var $div = S.one("#demo-2-div");
+			$div.css({'opacity':'0'})
+			//使用hide的方法直接报�?
+			if($div.css("display") == 'none'){
+				$div.fadeIn(0.5,function(){
+					$div.css({'display':'block'});
+				});
+			}else{
+				$div.fadeOut(0.5,function(){
+					$div.css({'display':'none'});
+				});
+			}
+		})																																																					
+	});	
+})(KISSY);
+</script>
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

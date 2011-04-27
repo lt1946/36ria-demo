@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title> Google’s AJAX Search实例</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/css/GgSearch.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>Google’s AJAX Search实例</h2> 
+        <p>demo制作：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。</p>
+        <p>文章链接：<a href="http://www.36ria.com/2882">http://www.36ria.com/2882</a></p>  
+    </div>
+</div>
+<div class="page-960 center">
+	<div class="wrapper">
+		<div id="ajax-search">
+		    <form id="search-form" method="post" class="round-2em">
+	           	<input id="s" type="text" class="round-2em" />
+	            <input type="button" value="搜&nbsp;索" id="search-btn" class="round-2em"/>
+		    </form>
+			<!--搜索结果-->
+			<div id="search-results-container">
+				<div id="search-results">
+					<div class="btn-page prev-page">上一页</div>
+					<div class="btn-page next-page">下一页</div>
+					<s class="triangle"><i class="bor"></i><i class="blo"></i></s>	
+				</div>	
+			</div>				  				    		
+		</div>
+		<div id="site-container">
+			<label>搜索范围：</label>
+			<input type="radio" name="sites[]" class="site" value="36ria.com" checked="checked" />
+			<label>RIA之家</label>
+			<input type="radio" name="sites[]" class="site" value="" />
+			<label>google</label>						
+		</div>
+    </div>    
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="kissy-min.js"></script>
+<script src="js/GgSearch.js"></script>
+<script type="text/javascript">
+$(function(){
+	var S = KISSY,DOM = S.DOM;
+	var ggSearch = new KISSY.GgSearch('#s',{resultsContainer:'#search-results'});
+	var $searchBtn = $('#search-btn');
+	$searchBtn.bind('click',search);
+	//下一页
+	S.one('.next-page').on('click',function(){
+		ggSearch.next();
+	})
+	//上一页
+	S.one('.prev-page').on('click',function(){
+		ggSearch.prev();
+	})
+	//选择站点
+	S.all('.site').on('change',function(ev){
+		var checked = DOM.attr(ev.target,'checked'),val;
+		if(checked){
+			val = DOM.val(ev.target);
+			ggSearch.site(val);
+		}
+	})			
+	function search(e){
+		ggSearch.search();
+		return false;
+	}	
+})	
+	
+</script>
+</body>
+</html>

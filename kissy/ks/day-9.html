@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第九天kissy中的ajax—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<style>
+#zuosa-public-list{
+	background-color:#fff;
+	border:1px solid #ccc;
+	padding:10px;
+	margin:10px 0px;
+}
+#zuosa-public-list li{
+	padding:10px 0px;
+	border-bottom:1px dashed #ccc;
+	margin-left:0px;
+}
+#zuosa-public-list li .user{
+	width:80px;
+	margin-right:10px;
+}
+#zuosa-public-list li .user img{
+	border:1px solid #ccc;padding:1px; 
+}
+#zuosa-public-list li .user p{
+	text-align:center;
+	font-weight:bold;
+	color:#333;
+	font-size:14px;
+}
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第九天kissy中的ajax—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3612">http://www.36ria.com/3612</a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<p>我想大家见拆合菜单也见烦了，接下来的几篇教程不再使用拆合菜单的例子，今天明河来说说kissy中的ajax，很遗憾，截止到1.1.5版kissy的ajax方面API还没放出，目前只有getScript方法，用于获取json数据。<p>   
+    <p>kissy的ajax方面的功能一延再延，的确还是让人失望的。等1.2ajax功能放出后，这部分功能的说明，明河日后补上。</p>
+	<p>这次只测试<strong>KISSY.getScript()</strong></p>
+	<p>KISSY.getScript()的文档请<a href="http://kissyteam.github.com/kissy/docs/ajax/index.html" target="_blank">猛击这里进入</a>。</p>
+	<h4>使用KISSY.getScript()获取做啥微博公共数据</h4>
+	<p><input type="button" value="获取数据" id="get-public-data" /></p>
+	<div id="zuosa-container">
+		<ul id="zuosa-public-list">
+		
+		</ul>		
+	</div>
+    <pre class="prettyprint">
+var S = KISSY;
+S.use('core',function(){
+	var Event = S.Event,DOM = S.DOM,
+	    //回调函数名（用于jsonp）
+	    CALLBACK = 'getPublic';		
+		Event.on('#get-public-data','click',onGetData);
+	/**
+	 * 获取做啥公共消息
+	 * @param {Object} ev 事件对象
+	 */
+	function onGetData(ev){
+		S.getScript("http://api.zuosa.com/statuses/public_timeline.json?callback="+CALLBACK)
+	}																																									
+});	
+/**
+ * jsonp的回调函数，当请求完数据后执行
+ * @param {Object} data 数据
+ */
+function getPublic(data){
+	if(data.length > 0){
+		var arrHtml = [],_li = null,user;
+		//数据处理
+		S.each(data,function(item){
+			user = item["user"];
+			_li = "&lt;li class='clearfix'&gt;&lt;div class='user l'&gt;&lt;img src='&quot;+user['profile_image_url']+&quot;' /&gt;&lt;p&gt;&quot;+user[&quot;screen_name&quot;]+&quot;&lt;/p&gt;&lt;/div&gt;&quot;+item[&quot;text&quot;]+&quot;&lt;/li&gt;";
+			arrHtml.push(_li);					
+		});
+		//将生成的li添加到列表内
+		S.DOM.html(S.get('#zuosa-public-list'),arrHtml.join(""));
+	}			
+}	
+    </pre>
+	<p>当然，这里明河没有做到非常细致，只获取几个基础的数据。</p>
+	<p>getScript有三个参数，但实际上明河只用到了第一个参数即url，这是因为这里使用的jsonp，当数据返回时会自动执行回调函数getPublic，不再需要第二个参数（获取json数据后执行的回调函数）。</p>
+    <h4>4、明河结语</h4>
+ 	<p>ajax方面的更详细介绍，留待1.2出来后，明河补上。不知不觉明河已经发到第九篇了，kissy常用的功能点，基本上都有提到了，下面的教程将讲解kissy更深入的东西，比如继承机制、模块机制等。</p>
+</div>
+<script src="kissy/build/seed.js"></script>
+<script>
+var S = KISSY;
+S.use('core',function(){
+	var Event = S.Event,DOM = S.DOM,
+	    //回调函数名（用于jsonp）
+	    CALLBACK = 'getPublic';		
+		Event.on('#get-public-data','click',onGetData);
+	/**
+	 * 获取做啥公共消息
+	 * @param {Object} ev 事件对象
+	 */
+	function onGetData(ev){
+		S.getScript("http://api.zuosa.com/statuses/public_timeline.json?callback="+CALLBACK)
+	}																																									
+});	
+/**
+ * jsonp的回调函数，当请求完数据后执行
+ * @param {Object} data 数据
+ */
+function getPublic(data){
+	if(data.length > 0){
+		var arrHtml = [],_li = null,user;
+		//数据处理
+		S.each(data,function(item){
+			user = item["user"];
+			_li = "<li class='clearfix'><div class='user l'><img src='"+user['profile_image_url']+"' /><p>"+user["screen_name"]+"</p></div>"+item["text"]+"</li>";
+			arrHtml.push(_li);					
+		});
+		//将生成的li添加到列表内
+		S.DOM.html(S.get('#zuosa-public-list'),arrHtml.join(""));
+	}			
+}		
+</script>	
+
+<!--为了让代码更易读，这里明河引入prettify代码高亮-->
+<link href="prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="prettify/prettify-min.js"></script>
+<script>
+prettyPrint();
+</script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+body{background-color:#FAFDEF;}
+#header{
+	background-color:#ECF4FC;
+	border-bottom:1px solid #A0AFC3;
+	margin:0px;
+	margin-bottom:10px;
+	padding:20px;
+	width:100%;
+	line-height:24px;
+}	
+#share{
+	width:660px;height:70px;
+	margin:10px auto;
+}

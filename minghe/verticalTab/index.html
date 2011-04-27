@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.verticalTab - 垂直选项卡</title>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.verticalTab.js"></script>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+	var VT = $("#demo1").verticalTab({titlesApplyTo:"#demo1-titles",
+	                         contentsApplyTo : "#demo1-contents",
+							 currentTitleCls : "demo1-current-title",
+							 animateType : "fade"});
+	/*						
+	VT.addEventListener("afterChange",function(e){
+		alert(e.currentIndex);
+	});
+	*/		 
+})
+</script>
+</head>
+
+<body>
+<h2 id="header">
+$.verticalTab - 垂直选项卡<br /> 
+作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。
+</h2>
+                        <div class="mar-t-10 clearfix" id="demo1">
+                        	<div class="l" id="demo1-titles">
+                                <ul>
+                                    <li>
+                                        相关文章
+                                    </li> 
+                                    <li>
+                                        最新文章
+                                    </li>
+                                    <li>
+                                        最热文章
+                                    </li>
+                                    <li class="bor-b-no">
+                                        随机文章
+                                    </li>                                                                                                
+                                </ul>                            
+                            </div>
+                            <div class="l" id="demo1-contents">
+                                <ul>
+                                    <li>
+                                       <ul class="post-title-list">
+                                            <li>
+                                                <a href="http://www.36ria.com/2058">使用jquery制作仿Skype的动画按钮</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://www.36ria.com/2021">使用jquery制作动感的鼠标滑过效果</a>
+                                            </li>
+                                             <li><a href="http://www.36ria.com/1890" >php+jquery实现ajax星级评价教程</a></li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1821">如何让层水平垂直居中页面</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1813">使用jquery+php获取和设置Cookies</a>
+
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1787" >使用ajax+jquery+php创建即时编辑可拖拉的菜单</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1756">jquery中的hover方法教程</a>
+                                            </li>
+                                                                                        <li>
+
+                                                <a href="http://www.36ria.com/1714">jquery结合JSONP教程</a>
+                                            </li>
+                                             
+                                        </ul>                                                                       
+                                    </li>     
+                                    <li>
+                                        <ul class="post-title-list">
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2518">制作wordpress收藏分享插件（wordpress插件开发教程三）</a>
+                                            </li>
+
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2504">精选10个jquery表格增强插件</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2498">制作wordpress收藏分享插件（wordpress插件开发教程二）</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2491">制作wordpress收藏分享插件（wordpress插件开发教程一）</a>
+
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2467">20个酷炫的flash站点欣赏</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2460">wordpress插件开发教程电子书</a>
+                                            </li>
+                                                                                        <li>
+
+                                                <a href="http://www.36ria.com/2452" >使用actionscript3.0构建一个异步加载图片的画廊（完结篇）</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2449">新版RIA之家满意度调查结果说明</a>
+                                            </li>
+                                                                                        
+                                        </ul>         
+         
+                                    </li>
+                                    <li>
+                                       <ul class="post-title-list">
+                                            <li>
+                                                <a href="http://www.36ria.com/2058">使用jquery制作仿Skype的动画按钮</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/2021">使用jquery制作动感的鼠标滑过效果</a>
+                                            </li>
+
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1890" >php+jquery实现ajax星级评价教程</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1821">如何让层水平垂直居中页面</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1813" >使用jquery+php获取和设置Cookies</a>
+
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1787">使用ajax+jquery+php创建即时编辑可拖拉的菜单</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1756">jquery中的hover方法教程</a>
+                                            </li>
+                                                                                        <li>
+
+                                                <a href="http://www.36ria.com/1714">jquery结合JSONP教程</a>
+                                            </li>
+                                             
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <ul class="post-title-list">
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1673">优秀flash站点欣赏第五辑</a>
+                                            </li>
+
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1942">玩转wordpress2.9缩略图功能</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1289">博客周记</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1842">十五个使用jquery特效的简单页面站点</a>
+
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/138">Agile Carousel—jquery幻灯片插件</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/517">使用jquery创建一个随鼠标滚动的垂直菜单</a>
+                                            </li>
+                                                                                        <li>
+
+                                                <a href="http://www.36ria.com/1469">blend &#8211; jquery按钮动画插件</a>
+                                            </li>
+                                                                                        <li>
+                                                <a href="http://www.36ria.com/1825">浣溪沙</a>
+                                            </li>
+                                                                                        
+                                        </ul>   
+                                    </li>                                                                                                     
+                                </ul>                            
+                            </div>
+                        </div> 
+</body>
+</html>

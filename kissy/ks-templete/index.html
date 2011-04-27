@@ -1,0 +1,305 @@
+<html>
+
+<head>
+<title>kissy.Template实战</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://www.36ria.com/style/css/base.css" rel="stylesheet" type="text/css" />
+    <link href="http://www.36ria.com/style/css/demo.css" rel="stylesheet" type="text/css" />
+    <script src="http://assets.taobaocdn.com/s/kissy/1.1.6/kissy-min.js"></script>
+    <script src="template.js"></script>
+    <script type="text/javascript">
+        var S = KISSY, DOM = S.DOM,Event = S.Event;
+        S.ready(function(){
+            Event.on('#demo1','click',function(){
+                appendP4p(DOM.attr('#tpl-p4p-old','data-href'),'#tpl-p4p-old');
+            });
+            Event.on('#demo2','click',function(){
+                appendP4p(DOM.attr('#tpl-p4p-new','data-href'),'#tpl-p4p-new');
+            });
+        });
+        /**
+         * 获取数据，将模板解析到DOM
+         * @param url
+         * @param tplId
+         */
+        function appendP4p(url,tplId){
+            S.getScript(url, function() {
+                DOM.html('#J_P4p','');
+                S.tmpl(tplId, {'p4p_sidebar': __p4p_sidebar__}).appendTo('#J_P4p');
+             })
+        }
+    </script>
+<style>
+h2 {
+    color: #808080;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 14px;
+    margin-bottom:5px;
+}
+.p4p-container{
+    margin:10px auto;
+    width:540px;
+    padding:10px;
+    border:1px solid #ccc;
+    background-color:#fff;
+    font-size:12px;
+}
+.marketing {
+    list-style: none outside none;
+}
+.marketing li {
+    display: inline-block;
+    letter-spacing: normal;
+    line-height: 24px;
+    margin: 0 6px;
+    vertical-align: top;
+    width: 83px;
+    word-spacing: normal;
+    margin-bottom:10px;
+}
+.marketing li em{
+    font-style: normal;
+}
+.marketing li div img, .marketing li div .pro-img a {
+    background-color: #FFFFFF;
+    height: 80px;
+    width: 80px;
+}
+.marketing li div .pro-img a {
+    border: 1px solid #DDDDDD;
+    display: block;
+    margin: 0 auto;
+    padding: 1px;
+}
+.marketing li div .pro-price {
+    font-family: 'arial','verdana';
+    height: 14px;
+    line-height: 14px;
+}
+.marketing li div .pro-price em {
+    color: #FF5200;
+    font-family: 'Tahoma','simsun';
+    font-weight: bold;
+    padding-left: 3px;
+}
+.marketing li div .pro-name {
+    display: block;
+    height: 38px;
+    line-height: 18px;
+    margin-top: 3px;
+    overflow: hidden;
+}
+.marketing li div .pro-name a {
+    color: #808080;
+    display: block;
+}
+.marketing li div .pro-name a:hover {
+    color: #FF5200;
+}
+.marketing li div .shop-name {
+    border: 1px solid #F0FAFF;
+    color: #FF6600;
+    display: block;
+    height: 38px;
+    overflow: hidden;
+    text-align: center;
+}
+.marketing li div .shop-name a {
+    display: block;
+    height: 38px;
+}
+
+#J_RRFavCollect {
+    position:relative;
+}
+#J_RRFavCollect .switch-content {
+    height: 157px;
+    margin: 5px 0 0 15px;
+    overflow: hidden;
+    position: relative;
+    width: 540px;
+}
+#J_RRFavCollect .J_RecommandListUl {
+    left: 0;
+    list-style: none outside none;
+    padding: 0;
+    position: absolute;
+    width: 1920px;
+}
+#J_RRFavCollect .J_RecommandListUl li {
+    display: inline-block;
+    height: 145px;
+    letter-spacing: normal;
+    line-height: 24px;
+    margin: 0 6px;
+    padding: 12px 0 0;
+    position: relative;
+    vertical-align: top;
+    width: 84px;
+    word-spacing: normal;
+}
+#J_RRFavCollect .J_RecommandListUl li p {
+    height: 22px;
+    overflow: hidden;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-img a, #J_RRFavCollect .J_RecommandListUl li img {
+    background-color: #FFFFFF;
+    height: 80px;
+    width: 80px;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-img a {
+    border: 1px solid #DDDDDD;
+    display: block;
+    margin: 0 auto;
+    padding: 1px;
+    text-align: center;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-price {
+    font-family: 'arial','verdana';
+    height: 14px;
+    line-height: 14px;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-price em {
+    color: #FF5200;
+    font-family: 'Tahoma','simsun';
+    font-weight: bold;
+    padding-left: 3px;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-name {
+    display: block;
+    height: 38px;
+    line-height: 18px;
+    margin-top: 3px;
+    overflow: hidden;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-name a {
+    color: #808080;
+    display: block;
+}
+#J_RRFavCollect .J_RecommandListUl li .pro-name a:hover {
+    color: #FF5200;
+}
+#J_RRFavCollect .J_RecommandListUl li .shop-name {
+    border: 1px solid #F0FAFF;
+    color: #FF6600;
+    display: block;
+    height: 38px;
+    overflow: hidden;
+    text-align: center;
+}
+#J_RRFavCollect .J_RecommandListUl li .shop-name a {
+    display: block;
+    height: 38px;
+}
+#J_RRFavCollect #other-rec {
+    margin-right: 22px;
+    margin-top: 7px;
+    text-align: right;
+}
+#J_RRFavCollect .J_RecommandListUl li .J_NoInterest {
+    color: #999999;
+    display: none;
+    line-height: 12px;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+#J_RRFavCollect .J_RecommandListUl li .J_NoInterest:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+#J_RRFavCollect .switch {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+#J_RRFavCollect .switch .J_Prev, #J_RRFavCollect .switch .J_Next {
+    display: block;
+    float: left;
+    height: 14px;
+    overflow: hidden;
+    text-indent: -999px;
+    width: 16px;
+}
+#J_RRFavCollect .switch .J_Prev {
+    background: url("http://img04.taobaocdn.com/tps/i4/T1RMX6XaRuXXXXXXXX-16-28.gif") no-repeat scroll 0 -14px transparent;
+    width: 15px;
+}
+#J_RRFavCollect .switch .J_Next {
+    background: url("http://img03.taobaocdn.com/tps/i3/T1Q3X6XaVuXXXXXXXX-16-28.gif") no-repeat scroll 0 -14px transparent;
+}
+#J_RRFavCollect .switch span.disable-prev, #J_RRFavCollect .switch span.disable-next {
+    background-position: 0 0;
+}
+#J_RRFavCollect .switch-content .no-recommend {
+    color: #404040;
+    font-size: 12px;
+    line-height: 157px;
+    text-align: center;
+}    
+</style>
+</head>
+<body>
+<div id="header" class="clearfix">
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div>
+  <div class="l mar-t5">
+        <h2>kissy.Template实战</h2>
+        <p>作者：明河，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p>
+    </div>
+</div>
+<div id="main" class="mar-t10">
+    <!-- 旧版P4P关联推荐模板 START -->
+    <script type="text/x-kissy-template" id="tpl-p4p-old" data-href="http://tmatch.simba.taobao.com/?name=tbuad&catid=&pid=420434_1006,420435_1006&count=5&rct=100&o=j&keyword=iphone&offset=0&ip=121.0.29.237&frontcatid=1512%2C50008090%2C50019321%2C50018909%2C1201%2C11&type=0&refpid=&propertyid=&lid=&gprice=&loc=&sort=&q2cused=0&sbid=18&p4p=__p4p_sidebar__">
+        <h2 class="recommend-title">喜欢此宝贝的人还喜欢：</h2>
+        <ul class="marketing">
+            {{#each p4p_sidebar}}
+                <li>
+                    <div>
+                        <span class="pro-img">
+                            <a target="_blank" href="{{_ks_value.EURL}}"><img src="{{_ks_value.TBGOODSLINK}}"></a></span>
+                        <span class="pro-name"><a title="{{_ks_value.EURL.TITLE}}" href="{{_ks_value.EURL}}" target="_blank">{{_ks_value.TITLE}}</a></span>
+                        <div class="pro-price">￥<em>{{_ks_value.SELL}}</em></div>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
+    </script>
+    <!-- 旧版P4P关联推荐模板 END -->
+    <!-- 新版P4P关联推荐模板 START -->
+    <script type="text/x-kissy-template" id="tpl-p4p-new" data-href="http://tmatch.simba.taobao.com/?name=tbuad&catid=&pid=420434_1006,420435_1006&count=5&rct=100&o=j&keyword=iphone&offset=0&ip=121.0.29.237&frontcatid=1512%2C50008090%2C50019321%2C50018909%2C1201%2C11&type=0&refpid=&propertyid=&lid=&gprice=&loc=&sort=&q2cused=0&sbid=18&p4p=__p4p_sidebar__">
+        <div class="fav-recommend gird" id="J_RRFavCollect">
+            <h2 class="recommend-title">喜欢此宝贝的人还喜欢：</h2>
+            <div class="switch-content">
+                <ul class="marketing J_RecommandListUl">
+                    {{#each p4p_sidebar}}
+                        <li>
+                            <div>
+                                <span class="pro-img">
+                                    <a target="_blank" href="{{_ks_value.EURL}}"><img src="{{_ks_value.TBGOODSLINK}}"></a></span>
+                                <span class="pro-name"><a title="{{_ks_value.EURL.TITLE}}" href="{{_ks_value.EURL}}" target="_blank">{{_ks_value.TITLE}}</a></span>
+                                <div class="pro-price">￥<em>{{_ks_value.SELL}}</em></div>
+                            </div>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="switch">
+                <span class="J_Prev disable-prev">上一页</span>
+                <span class="J_Next">下一页</span>
+            </div>
+            <div id="other-rec">
+                <a target="_blank" href="">其它推荐&nbsp;<span class="arrow">&gt;&gt;</span></a>
+            </div>
+        </div>
+    </script>
+    <!-- 新版P4P关联推荐模板 END -->
+    <p><button id="demo1">旧版p4p</button>&nbsp;<button id="demo2">新版p4p</button></p>
+    <div id="J_P4p" class="p4p-container">
+        
+    </div>
+</div>
+</body>
+
+</html>

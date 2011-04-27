@@ -1,0 +1,59 @@
+/*******************重置html样式*******************/
+html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,input,p,blockquote,th,td,form{margin:0;padding:0;}
+ol,ul,li,dd,dt,dl{ list-style:none;}
+address,caption,cite,code,dfn,th,var{font-style:normal;font-weight:normal;}
+img{border:0;}
+caption,th{text-align:left;}
+table{border-collapse:collapse;empty-cells:show;}
+input,select,textarea{font-size:12px;}
+textarea {}
+body{font-size:12px;}
+a{text-decoration:none;color:#666;}
+/*******************可重用样式*******************/
+
+
+/*-----显示模式---*/
+.none{display:none;}
+.block{display:block;}
+.inline{display:inline;}
+.hidden{overflow:hidden;}
+/*-----对齐方式----*/
+.l{float:left;}
+.r{float:right;}
+.clear{clear:both;height:0px;font-size:0px;line-height:0px;over-flow:hidden;}
+.clear {display:inline;}
+.a-c{text-align:center;margin:0 auto;}
+.a-l{text-align:left;}
+.a_r{text-align:right;}
+.center{margin:0px auto;}
+/*-----margin----*/
+.mar-t6{margin-top:6px;}
+.mar_l_r_4{margin:0px 4px;}
+.mar_l_r_16{margin:0px 16px;}
+.mar_t_10{margin-top:10px;}
+.mar_b_10{margin-bottom:10px;}
+.mar_r_10{margin-right:10px;}
+.mar_l_10{margin-left:10px;}
+/*-----padding----*/
+.pad10{padding:0 10px;}
+
+/*-----font size----*/
+.font-12{font-size:12px;}
+.font-14{font-size:14px;}
+.bold{font-weight:bold;}
+/*-------color------*/
+.red{color:#b70a03;}
+.gray{color:#999999;}
+.blue,a.blue{color:#002bb8;}
+.orange{color:#FF9900 !important;}
+.gray{color:#666;}
+.white{color:#FFFFFF;}
+/*------border-----*/
+.bor-gray{border:1px #CCCCCC solid;}
+.bor_none{border:none !important;}
+/*------width-----*/
+.w1000{width:1000px;}
+.w_200{width:200px;}
+/*------height-----*/
+.h_24{height:24px;}
+

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$.verticalTab - 垂直选项卡</title>
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../js/jquery.verticalTab.js"></script>
+<link href="../style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="css/lai120-images-slide.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+$(function(){
+
+	var VT = $("#lai120-images-slide").verticalTab({titlesApplyTo:"#lai120-images-slide-titles",
+	                         contentsApplyTo : "#lai120-images-slide-contents",
+							 currentTitleCls : "lai120-images-slide-current-title",
+							 animateType : "fade"})
+					.verticalTab("api");
+	//改变选项卡内容后触发				   
+	VT.addEventListener("afterChange",function(e){
+		setCurrentPoint();		
+	});
+		
+	addpoints();
+	//添加计数
+	function addpoints(){
+		var size = 	VT.size;
+		var _a = [];
+		for(var i = 0;i<size;i++){
+			_a.push('<span class="l"></span>');
+		}
+		$(".points").html(_a.join(''));
+		setCurrentPoint();	
+		$(".points").children().click(function(){
+			var _i = $(this).index();
+			VT.show(_i);
+		})
+	}
+	function setCurrentPoint(){
+		var _current = VT.current;
+		$(".points").children().removeClass("current").eq(_current).addClass("current");
+	}
+})
+</script>
+</head>
+
+<body>
+<h2 id="header">
+$.verticalTab - 垂直选项卡<br /> 
+<p>作用于水平选项卡演示</p>
+作者：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。
+</h2>
+                    <div class="mar-t-10 clearfix" id="lai120-images-slide">
+        <div id="lai120-images-slide-contents">
+            <ul>
+                <li>
+  					<div><a href=""><img src="images/index_dh1.jpg" /></a></div>
+                    <h4>英格兰1-4德国</h4>
+                    <p>英格兰获得小组第二使得具有传奇色彩的英德大战提前在1/8决赛上演。双方此前27次交手，英格兰12胜6平10负占据上风。</p>
+                </li>                                        
+                <li>
+  					<div><a href=""><img src="images/index_dh2.jpg" /></a></div>
+                    <h4>测试2测试2测试2测试2测试2</h4>
+                    <p>测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2测试2。</p>                  
+                </li>
+                <li>
+  					<div><a href=""><img src="images/index_dh1.jpg" /></a></div>
+                    <h4>测试3测试3测试3测试3测试3测试3</h4>
+                    <p>测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3测试3。</p>
+                </li>
+                <li>
+  					<div><a href=""><img src="images/index_dh2.jpg" /></a></div>
+                    <h4>测试4测试4测试4测试4测试4测试4</h4>
+                    <p>测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4测试4。</p>                                    
+                </li>                                                                                                     
+            </ul> 
+            <div class="points clearfix">
+
+            </div>                                                          
+        </div>                        
+        <div id="lai120-images-slide-titles" class="clearfix">
+            <ul>
+                        <li class="l">
+                        	<a href="">
+                                <div><img src="images/index_dhimg3.jpg" /></div>
+                                <p>测试1测试1测试1测试1测试1测试1测试1</p>                            
+                            </a>
+                       </li>
+        
+                        <li class="l">
+                        	<a href="">
+                                <div><img src="images/index_dhimg3.jpg" /></div>
+                                <p>测试2测试2测试2测试2测试2</p>                            
+                            </a>
+                       </li>
+                        <li class="l">
+                        	<a href="">
+                                <div><img src="images/index_dhimg3.jpg" /></div>
+                                <p>测试3测试3测试3测试3测试3测试3</p>                            
+                            </a>
+                       </li>
+                        <li class="l">
+                        	<a href="">
+                                <div><img src="images/index_dhimg3.jpg" /></div>
+                                <p>测试4测试4测试4测试4测试4测试4</p>                            
+                            </a>
+                       </li>
+                    </ul>                      
+        </div>
+    </div>
+</body>
+</html>

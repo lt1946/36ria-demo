@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>ajbridge - AJBridge Docs</title>
+<link rel="stylesheet" href="../assets/base-min.css" />
+<link rel="stylesheet" href="../assets/docs.css" />
+</head>
+<body class="w866">
+<div id="header">
+    <a class="logo" href="../index.html"><img src="../assets/logo.png" alt="KISSY"  /></a>
+    <p class="rel-nav">
+         <a href="http://github.com/kissyteam/kissy-ajbridge/">src files</a>
+    </p>
+</div>
+<div id="content" class="layout grid-s232m0">
+    <div class="col-main">
+        <div class="main-wrap">
+            <div class="section summary">
+                <p>本章节将假设您已了解以下内容：</p>
+                <ul>
+                    <li><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/embed-swf-onto-webpage.html">嵌入SWF的几种方式</a></li>
+                    <li><a href="http://kissyteam.github.com/kissy/docs/flash/practice/references/flashplayer-parameters.html">Flash播放器参数</a></li>
+                    <li><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a></li>
+                    <li><a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">静态发布方式</a></li>
+                </ul>
+
+                <p>Requires:</p>
+                <ul>
+                    <li><a href="http://github.com/kissyteam/kissy/blob/master/build/packages/core.js">KISSY CORE</a></li>
+                    <li><a href="http://github.com/kissyteam/kissy/blob/master/build/flash/flash-pkg.js" target="_blank">Flash package</a></li>
+                </ul>
+
+                <p>Editors:</p>
+                <ul>
+                    <li><a href="mailto:longzang@taobao.com">龙藏</a>,Taobao,Inc</li>
+                </ul>
+			</div>
+
+            <div class="section" id="static">
+                <h3>Properties(Static)</h3>
+
+                <div class="member prop">
+                    <h4>
+                    	<a name="prop_version">version</a> - <code>String</code>
+					</h4>
+                    <div class="detail">
+                       <p>AJBridge 的版本信息</p>
+                    </div>
+					  <h4>
+                    	<a name="prop_instances">instances</a> - <code>Object</code>
+					</h4>
+                    <div class="detail">
+                       <p>AJBridge 注册对象池</p>
+					   <p class="notice">建议在一般情况下做只读操作。</p>
+                    </div>
+                </div>
+				
+				<h3>Methods(Static)</h3>
+                <div class="member method">
+                    <h4>
+                        <a name="method_eventHandler">eventHandler</a>
+                        <code>void <em>eventHandler</em>(id, event)</code>
+                    </h4>
+                    <div class="detail">
+                    	<p> AJBridge 注册对象事件分配器。</p>
+						 <dl class="parameters">
+                            <dt>Parameters:</dt>
+                            <dd>
+                                <code class="param-name">id</code>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	从 SWF 传出的 自身 id。
+                            </dd>
+							<dd>
+                                <code class="param-name">event</code>
+                                <code class="param-type">&lt;Object&gt;</code>
+                               	从 SWF 传出的 自身事件。
+								该 event 必有属性  type。
+                            </dd>
+                        </dl>
+                        <p class="notice">建议在一般情况下做不要覆盖或者重命名此方法。</p>
+                    </div>
+					 <h4>
+                        <a name="method_augment">augment</a>
+                        <code>void <em>augment</em>(C, methods)</code>
+                    </h4>
+                    <div class="detail">
+                    	<p>批量注册 SWF 中公开的方法。</p>
+                    	<p class="tips">是 AJBridge 扩展应用必用方法。</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">C</code>
+                                <code class="param-type">&lt;Class&gt;</code>
+                               	需要向添加的 SWF 公开的方法 的 JS 类
+                            </dd>
+                            <dd>
+                                <code class="param-name">methods</code>
+                                <code class="param-type">&lt;String&gt;|&lt;Array&gt;</code>
+                               	已知的 SWF 公开方法
+                            </dd>
+                        </dl>
+<pre class="example-code"><code>
+// 注册 SWF 公开的单个方法
+AJBridge.augment(AJBridge, 'activate');
+// 注册 SWF 公开的多个方法
+AJBridge.augment(Store,
+		[
+			"getItem",
+			"setItem",
+			"removeItem",
+			"getLength",
+			"key",
+			"clear",
+			"getModificationDate",
+			"hasAdequateDimensions",
+			"displaySettings",
+			"getUseCompression",
+			"getSize",
+			"setMinDiskSpace"
+		]
+	);
+</code></pre>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="section" id="properties">
+				
+				<a name="part_methods"></a>
+				<h3>Methods</h3>
+                <div class="member method">
+                    <h4>
+                        <a name="method_init">init</a>
+                        <code>void <em>init</em>()</code>
+                    </h4>
+                    <div class="detail">
+                        <p>初始化 AJBridge 实例</p>
+						<p class="notice">请将此函数放置至配置和监听函数之后。</p>
+						<p>以下为推荐格式:</p>
+<pre class="example-code"><code>
+// 1. 初始化 id 和 config 此处略...
+// 2. 创建实例
+var aj = new AJBridge(id, config);
+
+// 3. 对实例进行监听
+aj.on("failed", function(ev) {
+        //TODO：
+    });
+aj.on("error", function(ev) {
+        //TODO：
+    });
+//...
+
+// 4.初始化实例
+aj.init(); 
+</code></pre>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_callSWF">callSWF</a>
+                        <code>any <em>callSWF</em>(func, args)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>调用 swf 的方法</p>
+						<p class="tips">若没有该方法注册过，则将不会被执行。</p>
+						<p class="notice">不推荐直接使用该方法，仅在子类覆盖时参考使用。</p>
+						<dl class="parameters">
+                            <dt>Parameters:</dt>
+							<dd>
+                                <code class="param-name">func</code>
+                                <code class="param-type">&lt;Function&gt;</code>
+                               	调用的 swf 公开的方法
+                            </dd>
+                            <dd>
+                                <code class="param-name">args</code>
+                                <code class="param-type">&lt;Array&gt;</code>
+                               	swf 公开的方法的传参
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_activate">activate</a>
+                        <code>void <em>activate</em>(config)</code>
+                    </h4>
+                    <div class="detail">
+                        <p>激活<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">静态发布方式</a>的 swf </p>
+						<p>使用时静态发布方式需注意以下几点:</p>
+						<ol>
+							<li>SWF 的  HTML 嵌入元素必需带 id</li>
+							<li>必需将播放器参数 <code>allowscriptaccess</code> 值配置为 <code>always</code> </li>
+							<li>必需将播放器自定义参数 <code>flashvars</code> 值配置为 <code>jsEntry=KISSY.AJBridge.eventHandler&amp;swfID=[YOUR_SWF_ID]</code> 。 
+								其中  <code>jsEntry</code> 的值确保一定为 <code>KISSY.AJBridge.eventHandler</code>，
+								<code>swfID</code> 的值确保一定为 SWF 的  HTML 嵌入元素的 id。
+							</li>
+						</ol>
+						
+						<p> HTML 代码示例( O-O 式)</p>
+<pre class="example-code"><code>
+&lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+ width="400" height="300" id="myFlashContent3"&gt;
+    &lt;param name="movie" value="assets/ajbridge.swf"/&gt;
+    &lt;param name="allowscriptaccess" value="always"/&gt;
+    &lt;param name="bgcolor" value="#C4C4C4"/&gt;
+    &lt;param name="flashvars"
+value="jsEntry=KISSY.AJBridge.eventHandler&amp;swfID=myFlashContent3"/&gt;
+    &lt;!--[if !IE]&gt;-->
+    &lt;object type="application/x-shockwave-flash"
+	 data="assets/ajbridge.swf" width="400" height="300"&gt;
+        &lt;param name="allowscriptaccess" value="always"/&gt;
+        &lt;param name="flashvars"
+value="jsEntry=KISSY.AJBridge.eventHandler&amp;swfID=myFlashContent3"/&gt;
+        &lt;param name="bgcolor" value="#C4C4C4"/&gt;
+        &lt;!--&lt;![endif]--&gt;
+        &lt;a href="http://www.adobe.com/go/getflashplayer"&gt;
+            &lt;img src="../../assets/get_flash_player.gif"
+alt="Get Adobe Flash player"/&gt;
+        &lt;/a&gt;
+        &lt;!--[if !IE]&gt;--&gt;	
+    &lt;/object&gt;
+    &lt;!--&lt;![endif]--&gt;
+&lt;/object&gt;	
+</code></pre>
+						<p> JS 代码示例, 不需要指定 swf 路径</p>
+<pre class="example-code"><code>
+var a = new A(id,config);
+a.on("failed", function(ev) {
+    test.fail();
+    test.echo('failed：' + ev.message.status);
+});
+a.on("error", function(ev) {
+    test.fail();
+    test.echo('error：' + ev.message);
+});
+//...
+a.init();	
+</code></pre>												
+                    </div>
+                </div>
+				<div class="member method">
+                    <h4>
+                        <a name="method_getReady">getReady</a>
+                        <code>String <em>getReady</em>()</code>
+                    </h4>
+					<div class="detail">
+                        <p>校验 AJBridge 是否可用</p>
+						<p class="tips">返回值始终固定为  "ready"。</p>
+						<dl class="parameters">
+                            <dt>Returns:</dt>
+							<dd>
+                                <code class="param-type">&lt;String&gt;</code>
+                               	恒为 "ready"
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="section" id="events">
+				 <a name="part_events"></a>
+				 <h3>JS Events</h3>
+				 <p>来自 AJBridge.js 定义的事件 </p>
+				 <div class="member event">
+                    <h4>
+                        <a name="event_failed">failed</a>
+                    </h4>
+                    <div class="detail">
+                        <p>当Flash Player 的 版本过低或者未安装将调用此事件。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+			            <tbody>
+			            	<tr>
+			            		<th>属性</th>
+								<th>值</th>
+							</tr>
+			           		<tr>
+			           			<td><code>message</code></td>
+								<td><code>{id:String,status:Number,swf:HTMLElement}</code>值属性含义同Properties部分</td>
+							</tr>
+			          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_error">error</a>
+                    </h4>
+                    <div class="detail">
+                        <p>当调度 通过 <code>augment()</code> 绑定 SWF 的方法失败时触发。</p>
+                        <p>可能 SWF 未准备好，或者未在 SWF 定义该方法。</p>
+						<p>此事件具有以下属性:</p>
+						<table width="100%" class="innertable">
+				            <tbody>
+				            	<tr>
+				            		<th>属性</th>
+									<th>值</th>
+								</tr>
+				           		<tr>
+				           			<td><code>message</code></td>
+									<td>调用失败时抛出的异常</td>
+								</tr>
+				          	</tbody>
+		  				</table>
+                    </div>
+				</div>
+				
+				 <h3>SWF Event</h3>
+				 <p>来自 SWF 定义的事件 </p>
+				 <div class="member event">
+                    <h4>
+                        <a name="event_init">init</a>
+                    </h4>
+                    <div class="detail">
+                        <p> SWF 初始化。</p>
+						<p class="notice"> 仅在<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a>有该事件。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_addCallback">addCallback</a>
+                    </h4>
+                    <div class="detail">
+                        <p> SWF 动态添加了向 js 公开的N个方法(N>=1)。</p>
+						<p class="notice"> 仅在<a href="http://kissyteam.github.com/kissy/docs/flash/practice/examples/publishing-static.html" target="_blank">动态发布方式</a>有该事件。</p>
+                    </div>
+				</div>
+				<div class="member event">
+                    <h4>
+                        <a name="event_swfReady">swfReady</a>
+                    </h4>
+                    <div class="detail">
+                        <p> SWF 准备就绪。</p>
+                        <p class="notice"> 注意，这仅仅是 SWF 本身下载完毕并就绪。具体应用需要在特定的事件下运行处理完毕后才能调度 SWF 公开的方法。</p>
+                    </div>
+				</div>
+			</div>
+            <div class="section notes">
+                <p>
+                    	示例详细：<a href="../../src/ajbridge/test.html">ajbridge/test.html</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sub">
+        <div class="sub-wrap">
+            <div class="loc"><a href="../index.html">home</a> &rsaquo; ajbridge :</div>
+            <div class="toc">
+                <h3>Properties(Static)</h3>
+                <ul>
+                    <li><a href="index.html#prop_version">version</a></li>
+                    <li><a href="index.html#prop_instances">instances</a></li>
+                </ul>
+				<h3>Methods(Static)</h3>
+				<ul>
+                    <li><a href="index.html#method_eventHandler">eventHandler</a></li>
+                    <li><a href="index.html#method_augment">augment</a></li>
+                </ul>
+				<h3>Methods</h3>
+				<ul>
+                    <li><a href="index.html#method_init">init</a></li>
+                    <li><a href="index.html#method_callSWF">callSWF</a></li>
+                    <li><a href="index.html#method_activate">activate</a></li>
+                    <li><a href="index.html#method_getReady">getReady</a></li>
+                </ul>
+				<h3>Events</h3>
+				<ul>
+                    <li><a href="index.html#event_failed">failed</a></li>
+                    <li><a href="index.html#event_error">error</a></li>
+                    <li><a href="index.html#event_init">init</a></li>
+                    <li><a href="index.html#event_addCallback">addCallback</a></li>
+                    <li><a href="index.html#event_swfReady">swfReady</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+    <p class="copyright">&copy; 2009 - 2029 KISSY UI LIBRARY</p>
+</div>
+</body>
+</html>

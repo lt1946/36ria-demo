@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>利用jquery.backgroundPosition（背景图片动画）制作华丽的菜单</title>
+<link href="style/css/base.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l">
+        <h2>利用jquery.backgroundPosition（背景图片动画）制作华丽的菜单</h2> 
+        作者： Jonathan Snook，中文demo制作：明河共影，欢迎访问<a href="http://www.36ria.com">我的博客</a>。  
+    </div>
+</div>
+<div class="page-960 center">
+	<div class="wrapper clearfix">
+        <h2>示例1：没有使用脚本特效的菜单</h2>
+            <ul id="noscript">
+                <li><a href="http://www.36ria.com/">首页</a></li>
+                <li><a href="http://www.36ria.com/">关于作者</a></li>
+                <li><a href="http://www.36ria.com/">联系作者</a></li>
+            </ul>
+        
+        <h2>示例2：背景图片从上向下移动</h2>
+            <ul id="a">
+                <li><a href="http://www.36ria.com/">首页</a></li>
+                <li><a href="http://www.36ria.com/">关于作者</a></li>
+                <li><a href="http://www.36ria.com/">联系作者</a></li>
+            </ul>
+        
+        <h2>示例3：背景图片从右向左</h2>
+            <ul id="b">
+                <li><a href="http://www.36ria.com/">首页</a></li>
+                <li><a href="http://www.36ria.com/">关于作者</a></li>
+                <li><a href="http://www.36ria.com/">联系作者</a></li>
+            </ul>
+        <h2>示例4：颜色从浅到深</h2>
+        
+            <ul id="c">
+                <li><a href="http://www.36ria.com/">首页</a></li>
+                <li><a href="http://www.36ria.com/">关于作者</a></li>
+                <li><a href="http://www.36ria.com/">联系作者</a></li>
+            </ul>
+        <h2>示例5：从绿色到红色</h2>
+            <ul id="d">
+                <li><a href="http://www.36ria.com/">首页</a></li>
+                <li><a href="http://www.36ria.com/">关于作者</a></li>
+                <li><a href="http://www.36ria.com/">联系作者</a></li>
+            </ul>
+
+    </div>
+</div>
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.backgroundPosition.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	$('#a a')
+		.css( {backgroundPosition: "-20px 35px"} )
+		.mouseover(function(){
+			$(this).stop().animate({backgroundPosition:"(-20px 94px)"}, {duration:500})
+		})
+		.mouseout(function(){
+			$(this).stop().animate({backgroundPosition:"(40px 35px)"}, {duration:200, complete:function(){
+				$(this).css({backgroundPosition: "-20px 35px"})
+			}})
+		})
+	$('#b a')
+		.css( {backgroundPosition: "0 0"} )
+		.mouseover(function(){
+			$(this).stop().animate({backgroundPosition:"(-150px 0)"}, {duration:500})
+		})
+		.mouseout(function(){
+			$(this).stop().animate({backgroundPosition:"(-300px 0)"}, {duration:200, complete:function(){
+				$(this).css({backgroundPosition: "0 0"})
+			}})
+		})
+	$('#c a')
+		.css( {backgroundPosition: "0 0"} )
+		.mouseover(function(){
+			$(this).stop().animate({backgroundPosition:"(0 -250px)"}, {duration:500})
+		})
+		.mouseout(function(){
+			$(this).stop().animate({backgroundPosition:"(0 0)"}, {duration:500})
+		})
+	$('#d a')
+		.css( {backgroundPosition: "0 0"} )
+		.mouseover(function(){
+			$(this).stop().animate({backgroundPosition:"(0 -250px)"}, {duration:500})
+		})
+		.mouseout(function(){
+			$(this).stop().animate({backgroundPosition:"(0 0)"}, {duration:500})
+		})
+});
+</script>
+
+</body>
+</html>

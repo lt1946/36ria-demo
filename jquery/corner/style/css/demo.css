@@ -1,0 +1,53 @@
+body{background-color:#FAFDEF;}
+#header{
+	height:100px;line-height:32px;
+	padding:10px;
+	background:url(../images/header-bg.png) 0px 0px repeat-x;
+	font-size:14px;color:#FFC;
+}
+#logo{
+	margin-right:10px;
+}
+#header  h2{
+	font-size:16px;
+	color:#FFF;
+
+}
+#header a{
+	color:#3CF;
+	text-decoration:underline;
+}
+#header a:hover{
+	color:#CCC !important;
+}	
+
+
+/*------------正式样式----------------*/
+.wrapper{
+	margin-top:20px;
+	padding:20px;
+	background-color:#FFF;
+	border:1px solid #999;
+	line-height:24px;
+}
+
+div.section { clear: left; }
+div.section h1 { padding: 20px 20px 0 20px }
+div.section h2 { background: #fff; padding: 1px 20px;  }
+div.demo, div.inner { color: #000; text-align: center; font-family: verdana, arial, sans-serif;}
+div.demo  { float: left; width: 18em; padding: 30px; margin: 1em; background: #6af; }
+div.inner { margin: 0; background: #ffc; padding: 10px; border:0; zoom:1;}
+div.outer { float: left; margin: 15px; background: #c82; padding: 8px; width: 22em }
+div.fun   { margin: 2px; }
+div#readyTest { background-color: #6af; float: right; padding: 10px; height: 20px }
+
+#abs { position: absolute; width: 200px; background: #ffa;
+    padding: 5px; margin: 8px; top: 0; right: 0; text-align: center }
+
+/* fixed height/width testing */
+.box  { background-color: #6af; padding: 15px; text-align: center; margin: 25px }
+#box1 { zoom:1 }                                       /* fluid (zoom for layout) */
+#box2 { height: 150px;  }                              /* fixed height */
+#box3 { width:  300px; margin:auto }                   /* fixed width */
+#box4 { height: 150px; width: 300px; margin:auto }     /* fixed height and width */
+

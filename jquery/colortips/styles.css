@@ -1,0 +1,28 @@
+
+#page{
+	/* This the main container div */
+	width:900px;
+	margin:0 auto;
+	position:relative;
+	padding-top:1px;
+}
+#page h4{
+	font-size:18px !important;
+	margin:10px 0px;
+}
+
+h2.backToTz{
+	position:absolute;
+	right:0;
+	top:52px;
+	white-space:nowrap;
+}
+
+a, a:visited {
+	text-decoration:none;
+	outline:none;
+	color:#159ce9;
+}
+
+a:hover{	text-decoration:underline;}
+a img{	border:none;}

@@ -1,0 +1,272 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>第四天DOM（基础篇）—15天学会kissy</title>
+<link href="kissy/build/cssbase/base-min.css" rel="stylesheet" type="text/css" />
+<link href="style/css/demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="header" class="clearfix">
+	<div id="logo" class="l"><img src="style/images/logo.png" /></div>
+	<div class="l mar-t5">
+        <h2>第四天DOM（基础篇）—15天学会kissy</h2>
+        <p>作者：明河共影，博客：<a href="http://www.36ria.com/">RIA之家</a></p>
+        <p>文章链接：<a href="http://www.36ria.com/3228">http://www.36ria.com/3228</a></p>    
+    </div>
+</div>
+<div id="content" class="w950 mar-t10">
+	<p>起始代码</p>
+    <pre class="brush: javascript;">
+        (function(S){
+            S.use('core',function(){
+                var Event = S.Event,DOM = S.DOM;
+            });
+            
+        })(KISSY);
+    </pre> 
+    KISSY.DOM包含所有dom操作的API，这里为了日后调用方便，将其赋值给DOM。
+    <pre class="brush: javascript;">
+		DOM = S.DOM
+    </pre>      
+    <h4>拆合菜单</h4>
+    <ul id="menu" class="mar-t-10">	
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=1" onclick="return false;">jquery</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=7" target="_blank">jquery插件</a></li>
+                <li><a href="http://www.36ria.com/?cat=6" target="_blank">jquery教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=105" target="_blank">jquery与ajax</a></li>                            
+            </ul>
+        </li>
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=11" onclick="return false;">flex</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=101" target="_blank">flex实例</a></li>
+                <li><a href="http://www.36ria.com/?cat=113" target="_blank">flex教程</a></li>                          
+            </ul>                            
+        </li> 
+        <li class="menu-item">
+            <div><a href="http://www.36ria.com/?cat=3" onclick="return false;">javascript</a></div>
+            <ul>
+                <li><a href="http://www.36ria.com/?cat=116" target="_blank">javascript资源</a></li>
+                <li><a href="http://www.36ria.com/?cat=4" target="_blank">javascript教程</a></li>
+                <li><a href="http://www.36ria.com/?cat=9" target="_blank">浏览器</a></li>                            
+            </ul>                             
+        </li>                                                                                                                       
+    </ul>
+    
+    <p>此菜单样式来自明河的上一版RIA之家的版本，以下示例的操作对象都为此菜单，该菜单的html代码如下（做了截取）：</p>
+    <code> &lt;ul id=&quot;menu&quot; class=&quot;mar-t-10&quot;&gt; <br />
+&lt;li class=&quot;menu-item&quot;&gt;<br />
+&lt;div&gt;&lt;a href=&quot;http://www.36ria.com/?cat=1&quot; onclick=&quot;return false;&quot;&gt;jquery&lt;/a&gt;&lt;/div&gt;<br />
+&lt;ul&gt;<br />
+&lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=7&quot; target=&quot;_blank&quot;&gt;jquery插件&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=6&quot; target=&quot;_blank&quot;&gt;jquery教程&lt;/a&gt;&lt;/li&gt;<br />
+&lt;li&gt;&lt;a href=&quot;http://www.36ria.com/?cat=105&quot; target=&quot;_blank&quot;&gt;jquery与ajax&lt;/a&gt;&lt;/li&gt; <br />
+&lt;/ul&gt;<br />
+&lt;/li&gt;<br />
+.......<br />
+&lt;/ul&gt;
+    </code>
+	<p>明河将一步步完成拆合菜单的交互，动手是最好的学习方法，请大胆的测试DOM下的各个方法，同时多看文档，熟必能生巧！</p>     
+    <h4>step 1:获取id为“menu”的拆合菜单元素</h4> 
+    <pre class="brush: javascript;">
+            var menu = S.get("#menu");
+    </pre> 
+    <p>KISSY.get()用于获取符合选择器的第一个元素,留意永远只返回一个dom节点。参数为css选择器</p>     
+    <h4>step 2:获取class为“menu-item”的li</h4>
+    <pre class="brush: javascript;">
+            var menuItem = S.query("#menu .menu-item");
+    </pre>
+    <p>由于需要返回的是多个dom节点，所以不能用get，而要使用query。</p>
+    <h4>step 3:获取class为"menu-item"的li的个数</h4>
+    <p><input type="button" value="获取个数" id="demo3-btn" /></p>
+    <pre class="brush: javascript;">
+		var menuItem = S.query("#menu .menu-item");
+		
+		Event.on(S.get("#demo3-btn"),'click',function(){
+			alert(menuItem.length);
+		})      
+    </pre> 
+    <h4>step 4:隐藏class为"menu-item"的li下的ul,即子菜单列表</h4>
+    <p><input type="button" value="隐藏子菜单列表" id="demo4-btn" />&nbsp;&nbsp;&nbsp;<input type="button" value="显示子菜单列表" id="demo4-btn-2" /></p>
+    <p>点击完回头看菜单的变化</p>
+    <pre class="brush: javascript;">
+		var childrenMenus = S.query("#menu ul");
+		
+		Event.on(S.get("#demo4-btn"),'click',function(){
+			DOM.hide(childrenMenus);
+		})
+		Event.on(S.get("#demo4-btn-2"),'click',function(){
+			DOM.show(childrenMenus);
+		})	    
+    </pre> 
+    <p>KISSY.DOM.hide()隐藏元素，那么KISSY.DOM.show()显示元素</p>
+    <h4>step 5:点击一级菜单项，显示该菜单项下的字菜单</h4>
+    <p>请先点击demo4的"隐藏子菜单列表"，然后点击一级菜单项</p> 
+    <pre class="brush: javascript;">
+		var menuItemHeader = S.query("#menu div");	
+		Event.on(menuItemHeader,'click',function(ev){
+			var nextMenu = DOM.next(ev.target);
+			DOM.show(nextMenu);
+			return false;
+		})    
+    </pre> 
+    <p>留意方法：DOM.next()，同时留意ev.target</p>     
+    <p>有点样子出来了，1级菜单项上有个箭头，我们希望子菜单显示后，该箭头变成向下，继续看</p>
+    <h4>step 6:改变一级菜单项的箭头</h4>  
+    <p>加个切换样式，该样式改变箭头背景图片位置（箭头是1级菜单项下的链接背景图片）</p>
+    <pre class="brush: css;">
+        .arrow-down{
+            background-position:0px 2px !important;
+        }  
+    </pre> 
+    <p>子菜单显示后，给1级菜单下的链接加上arrow-down样式类</p> 
+    <p>在step 5的基础上加二行代码</p>  
+    <pre class="brush: javascript;">
+		var menuItemHeader = S.query("#menu div");	
+		Event.on(menuItemHeader,'click',function(ev){
+            //显示子菜单
+			var nextMenu = DOM.next(ev.target);
+			DOM.show(nextMenu);
+            //改变箭头
+			var children = DOM.children(ev.target);
+			DOM.addClass(children,'arrow-down');
+			return false;
+		}) 
+    </pre>
+    <p>留意方法：DOM.children()、DOM.addClass()</p>    
+    <h4>step 7:点击1级菜单项，当子菜单显示时隐藏子菜单；子菜单隐藏时显示子菜单</h4>  
+    <pre class="brush: javascript;">
+		var menuItemHeader = S.query("#menu div");	
+		Event.on(menuItemHeader,'click',function(ev){
+			var nextMenu = DOM.next(ev.target);
+			//获取子菜单的display样式属性值
+			var display = DOM.css(nextMenu,'display');
+			//根据子菜单的显示情况来判断是否显示子菜单
+			if(display == 'none'){
+				DOM.show(nextMenu);
+			}else{
+				DOM.hide(nextMenu);
+			}
+			//改变箭头
+			var children = DOM.children(ev.target);
+			DOM.addClass(children,'arrow-down');
+			return false;
+		})
+    </pre> 
+    <p>留意方法：DOM.css()</p> 
+    <p>别看这么多代码，起始大部分是前一步的代码，为了便于理解，明河直接贴完整代码。</p>
+    <h4>step 8:隐藏子菜单后箭头要复位</h4> 
+    <p>删除arrow-down即可</p>
+    <pre class="brush: javascript;">
+		var menuItemHeader = S.query("#menu div");	
+		Event.on(menuItemHeader,'click',function(ev){
+			var nextMenu = DOM.next(ev.target);
+			var children = DOM.children(ev.target);
+			//获取子菜单的display样式属性值
+			var display = DOM.css(nextMenu,'display');
+			//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方向
+			if(display == 'none'){
+				DOM.show(nextMenu);
+                //箭头向下
+				DOM.addClass(children,'arrow-down');
+			}else{
+				DOM.hide(nextMenu);
+                //恢复箭头向上
+				DOM.removeClass(children,'arrow-down');
+				
+			}
+			return false;
+		})
+    </pre> 
+    <p>留意方法：DOM.removeClass()</p> 
+    <h4>step 9:只显示一个子菜单</h4> 
+    <pre class="brush: javascript;">
+			//隐藏所有子菜单
+			DOM.hide(childrenMenus);
+			//复位所有子菜单的箭头
+			var arrowDownLink = DOM.query("#menu .arrow-down");
+			DOM.removeClass(arrowDownLink,'arrow-down');    
+    </pre>
+    <p>至此一个还算完美的拆合菜单完成了，但还是不够酷，代码不够优雅，下一期教程继续深入</p>
+                        
+</div>
+<script src="kissy/build/seed-min.js"></script>
+<script>
+(function(S){
+	S.use('core',function(){
+		var Event = S.Event,DOM = S.DOM;
+		var menu = S.get("#menu");
+		var menuItem = S.query("#menu .menu-item");
+		
+		Event.on(S.get("#demo3-btn"),'click',function(){
+			alert(menuItem.length);
+		})
+		
+		var childrenMenus = S.query("#menu ul");
+		
+		DOM.hide(childrenMenus);
+		
+		Event.on(S.get("#demo4-btn"),'click',function(){
+			DOM.hide(childrenMenus);
+		})
+		Event.on(S.get("#demo4-btn-2"),'click',function(){
+			DOM.show(childrenMenus);
+		})	
+		
+		var menuItemHeader = S.query("#menu div");	
+		Event.on(menuItemHeader,'click',function(ev){
+			var nextMenu = DOM.next(ev.target);
+			var children = DOM.children(ev.target);
+			//获取子菜单的display样式属性值
+			var display = DOM.css(nextMenu,'display');
+			
+			//隐藏所有子菜单
+			DOM.hide(childrenMenus);
+			//复位所有子菜单的箭头
+			var arrowDownLink = DOM.query("#menu .arrow-down");
+			DOM.removeClass(arrowDownLink,'arrow-down');
+			//根据子菜单的显示情况来判断是否显示子菜单，同时改变箭头方向
+			if(display == 'none'){
+				DOM.show(nextMenu);
+				DOM.addClass(children,'arrow-down');
+			}else{
+				DOM.hide(nextMenu);
+				DOM.removeClass(children,'arrow-down');
+			}
+			return false;
+		})
+	});
+	
+})(KISSY);
+</script>
+<!--为了让代码更易读，这里明河引入jquery的代码高亮插件-->
+<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script>
+<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script>
+<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shThemeDefault.css"/>
+<script type="text/javascript">
+	SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	//SyntaxHighlighter.defaults.toolbar = false;
+	SyntaxHighlighter.config.toolbarItemWidth = 16;
+	SyntaxHighlighter.config.toolbarItemHeight = 16;
+	SyntaxHighlighter.config.strings = {
+			expandSource : '展开代码',
+			viewSource : '查看代码',
+			copyToClipboard : '复制代码',
+			copyToClipboardConfirmation : '代码复制成功',
+			print : '打印',
+			help : '?',
+			alert: '语法高亮\n\n',
+			noBrush : '不能找到刷子: ',
+			brushNotHtmlScript : 'Brush wasn\'t configured for html-script option: '
+		}
+	//SyntaxHighlighter.config.tagName = 'div';
+	SyntaxHighlighter.all();
+</script>
+</body>
+</html>

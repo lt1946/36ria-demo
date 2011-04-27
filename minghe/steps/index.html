@@ -1,0 +1,344 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>KISSY.Steps</title>
+<link href="http://www.36ria.com/style/css/doc.css" type="text/css" rel="stylesheet" />
+<script src="http://a.tbcdn.cn/s/kissy/1.1.6/kissy-min.js"  type="text/javascript"></script>
+<!--代码高亮-->
+<link href="http://www.36ria.com/prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="http://www.36ria.com/prettify/prettify-min.js"></script>
+<!--步骤条-->
+<link href="steps.css" rel="stylesheet" type="text/css">
+<script src="steps.js"></script>
+<style>
+    ol{
+        margin-left:0px !important;
+    }
+</style>
+</head>
+
+<body>
+<div id="header" class="clearfix"> 
+  <div id="logo" class="l"><img src="http://www.36ria.com/style/images/logo.png" /></div> 
+  <div class="l mar-t5"> 
+        <h2>KISSY.Steps — 步骤条组件</h2> 
+        <p>作者：明河共影，博客<a href="http://www.36ria.com/" target="_blank">http://www.36ria.com/</a></p> 
+        <p>文章链接：<a href="http://www.36ria.com/3841" target="_blank">http://www.36ria.com/3841</a></p>    
+    </div> 
+</div> 	
+<div  id="main">
+        <h1>示例</h1>
+		<h4>示例1：基础示例</h4>
+		<ol id="steps-demo-1">
+			<li>1. 加入购物车</li>
+			<li>2. 确认订单信息</li>
+			<li>3. 付款到支付宝</li>
+			<li>4. 确认收货</li>
+			<li>5. 评价</li>
+		</ol>
+		<pre class="prettyprint">
+//示例1
+step1 = new S.Steps('#steps-demo-1');
+//运行
+step1.render();
+//激活第二个步骤
+step1.set('act',2);
+S.log(step1.get('act'));
+		</pre>
+		<p>激活的步骤当为0或者小于0或非整数或为空号，都意味着不设置激活步骤。</p>
+		<p>既然有set()，必然有get()，get()比较简单不再演示。</p>
+		<h4>示例2：使用配置参数自动运行组件</h4>
+		<ol id="steps-demo-2">
+			<li>1. 加入购物车</li>
+			<li>2. 确认订单信息</li>
+			<li>3. 付款到支付宝</li>
+			<li>4. 确认收货</li>
+		</ol>
+		<pre class="prettyprint">
+step2 = new S.Steps('#steps-demo-2',{'autoRender':true,'act':3});
+		</pre>
+		<h4>示例3：改变步骤条颜色</h4>
+		<ol id="steps-demo-3">
+			<li>1. 加入购物车</li>
+			<li>2. 确认订单信息</li>
+			<li>3. 付款到支付宝</li>
+			<li>4. 确认收货</li>
+		</ol>
+		<pre class="prettyprint">
+step3 = new S.Steps('#steps-demo-3',{'autoRender':true,'act':2,'color':'blue'});
+		</pre>
+		<p>或者使用</p>
+		<pre class="prettyprint">
+step3 = new S.Steps('#steps-demo-3');
+step3.render();
+step3.set('act',2);
+step3.set('color','blue');
+		</pre>
+		<p>二者产生的效果是一样的，更推荐使用第二种，虽然繁琐，但语义性更强。</p>
+		<p>内置了6种颜色：橘色、蓝色、绿色、红色、粉色、灰色。</p>
+		<h4>示例4：监听运行结束事件</h4>
+		<ol id="steps-demo-4">
+			<li>1. 加入购物车</li>
+			<li>2. 确认订单信息</li>
+			<li>3. 付款到支付宝</li>
+			<li>4. 确认收货</li>
+		</ol>
+		<pre class="prettyprint">
+//示例4
+step4 = new S.Steps('#steps-demo-4',{'act':1,'color':'green'});
+//运行结束后触发
+step4.on('render',function(ev){
+S.log('共有'+ev.steps.length+'个步骤');
+//改变宽度
+step4.set('width',200);
+});
+step4.render();
+		</pre>
+		<h4>示例5：监听激活后、改变颜色后事件</h4>
+		<ol id="steps-demo-5">
+			<li>1. 买家下单</li>
+			<li>2. 买家付款</li>
+			<li>3. 发货</li>
+			<li>4. 买家确认收货</li>
+			<li>5. 评价</li>
+		</ol>
+		<p><input type="button" value="激活第三个步骤" id="demo-5-btn1" />&nbsp;&nbsp;<input type="button" value="改变颜色为红色" id="demo-5-btn2" />&nbsp;&nbsp;<input type="button" value="重新设置激活步骤和颜色" id="demo-5-btn3" /></p>
+		<pre class="prettyprint">
+//示例5
+step5 = new S.Steps('#steps-demo-5');
+//改变激活后触发
+step5.on('afterActChange',function(ev){
+alert('属性名：'+ev.attrName+'，新的值：' + ev.newVal + ',旧的值：' + ev.prevVal);
+});
+//改变颜色后触发
+step5.on('afterColorChange',function(ev){
+alert('允许设置的颜色值有：' + step5.allowColor() + '，你设置的颜色值为：' + ev.newVal);
+});
+step5.render();
+//监听第一个按钮点击事件
+Event.on('#demo-5-btn1','click',function(ev){
+step5.set('act',3);
+});
+//监听第二个按钮点击事件
+Event.on('#demo-5-btn2','click',function(ev){
+step5.set('color','red');
+});
+//监听第三个按钮点击事件
+Event.on('#demo-5-btn3','click',function(ev){
+step5.reset();
+})
+		</pre>
+		<p>留意只触发了一次，因为监听的是change事件，属性值没有改变，就不会执行setter方法。当执行的是reset的方法时，也会触发change事件！当reset多个属性时，后监听的事件越前触发，比如这里的颜色改变事件触发优先于激活改变事件。</p>
+<h1>API说明</h1>
+		<h4>一、配置参数</h4>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table mar-t-10">
+			<thead>
+				  <tr>
+						<td>参数名</td>
+						<td>数据类型</td>
+						<td>默认值</td>
+						<td>描述</td>
+				  </tr>
+			</thead>
+			<tbody>
+				  <tr>
+						<td class="strong">autoRender</td>
+						<td>Boolean</td>
+						<td>false</td>
+						<td>是否自动运行</td>
+				  </tr>
+				  <tr>
+						<td class="strong">width</td>
+						<td>Number</td>
+						<td>''</td>
+						<td>单个步骤宽度，当为''时，根据外部容器平分宽度</td>
+				  </tr>
+				  <tr>
+						<td class="strong">act</td>
+						<td>Number</td>
+						<td>0</td>
+						<td>激活步骤，为0，不激活；从1开始</td>
+				  </tr>
+				  <tr>
+						<td class="strong">color</td>
+						<td>String</td>
+						<td>orange</td>
+						<td>步骤条颜色</td>
+				  </tr>
+			</tbody>
+		</table>
+		<h4>二、公开属性</h4>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table mar-t-10">
+			<thead>
+				  <tr>
+						<td>属性名</td>
+						<td>数据类型</td>
+						<td>描述</td>
+				  </tr>
+			</thead>
+			<tbody>
+				  <tr>
+						<td class="strong">container</td>
+						<td>HTMLElement</td>
+						<td>容器</td>
+				  </tr>
+				  <tr>
+						<td class="strong">isRender</td>
+						<td>Boolean</td>
+						<td>是否已经运行完成</td>
+				  </tr>
+			</tbody>
+		</table>
+		<h4>三、公开方法</h4>
+		<h5>1.render</h5>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="doc-tab">
+		  <tr>
+			<td class="td-title">描述：</td>
+			<td>运行</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">参数：</td>
+			<td>无</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">返回：</td>
+			<td>{Steps} 实例化后的对象 </td>
+		  </tr>
+		</table>
+		<h5>2.allowColor</h5>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="doc-tab">
+		  <tr>
+			<td class="td-title">描述：</td>
+			<td>获取步骤条组件允许设置的颜色值</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">参数：</td>
+			<td>无</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">返回：</td>
+			<td>{Array} 颜色数组 </td>
+		  </tr>
+		</table>
+		<h5>3.isAllowColor</h5>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="doc-tab">
+		  <tr>
+			<td class="td-title">描述：</td>
+			<td>是否是允许设置的颜色</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">参数：</td>
+			<td>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+					<thead>
+						  <tr>
+							<td>参数名</td>
+							<td>数据类型</td>
+							<td>描述</td>
+						  </tr>
+					</thead>
+					<tbody>
+						  <tr>
+							<td class="strong">color</td>
+							<td>String</td>
+							<td>颜色</td>
+						  </tr>
+					</tbody>
+				  </table>
+			</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">返回：</td>
+			<td>{Boolean} </td>
+		  </tr>
+		</table>
+		<h4>四、事件</h4>
+		<h5>1.render</h5>
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="doc-tab">
+		  <tr>
+			<td class="td-title">描述：</td>
+			<td>步骤条运行后触发的事件</td>
+		  </tr>
+		  <tr>
+			<td class="td-title">参数：</td>
+			<td>
+				 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="api-table">
+					<thead>
+						  <tr>
+							<td>参数名</td>
+							<td>数据类型</td>
+							<td>描述</td>
+						  </tr>
+				   </thead>
+					<tbody>
+						  <tr>
+							<td class="strong">steps</td>
+							<td>Array</td>
+							<td>步骤HTMLElement集合</td>
+						  </tr>
+					</tbody>
+				 </table>
+			</td>
+		  </tr>
+		</table>
+        </div>
+    </div>
+<script>
+    var S = KISSY, DOM = S.DOM,Event = S.Event,
+         step1,step2,step3,step4,step5;
+    //示例1
+    step1 = new S.Steps('#steps-demo-1');
+    //运行
+    step1.render();
+    //激活第二个步骤
+    step1.set('act',2);
+    S.log(step1.get('act'));
+    //示例2
+    step2 = new S.Steps('#steps-demo-2',{'autoRender':true,'act':3});
+    //示例3
+    step3 = new S.Steps('#steps-demo-3',{'autoRender':true,'act':2,'color':'blue'});
+    /*
+    //示例3第二种写法
+    step3 = new S.Steps('#steps-demo-3');
+    step3.render();
+    step3.set('act',2);
+    step3.set('color','blue');*/
+    //示例4
+    step4 = new S.Steps('#steps-demo-4',{'act':1,'color':'green'});
+    //运行结束后触发
+    step4.on('render',function(ev){
+        S.log('共有'+ev.steps.length+'个步骤');
+        //改变宽度
+        step4.set('width',200);
+    });
+    step4.render();
+    //示例5
+    step5 = new S.Steps('#steps-demo-5');
+    //改变激活后触发
+    step5.on('afterActChange',function(ev){
+        alert('属性名：'+ev.attrName+'，新的值：' + ev.newVal + ',旧的值：' + ev.prevVal);
+    });
+    //改变颜色后触发
+    step5.on('afterColorChange',function(ev){
+        alert('允许设置的颜色值有：' + step5.allowColor() + '，你设置的颜色值为：' + ev.newVal);
+    });
+    step5.render();
+    //监听第一个按钮点击事件
+    Event.on('#demo-5-btn1','click',function(ev){
+        step5.set('act',3);
+    });
+    //监听第二个按钮点击事件
+    Event.on('#demo-5-btn2','click',function(ev){
+        step5.set('color','red');
+    });
+    //监听第三个按钮点击事件
+    Event.on('#demo-5-btn3','click',function(ev){
+        step5.reset();
+    })
+</script>
+<script> 
+prettyPrint();
+</script> 
+</body>
+</html>
