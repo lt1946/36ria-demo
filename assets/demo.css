@@ -31,7 +31,7 @@ input[type='text']{
 	height:20px;
 	line-height:18px;
 }
-/*-----ÇåÀí¸¡¶¯---*/
+/*-----æ¸…ç†æµ®åŠ¨---*/
 .clearfix:after {
     content: ".";
     display: block;
@@ -55,7 +55,7 @@ input[type='text']{
 .r {
     float: right;
 }
-/*----- ²¼¾Ö²¿·ÖĞŞ¸Ä×ÔYUI3µÄÕ¤¸ñÏµÍ³------*/
+/*----- å¸ƒå±€éƒ¨åˆ†ä¿®æ”¹è‡ªYUI3çš„æ …æ ¼ç³»ç»Ÿ------*/
 .grid{
     letter-spacing: -0.31em;
     *letter-spacing: normal;
@@ -89,7 +89,7 @@ p {
 /*----- BASE END ------*/
 
 /*----- header START ------*/
-#header {
+header {
     height: 100px;
     padding: 10px;
     background: url(http://www.36ria.com/style/images/header-bg.png) 0px 0px repeat-x;
@@ -99,26 +99,33 @@ p {
 #logo {
     margin-right: 10px;
 }
-
-#header p {
+header h1{
+    margin-top:0;
+}
+header p {
     color: #FFF;
-    margin: 0px;
-    margin-top: 6px;
+    line-height: 28px;
+    margin:0;
 }
 
-#header  h2 {
-    font-size: 16px;
+header  h2 {
     color: #FFF;
-    margin: 0px !important;
+    font-size:25px;
 }
-
-#header a {
+header  h2 a {
+    color:#fff;
+    text-decoration:none;
+}
+header a {
     color: #3CF;
     text-decoration: underline;
 }
 
-#header a:hover {
+header a:hover {
     color: #CCC !important;
+}
+header hgroup{
+    margin-top:10px;
 }
 /*----- header END ------*/
 
@@ -183,7 +190,7 @@ fieldset {
 h1 {
     font-size: 25px;
     color: #C58080;
-    font-family: 'ºÚÌå';
+    font-family: 'é»‘ä½“';
     border-bottom: 1px solid #E1E1E1;
     padding-bottom: 5px;
 }
@@ -210,7 +217,7 @@ pre.prettyprint {
     padding: 10px !important;
 }
 
-/*--------ÎÄµµ±í¸ñ---------*/
+/*--------æ–‡æ¡£è¡¨æ ¼---------*/
 .doc-tab {
     border: 1px solid #CCC;
     border-left: none;
@@ -240,14 +247,14 @@ pre.prettyprint {
     margin: 0px !important;
 }
 
-/*-----------Ñ¡Ïî¿¨-------*/
+/*-----------é€‰é¡¹å¡-------*/
 .tab {
     margin-top: 10px;
 }
 
 .tab-header {
     font-size: 16px;
-    font-family: ºÚ Ìå;
+    font-family: é»‘ ä½“;
     background: url('http://demo.ued.taobao.net/dpl/style/images/tab-header-bg.png') 0px -1px repeat-x;
 }
 
@@ -296,10 +303,10 @@ pre.prettyprint {
 }
 
 ol {
-    padding-left: 0px;
+    padding-left: 0;
 }
 
-/*-----------API±í¸ñ-------*/
+/*-----------APIè¡¨æ ¼-------*/
 .api-table {
     background-color: #fff;
 }
@@ -327,5 +334,3 @@ ol {
 .api-table tbody tr:hover {
     background-color: #FFC;
 }
-
-    }
