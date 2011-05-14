@@ -3,7 +3,8 @@
  * @author 明河<minghe36@126.com>
  * @version 1.0
  * @example
- * 
+ *          LS.item("key","value");//设置key字段为value
+ *          LS.item("key");//设置key字段的值
  */
 var LS = {
     /**
