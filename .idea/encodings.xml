@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/assets/demo.css" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/html5/localStorage/histories.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/templete/index.html" charset="UTF-8" />
   </component>
 </project>

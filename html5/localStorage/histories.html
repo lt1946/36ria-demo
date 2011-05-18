@@ -1,0 +1,52 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html class="no-js ie6-7"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]--> 
+<head>
+	<meta charset="utf-8"> 
+	<title></title>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<link href="../../assets/demo.css" type="text/css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script src="ls.js"></script>
+    <script src="histories.js"></script>
+    <script>
+        $(function(){
+            var histories = new Histories();
+            //添加历史数据列表
+            histories.appendTo('#histories');
+            //以随机数作为文章的测试id。
+            var id = Math.floor(Math.random()*100);
+            //点击追加测试数据按钮
+            $('#add_test_data').click(function(){
+                var data = {'id' : id,'title' : '第'+id+'篇文章标题','url' : 'http://www.36ria.com/'};
+                //保存数据
+                histories.save(data);
+                //清空列表
+                $('#histories').html('');
+                //添加历史数据列表
+                histories.appendTo('#histories');
+            })
+        })
+    </script>
+</head>
+<body>
+	<!--<header class="grid">
+		<h1 id="logo" class="g-u"><a href="http://www.36ria.com/"><img src="http://www.36ria.com/style/images/logo.png" alt="RIA之家" /></a></h1>
+		<hgroup class="g-u">
+			<h2><a href="http://www.36ria.com/4247" target="_blank">html5本地存储localStorage实战—历史浏览记录</a></h2>
+			<p>作者：<a href="http://www.36ria.com/author/minghe" target="_blank">明河</a></p>
+		</hgroup>
+	</header>-->
+
+    <article id="main">
+        <input type="button" value="向本地追加数据" id="add_test_data" />
+        <p>点击上面的按钮，保存本地存储测试数据，数据格式类似：{'id' : 1,'title' : '第1篇文章标题','url' : 'http://www.36ria.com/'}。</p>
+        <p>如果id在列表中存在，将不会重复记忆。</p>
+        <h4>下面是你本地存储的数据</h4>
+        <ul id="histories">
+
+        </ul>
+    </article>
+</body>
+</html>
