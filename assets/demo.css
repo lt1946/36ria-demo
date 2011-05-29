@@ -55,6 +55,14 @@ input[type='text']{
 .r {
     float: right;
 }
+
+body pre.prettyprint {
+    border: 1px dashed #CCC;
+    background-color: #E9F4FB;
+    margin: 10px 0;
+    padding: 10px;
+    overflow-x: auto;
+}
 /*----- 布局部分修改自YUI3的栅格系统------*/
 .grid{
     letter-spacing: -0.31em;
