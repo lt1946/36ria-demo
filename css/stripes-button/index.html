@@ -1,11 +1,172 @@
 <!doctype html>
-<html>
+<!--[if lt IE 8 ]><html class="no-js ie6-7"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]--> 
 <head>
-<meta charset="gbk"/>
-<title>Test</title>
+	<meta charset="utf-8"> 
+	<title></title>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<link href="http://www.36ria.com/demo/assets/demo.css" type="text/css" rel="stylesheet" />
+    <style>
+        .wrap{
+            margin: 2em auto 5em;
+            padding: 1em;
+            text-align: left;
+            width: 50%;
+        }
+        .stripes-btn {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 4px 8px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size:12px;
+
+            background-color: #7596db;
+            background: -moz-linear-gradient(center top, #a2c1f7, #7596db);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#a2c1f7), to(#7596db));
+
+            border-style: solid;
+            border-width: 1px;
+            border-color: #a2c1f7 #7596db #7596db #a2c1f7;
+
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            border-radius: 5px;
+            color: #fff;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .bt-grey {
+            background-color: hsl(0, 0%, 70%);
+            background: -moz-linear-gradient(center top, hsl(0, 0%, 80%), hsl(0, 0%, 60%));
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(hsl(0, 0%, 80%)), to(hsl(0, 0%, 60%)));
+            border-color: hsl(0, 0%, 77%) hsl(0, 0%, 50%) hsl(0, 0%, 50%) hsl(0, 0%, 77%);
+        }
+
+        .stripes-btn span {
+            text-shadow: hsla(0, 0%, 30%, 0.5) 1px 1px 0px;
+        }
+
+        .bt-grey:hover,
+        .bt-grey.hover {
+            background-color: hsl(0, 0%, 80%);
+            background: -moz-linear-gradient(center top, hsl(0, 0%, 60%), hsl(0, 0%, 80%));
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(hsl(0, 0%, 60%)), to(hsl(0, 0%, 80%)));
+        }
+
+        .bt-grey:active,
+        .bt-grey.clicked {
+            background-color: hsl(0, 0%, 90%);
+            background: -moz-linear-gradient(center top, hsl(0, 0%, 80%), hsl(0, 0%, 90%));
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(hsl(0, 0%, 80%)), to(hsl(0, 0%, 90%)));
+            border-color: hsl(0, 0%, 82%);
+            outline: none;
+        }
+
+        .bt-blue:hover,
+        .bt-blue.hover {
+            background-color: #84a6ed;
+            background: -moz-linear-gradient(center top, #7596db, #a2c1f7);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#7596db), to(#a2c1f7));
+        }
+
+        .bt-blue:active,
+        .bt-blue.clicked {
+            background-color: #bed2f4;
+            background: -moz-linear-gradient(center top, #afc3e6, #bed2f4);
+            background: -webkit-gradient(linear, 0 0, 0 100%, from(#afc3e6), to(#bed2f4));
+            border-color: #a9c4e2;
+            outline: none;
+        }
+
+        /* Stripe efect */
+        .fx-stripes,
+        .fx-stripes:link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .fx-stripes:before {
+            content: "|||||||||||||||";
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            z-index: 1;
+
+            line-height: 1;
+            font-weight: bold; /* Parametres for stripes */
+            color: #fff;
+            font-size: 100px;
+            letter-spacing: -40px;
+            opacity: 0.1;
+
+            -moz-transform: skewX(-30deg);
+            -webkit-transform: skewX(-30deg);
+            -o-transform: skewX(-30deg);
+        }
+
+        .fx-stripes span {
+            position: relative;
+            z-index: 3;
+        }
+    </style>
 </head>
 <body>
-<script>
-</script>
+	<header class="grid">
+		<h1 id="logo" class="g-u"><a href="http://www.36ria.com/"><img src="http://www.36ria.com/style/images/logo.png" alt="RIA之家" /></a></h1>
+		<hgroup class="g-u">
+			<h2><a href="http://www.36ria.com/4348" target="_blank">使用css3制作带高亮条纹的简单按钮</a></h2>
+			<p>作者：未知，翻译：<a href="http://www.36ria.com/author/minghe" target="_blank">明河</a></p>
+		</hgroup>
+	</header>
+    <article>
+        <div class="wrap">
+            <div>
+                <a class="stripes-btn bt-blue fx-stripes" href="#"><span>蓝色按钮</span></a>
+                <a class="stripes-btn bt-grey fx-stripes" href="#"><span>灰色按钮</span></a>
+            </div>
+
+            <h4>按钮内部的白色条纹样式</h4>
+            <pre class="prettyprint">
+                .fx-stripes,
+                .fx-stripes:link {
+                    position: relative;
+                    overflow: hidden;
+                }
+
+                .fx-stripes:before {
+                    content: "|||||||||||||||";
+                    position: absolute;
+                    top: -50px;
+                    left: -50px;
+                    z-index: 1;
+
+                    line-height: 1;
+                    font-weight: bold; /* Parametres for stripes */
+                    color: #fff;
+                    font-size: 100px;
+                    letter-spacing: -40px;
+                    opacity: 0.1;
+
+                    -moz-transform: skewX(-30deg);
+                    -webkit-transform: skewX(-30deg);
+                    -o-transform: skewX(-30deg);
+                }
+
+                .fx-stripes span {
+                    position: relative;
+                    z-index: 3;
+                }
+            </pre>
+        </div>
+    </article>
+    <link href="http://www.36ria.com/prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="http://www.36ria.com/prettify/prettify-min.js"></script>
+    <script>
+    prettyPrint();
+    </script>
 </body>
 </html>
