@@ -11,16 +11,24 @@
 function Histories(config){
     var self = this;
     self.data = [];
+    //覆盖配置
     self.config = $.extend(Histories.DEFAULT_CONFIG,config);
+    //初始化
     self._init();
 }
 //默认配置
 Histories.DEFAULT_CONFIG = {
+    //显示条数
     count : 10,
+    //达到该数目时清理多余数据
     maxClearNumber : 100,
+    //标题长度
     maxTitleLen : 24,
+    //本地存储类
     ls : LS,
+    //存储字段
     storeName : 'data-histories',
+    //列表的li模板   
     tpl : '<li data-id="{id}"><a href="{url}" target="_blank">{title}</a></li>'
 };
 Histories.prototype = {
@@ -39,15 +47,20 @@ Histories.prototype = {
     appendTo : function(container){
         var self = this,$container = $(container),html = '',data = self.getData(),config = self.config,maxTitleLen = config.maxTitleLen,tpl = config.tpl,count = config.count;
         if($container.length == 0 || data.length == 0) return false;
+        //遍历数据（数组）
         $.each(data,function(i){
+            //截取标题
             this.title = this.title.substr(0,maxTitleLen);
+            //转换模板
             html += tpl.TFtpl(this);
+            //超过最大渲染数，直接退出循环
             if(i >= count) return false;
         });
         return $(html).appendTo($container);
     },
     /**
      * 获取本地数据
+     * @return {Array} 
      */
     getData : function(){
         var self = this,config = self.config,ls = config.ls,sData = ls.item(config.storeName);
@@ -61,11 +74,17 @@ Histories.prototype = {
      */
     save : function(singleData){
         var self = this,config = self.config,ls = config.ls,sData;
+        //保存的数据类型必须为对象
         if(typeof singleData == 'object'){
+            //如果已经存在该条数据，直接退出
             if(self.isExist(singleData.id)) return false;
+            //删除多余数据
             self._removeExceedPost();
+            //向数据缓存追加一条数据
             self.data.unshift(singleData);
+            //转化成json字符串
             sData = JSON.stringify(self.data);
+            //调用本地存储类，保存数据
             ls.item(config.storeName,sData);
         }
         return true;
@@ -108,12 +127,11 @@ Histories.prototype = {
 
 
 //简单的转换模板函数
-    String.prototype.TFtpl = function(o){
+String.prototype.TFtpl = function(o){
     return this.replace(/{([^{}]*)}/g,
             function (a,b){
                 var r = o[b];
                 return typeof r==='string'?r:a;
             }
     );
-
 };
