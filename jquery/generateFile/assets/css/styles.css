@@ -1,0 +1,61 @@
+
+/*----------------------------
+	Textarea and button
+-----------------------------*/
+
+form{
+	width:500px;
+	margin:20px auto 0;
+	text-align:center;
+}
+
+textarea{
+	resize:none;
+	width:400px;
+	height:280px;
+	margin-bottom:20px;
+	font:14px/1 'Segoe UI',Arial,sans-serif;
+	color:#333;
+	padding:4px;
+	overflow:auto;
+}
+
+.blueButton,
+.greenButton{
+	background:url('../img/buttons.png') no-repeat;
+	text-shadow:1px 1px 1px #277c9b;
+	color:#fff !important;
+	width:99px;
+	height:38px;
+	border:none;
+	text-decoration:none;
+	display:inline-block;
+	font-size: 16px;
+	line-height: 32px;
+	text-align: center;
+	margin: 0 4px;
+}
+
+.greenButton{
+	background:url('../img/buttons.png') no-repeat right top;
+	text-shadow:1px 1px 1px #498917;
+}
+
+.blueButton:hover,
+.greenButton:hover{
+	background-position:left bottom;
+	text-decoration:none !important;
+}
+
+.greenButton:hover{
+	background-position:right bottom;
+}
+
+.blueButton:active,
+.greenButton:active{
+	position:relative;
+	bottom:-1px;
+}
+
+
+
