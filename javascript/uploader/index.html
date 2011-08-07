@@ -1,0 +1,43 @@
+<!doctype html>
+<!--[if lt IE 8 ]><html class="no-js ie6-7"> <![endif]-->
+<!--[if IE 8 ]><html class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="gbk">
+	<title></title>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<link href="http://www.36ria.com/demo/assets/demo.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<header class="grid">
+		<h1 id="logo" class="g-u"><a href="http://www.36ria.com/"><img src="http://www.36ria.com/style/images/logo.png" alt="RIA之家" /></a></h1>
+		<hgroup class="g-u">
+			<h2><a href="" target="_blank">ajax异步文件上传原理解析</a></h2>
+			<p>作者：<a href="http://net.tutsplus.com/author/andrewburgess/" target="_blank">Andrew Burgess</a>，翻译：<a href="http://www.36ria.com/author/minghe" target="_blank">明河</a></p>
+		</hgroup>
+	</header>
+
+    <article id="main">
+        <h1>上传你的图片</h1>
+		<form method="post" enctype="multipart/form-data"  action="upload.php">
+    		<input type="file" name="images" id="images" multiple />
+    		<button type="submit" id="btn">Upload Files!</button>
+    	</form>
+
+  	    <div id="response"></div>
+		<ul id="image-list">
+
+		</ul>
+    </article>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="upload.js"></script>
+    <!-- 代码高亮 START  -->
+    <link href="http://www.36ria.com/prettify/prettify-min.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="http://www.36ria.com/prettify/prettify-min.js"></script>
+    <script>
+    prettyPrint();
+    </script>
+    <!-- 代码高亮 END  -->
+</body>
+</html>
